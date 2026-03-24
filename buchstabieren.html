@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Buchstabieren</title>
+  <link rel="stylesheet" href="aeg-theme.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="layout">
+
+    <div class="container-card" 
+         style="
+           width: 1400px;
+           border-radius: 12px;
+		   margin-top: calc((100vw - 1400px) / 4);
+           margin-left: calc((100vw - 1400px) / 2);
+           margin-right: calc((100vw - 1400px) / 2);
+		   margin-bottom: calc(100vh * 2);
+         ">
+      <h2>Email buchstabieren</h2>
+
+      <a href="#" onclick="openModal()">Tabelle</a>
+
+      <div class="grid grid-2 mt-20">
+        <!-- INPUT -->
+        <div class="container-card">
+          <input type="text" id="emailInput" placeholder="E-Mail eingeben...">
+          
+          <div class="grid grid-2 mt-20">
+            <button class="btn btn-outline" onclick="spellEmail()">Buchstabieren</button>
+            <button class="btn btn-primary" onclick="clearAll()">Löschen</button>
+          </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="container-card">
+          <h3>Ergebnis</h3>
+			<div id="result" class="mt-20" style="max-height: 500px; overflow-y: auto;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modalBox" class="modal hidden">
+  <div class="modal-content" style="max-width: 900px;">
+    <h3>Buchstabiertabelle</h3>
+
+    <div class="grid grid-2 mt-20">
+      <!-- LEFT HALF A-M -->
+      <table class="table">
+        <tr><th>Zeichen</th><th>Aussprache</th></tr>
+        <tr><td>A</td><td>Anton</td></tr>
+        <tr><td>B</td><td>Berta</td></tr>
+        <tr><td>C</td><td>Cäsar</td></tr>
+        <tr><td>D</td><td>Dora</td></tr>
+        <tr><td>E</td><td>Emil</td></tr>
+        <tr><td>F</td><td>Friedrich</td></tr>
+        <tr><td>G</td><td>Gustav</td></tr>
+        <tr><td>H</td><td>Heinrich</td></tr>
+        <tr><td>I</td><td>Ida</td></tr>
+        <tr><td>J</td><td>Julius</td></tr>
+        <tr><td>K</td><td>Kaufmann</td></tr>
+        <tr><td>L</td><td>Ludwig</td></tr>
+        <tr><td>M</td><td>Martha</td></tr>
+      </table>
+
+      <!-- RIGHT HALF N-Z -->
+      <table class="table">
+        <tr><th>Zeichen</th><th>Aussprache</th></tr>
+        <tr><td>N</td><td>Nordpol</td></tr>
+        <tr><td>O</td><td>Otto</td></tr>
+        <tr><td>P</td><td>Paula</td></tr>
+        <tr><td>Q</td><td>Quelle</td></tr>
+        <tr><td>R</td><td>Richard</td></tr>
+        <tr><td>S</td><td>Samuel</td></tr>
+        <tr><td>T</td><td>Theodor</td></tr>
+        <tr><td>U</td><td>Ulrich</td></tr>
+        <tr><td>V</td><td>Viktor</td></tr>
+        <tr><td>W</td><td>Wilhelm</td></tr>
+        <tr><td>X</td><td>Xanthippe</td></tr>
+        <tr><td>Y</td><td>Ypsilon</td></tr>
+        <tr><td>Z</td><td>Zeppelin</td></tr>
+      </table>
+    </div>
+
+    <button class="btn btn-secondary mt-20" onclick="closeModal()">Schließen</button>
+  </div>
+</div>
+
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+</style>
+
+<script>
+const buchstabiertabelle = {
+  a: "Anton", b: "Berta", c: "Cäsar", d: "Dora", e: "Emil",
+  f: "Friedrich", g: "Gustav", h: "Heinrich", i: "Ida", j: "Julius",
+  k: "Kaufmann", l: "Ludwig", m: "Martha", n: "Nordpol", o: "Otto",
+  p: "Paula", q: "Quelle", r: "Richard", s: "Samuel", t: "Theodor",
+  u: "Ulrich", v: "Viktor", w: "Wilhelm", x: "Xanthippe", y: "Ypsilon",
+  z: "Zeppelin",
+  ä: "Ärger", ö: "Ökonom", ü: "Übermut", ß: "Eszett",
+  0: "Null", 1: "Eins", 2: "Zwei", 3: "Drei", 4: "Vier",
+  5: "Fünf", 6: "Sechs", 7: "Sieben", 8: "Acht", 9: "Neun",
+  ".": "Punkt",
+  "-": "Bindestrich",
+  "_": "Unterstrich",
+  "@": "At"
+};
+
+function spellEmail() {
+  const input = document.getElementById("emailInput").value.toLowerCase();
+  const resultDiv = document.getElementById("result");
+
+  let output = "";
+
+  for (let char of input) {
+    let pronunciation = buchstabiertabelle[char] || "(unbekannt)";
+    output += `<div><strong>${char}</strong> → ${pronunciation}</div>`;
+  }
+
+  resultDiv.innerHTML = output;
+}
+
+function clearAll() {
+  const input = document.getElementById("emailInput");
+  const resultDiv = document.getElementById("result");
+
+  input.value = "";
+  resultDiv.innerHTML = "";
+  input.focus();
+}
+
+function openModal() {
+  document.getElementById('modalBox').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('modalBox').classList.add('hidden');
+}
+</script>
+
+</body>
+</html>

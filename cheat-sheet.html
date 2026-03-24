@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>AEG CSS – Cheat Sheet</title>
+  <link rel="stylesheet" href="aeg-theme.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+		<div class="logo">
+			<img src="AEG.png" alt="AEG Logo">
+		</div>
+      <a href="#typography">Typografia</a>
+      <a href="#buttons">Przyciski</a>
+      <a href="#inputs">Inputy</a>
+      <a href="#containers">Kontenery</a>
+      <a href="#table">Tabela</a>
+      <a href="#alerts">Alerty</a>
+      <a href="#grid">Grid</a>
+      <a href="#modal">Modal</a>
+      <a href="#loader">Loader</a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <h1>AEG CSS – Szablon komponentów</h1>
+
+      <!-- ================= TYPOGRAPHY ================= -->
+      <div id="typography" class="container-card mb-20">
+        <h2>Typografia</h2>
+
+        <h1>H1 - Nagłówek główny</h1>
+        <h2>H2 - Sekcja</h2>
+        <h3>H3 - Podsekcja</h3>
+        <h4>H4 - Mniejszy nagłówek</h4>
+
+        <p>Paragraf tekstu – standardowy tekst aplikacji.</p>
+
+        <a href="#">Link (hover)</a>
+      </div>
+
+      <!-- ================= BUTTONS ================= -->
+      <div id="buttons" class="container-card mb-20">
+        <h2>Przyciski</h2>
+
+        <p>Kopiuj klasę i używaj:</p>
+
+        <button class="btn btn-primary">.btn-primary</button>
+        <button class="btn btn-secondary">.btn-secondary</button>
+        <button class="btn btn-outline">.btn-outline</button>
+
+        <p class="mt-20">Hover: najedź myszką</p>
+        <p>Active: kliknij</p>
+        <p>Focus: TAB</p>
+      </div>
+
+      <!-- ================= INPUTS ================= -->
+      <div id="inputs" class="container-card mb-20 form-narrow">
+        <h2>Inputy</h2>
+
+        <div class="input-group">
+          <label>Input tekstowy</label>
+          <input type="text" placeholder="Wpisz tekst">
+        </div>
+
+        <div class="input-group">
+          <label>Textarea</label>
+          <textarea placeholder="Wpisz opis"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>Select</label>
+          <select>
+            <option>Opcja 1</option>
+            <option>Opcja 2</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINERS ================= -->
+      <div id="containers" class="container-card mb-20">
+        <h2>Kontenery</h2>
+
+        <div class="container-card mb-20">
+          .container-card
+        </div>
+
+        <div class="container-dark">
+          .container-dark
+        </div>
+      </div>
+
+      <!-- ================= TABLE ================= -->
+      <div id="table" class="container-card mb-20">
+        <h2>Tabela</h2>
+
+        <table class="table">
+          <tr>
+            <th>Nazwa</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td>Produkt A</td>
+            <td><span class="badge">OK</span></td>
+          </tr>
+          <tr>
+            <td>Produkt B</td>
+            <td><span class="badge">ERROR</span></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ================= ALERTS ================= -->
+      <div id="alerts" class="container-card mb-20">
+        <h2>Alerty</h2>
+
+        <div class="alert alert-success">alert-success</div>
+        <div class="alert alert-error">alert-error</div>
+      </div>
+
+      <!-- ================= GRID ================= -->
+      <div id="grid" class="container-card mb-20">
+        <h2>Grid</h2>
+
+        <div class="grid grid-3">
+          <div class="container-card text-center">1</div>
+          <div class="container-card text-center">2</div>
+          <div class="container-card text-center">3</div>
+        </div>
+      </div>
+
+      <!-- ================= LOADER ================= -->
+      <div id="loader" class="container-card mb-20 text-center">
+        <h2>Loader</h2>
+        <div class="loader centered"></div>
+      </div>
+
+      <!-- ================= MODAL ================= -->
+      <div id="modal" class="container-card mb-20">
+        <h2>Modal</h2>
+
+        <button class="btn btn-primary" onclick="openModal()">Otwórz modal</button>
+
+        <div id="modalBox" class="modal hidden">
+          <div class="modal-content">
+            <h3>Modal</h3>
+            <p>Treść modala</p>
+            <button class="btn btn-secondary" onclick="closeModal()">Zamknij</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= UTILITIES ================= -->
+      <div class="container-card mb-20">
+        <h2>Utility klasy</h2>
+
+        <p class="text-center">.text-center</p>
+        <div class="divider"></div>
+        <span class="badge">.badge</span>
+      </div>
+	  
+	  <div class="footer">
+			© 2026 AEG Shortcut – Gabriel Korzeniowski
+	  </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('modalBox').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('modalBox').classList.add('hidden');
+}
+</script>
+
+</body>
+</html>
