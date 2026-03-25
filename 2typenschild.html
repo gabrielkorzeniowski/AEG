@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>AEG - Produktdaten Finder</title>
+  <title>Produktdaten Finder</title>
   <link rel="stylesheet" href="aeg-theme.css">
 
   <style>
@@ -27,7 +27,29 @@
       overflow-y: auto;
       padding: 25px;
     }
+	
+	/* ===== SCROLL BUTTON STYLE START ===== */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 12px 16px;
+  font-size: 18px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: 0.2s;
+}
+
+#scrollTopBtn:hover {
+  background: var(--color-primary-hover);
+}
+/* ===== SCROLL BUTTON STYLE END ===== */
   </style>
+
 </head>
 
 <body>
@@ -38,14 +60,25 @@
     <div class="main">
 
       <div class="container-card">
+		
+<!-- ===== HEADER WITH RESET START ===== -->
+<div style="display:flex; justify-content:space-between; align-items:center;">
 
-        <h1>Produktdaten Finder</h1>
+  <h1>Produktdaten Finder</h1>
+
+  <button class="btn btn-primary" onclick="resetForm()">
+    Wyczyść formularz
+  </button>
+
+</div>
+<!-- ===== HEADER WITH RESET END ===== -->
+        <p>Wählen Sie den Gerätetyp aus, um die PNC-, Typenschild- und Seriennummer-Analyse anzuzeigen.</p>
 
         <!-- SELECT -->
         <div class="input-group">
-          <label>Typ urządzenia</label>
+          <label>Gerätetyp</label>
           <select id="productSelect">
-            <option value="">-- Wybierz --</option>
+            <option value="">-- Wählen --</option>
             <option value="washer">Pralka</option>
             <option value="dishwasher">Zmywarka</option>
             <option value="oven">Piekarnik</option>
@@ -54,39 +87,62 @@
 
         <!-- PNC -->
         <div id="pncBox" class="container-card mt-20 hidden">
-          <h2>PNC</h2>
+          <h2>PNC (Product Number Code)</h2>
           <div id="pncList" class="grid grid-3"></div>
+        </div>
+
+        <!-- TYPENSCHILD -->
+        <div id="typenschildBox" class="container-card mt-20 hidden">
+          <h2>Typenschild</h2>
+
+          <div class="grid grid-2">
+
+            <!-- LEFT TEXT -->
+            <div class="container-card">
+              <p id="typenschildText"></p>
+            </div>
+
+            <!-- RIGHT IMAGE (CENTERED) -->
+            <div class="container-card" style="display:flex; align-items:center; justify-content:center;">
+              <img id="typenschildImage" src="" alt="Typenschild" style="max-height: 300px;">
+            </div>
+
+          </div>
         </div>
 
         <!-- SERIAL -->
         <div id="serialBox" class="container-card mt-20 hidden">
+		
+		          <!-- PNC NOTE -->
+          <h2>PNC</h2>
+
+          <div class="input-group">
+            <label>Schreib PNC</label>
+            <input type="text" id="pncInput" placeholder="Muss 9 Ziffern lang sein">
+          </div>
+		  
+		  <!-- ===== FEHLERCODES BUTTON START ===== -->
+			<button class="btn btn-primary" onclick="showErrors()">Fehlercodes</button>
+          <!-- ===== FEHLERCODES BUTTON END ===== -->
+
+          <button class="btn btn-outline" onclick="copyPNC()">PNC kopieren</button>
+		  
+		            <div class="divider"></div>
 
           <h2>Seriennummer</h2>
 
+          <!-- SERIAL INPUT -->
           <div class="input-group">
-            <label>Seriennummer</label>
-            <input type="text" id="serialInput" maxlength="8">
+            <label>Schreib Seriennummer (8 cyfr)</label>
+            <input type="text" id="serialInput" placeholder="Muss 8 Ziffern lang sein" maxlength="8">
           </div>
 
-          <button class="btn btn-primary" onclick="analyzeSerial()">Analizuj</button>
-          <button class="btn btn-outline" onclick="copySerial()">Kopiuj</button>
+          <button class="btn btn-primary" onclick="analyzeSerial()">Analysieren</button>
+          <button class="btn btn-outline" onclick="copySerial()">Seriennummer kopieren</button>
 
+          <!-- SERIAL RESULT -->
           <div id="serialResult" class="mt-20"></div>
 
-          <div class="divider"></div>
-
-          <!-- PNC INPUT -->
-          <h3>PNC</h3>
-
-          <div class="input-group">
-            <input type="text" id="pncInput" placeholder="911XXXXXX">
-          </div>
-		  
-		            <!-- ===== FEHLERCODES BUTTON START ===== -->
-          <button class="btn btn-primary" onclick="showErrors()">Fehlercodes</button>
-          <!-- ===== FEHLERCODES BUTTON END ===== -->
-
-          <button class="btn btn-outline" onclick="copyPNC()">Kopiuj PNC</button>
 
 
 
@@ -106,6 +162,122 @@
 </div>
 
 <script>
+const productData = {
+  washer: {
+    pncs: ["911XXXXXX", "914XXXXXX"],
+    image: "typenschild/11.jpg",
+    description: "Typenschild znajduje się najczęściej na wewnętrznej stronie drzwi lub przy ramie drzwi pralki."
+  },
+  dishwasher: {
+    pncs: ["911XXXXXX", "944XXXXXX"],
+    image: "typenschild/11.jpg",
+    description: "Typenschild znajduje się na bocznej krawędzi drzwi lub wewnątrz urządzenia przy drzwiach."
+  },
+  oven: {
+    pncs: ["911XXXXXX", "945XXXXXX", "946XXXXXX"],
+    image: "typenschild/11.jpg",
+    description: "Typenschild znajduje się zazwyczaj na ramie drzwi piekarnika lub po otwarciu drzwi na obudowie."
+  }
+};
+
+const select = document.getElementById("productSelect");
+
+select.addEventListener("change", function () {
+  const value = this.value;
+  if (!value) return;
+
+  const data = productData[value];
+
+  document.getElementById("pncBox").classList.remove("hidden");
+  document.getElementById("typenschildBox").classList.remove("hidden");
+  document.getElementById("serialBox").classList.remove("hidden");
+
+  // PNC buttons
+  const pncList = document.getElementById("pncList");
+  pncList.innerHTML = "";
+
+  data.pncs.forEach(pnc => {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-outline";
+    btn.style.fontSize = "1.1rem";
+    btn.style.padding = "14px 20px";
+    btn.style.width = "100%";
+    btn.textContent = pnc;
+    pncList.appendChild(btn);
+  });
+
+  // Typenschild
+  document.getElementById("typenschildImage").src = data.image;
+  document.getElementById("typenschildText").textContent = data.description;
+});
+
+function getWeekDateRange(year, week) {
+  const simple = new Date(year, 0, 1 + (week - 1) * 7);
+  const dayOfWeek = simple.getDay();
+  const ISOweekStart = new Date(simple);
+
+  if (dayOfWeek <= 4)
+    ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+  else
+    ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+
+  const start = new Date(ISOweekStart);
+  const end = new Date(ISOweekStart);
+  end.setDate(start.getDate() + 6);
+
+  return { start, end };
+}
+
+function formatDate(date) {
+  return date.toLocaleDateString("pl-PL");
+}
+
+function analyzeSerial() {
+  const input = document.getElementById("serialInput").value.trim();
+  const resultBox = document.getElementById("serialResult");
+
+  if (input.length !== 8 || isNaN(input)) {
+    resultBox.innerHTML = "<div class='alert alert-error'>Ungültige Seriennummer (muss 8 Ziffern lang sein)</div>";
+    return;
+  }
+
+  const yearDigit = parseInt(input[0]);
+  const week = parseInt(input.slice(1, 3));
+
+  const years = [
+    2000 + yearDigit,
+    2010 + yearDigit,
+    2020 + yearDigit
+  ];
+
+  let html = "<div class='alert alert-success'><strong>Produktionszeitrahmen:</strong><br><br>";
+
+  years.forEach(year => {
+    const range = getWeekDateRange(year, week);
+
+    html += `
+      <div class="mb-20">
+        <strong>${year}</strong><br>
+        ${formatDate(range.start)} - ${formatDate(range.end)}
+      </div>
+    `;
+  });
+
+  html += "</div>";
+
+  resultBox.innerHTML = html;
+}
+
+/* ===== COPY FUNCTIONS ===== */
+function copySerial() {
+  const value = document.getElementById("serialInput").value;
+  navigator.clipboard.writeText(value);
+}
+
+function copyPNC() {
+  const value = document.getElementById("pncInput").value;
+  navigator.clipboard.writeText(value);
+}
 
 /* ===== FEHLERCODES DATABASE START ===== */
 const errorDatabase = {
@@ -121,6 +293,18 @@ const errorDatabase = {
       desc:"Problem z odpływem",
       solutions:["Wyczyść filtr"],
       level:"Technik"
+    },
+	    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
+    },
+	    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
     }
   ],
   "944": [
@@ -129,6 +313,24 @@ const errorDatabase = {
       desc:"Błąd odpływu",
       solutions:["Wyczyść filtr"],
       level:"Agent"
+    },
+		    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
+    },
+		    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
+    },
+		    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
     }
   ],
   "945": [
@@ -137,50 +339,28 @@ const errorDatabase = {
       desc:"Błąd temperatury",
       solutions:["Diagnostyka"],
       level:"Technik"
+    },
+		    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
+    },
+		    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
+    },
+		    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
     }
   ]
 };
 /* ===== FEHLERCODES DATABASE END ===== */
-
-const productData = {
-  washer: {
-    pncs: ["911XXXXXX", "914XXXXXX"]
-  },
-  dishwasher: {
-    pncs: ["911XXXXXX", "944XXXXXX"]
-  },
-  oven: {
-    pncs: ["911XXXXXX", "945XXXXXX"]
-  }
-};
-
-const select = document.getElementById("productSelect");
-
-select.addEventListener("change", function () {
-  const value = this.value;
-  if (!value) return;
-
-  const data = productData[value];
-
-  document.getElementById("pncBox").classList.remove("hidden");
-  document.getElementById("serialBox").classList.remove("hidden");
-
-  const pncList = document.getElementById("pncList");
-  pncList.innerHTML = "";
-
-  data.pncs.forEach(pnc => {
-    const btn = document.createElement("button");
-    btn.className = "btn btn-outline";
-    btn.style.padding = "14px";
-    btn.textContent = pnc;
-
-    btn.onclick = () => {
-      document.getElementById("pncInput").value = pnc;
-    };
-
-    pncList.appendChild(btn);
-  });
-});
 
 /* ===== SHOW ERRORS FUNCTION START ===== */
 function showErrors() {
@@ -213,8 +393,7 @@ function showErrors() {
       solutionsHTML = `<div>- ${err.solution}</div>`;
     }
     /* ===== GENERATE SOLUTIONS LIST END ===== */
-
-    /* ===== BADGE COLOR ===== */
+	/* ===== BADGE COLOR ===== */
     let badgeColor = err.level === "Agent" ? "#111111" : "#c62828";
 
     div.innerHTML = `
@@ -243,40 +422,41 @@ function showErrors() {
   box.scrollIntoView({ behavior: "smooth" });
 }
 /* ===== SHOW ERRORS FUNCTION END ===== */
+	
+	/* ===== RESET FORM FUNCTION START ===== */
+function resetForm() {
+  // select
+  document.getElementById("productSelect").value = "";
 
-// SERIAL
-function analyzeSerial() {
-  const input = document.getElementById("serialInput").value;
-  const result = document.getElementById("serialResult");
+  // inputy
+  document.getElementById("pncInput").value = "";
+  document.getElementById("serialInput").value = "";
 
-  if (input.length !== 8) return;
+  // wyniki
+  document.getElementById("serialResult").innerHTML = "";
+  document.getElementById("errorList").innerHTML = "";
 
-  const y = parseInt(input[0]);
-  const w = parseInt(input.slice(1,3));
+  // ukrywanie sekcji
+  document.getElementById("pncBox").classList.add("hidden");
+  document.getElementById("typenschildBox").classList.add("hidden");
+  document.getElementById("serialBox").classList.add("hidden");
+  document.getElementById("errorBox").classList.add("hidden");
 
-  const years = [2000+y, 2010+y, 2020+y];
-
-  let html = "<div class='alert alert-success'>";
-
-  years.forEach(year => {
-    html += `<div>${year} - tydzień ${w}</div>`;
+  // scroll na górę
+  document.querySelector(".main").scrollTo({ top: 0, behavior: "smooth" });
+}
+/* ===== RESET FORM FUNCTION END ===== */
+/* ===== SCROLL TO TOP FUNCTION START ===== */
+function scrollToTop() {
+  document.querySelector(".main").scrollTo({
+    top: 0,
+    behavior: "smooth"
   });
-
-  html += "</div>";
-
-  result.innerHTML = html;
 }
-
-// COPY
-function copySerial() {
-  navigator.clipboard.writeText(document.getElementById("serialInput").value);
-}
-
-function copyPNC() {
-  navigator.clipboard.writeText(document.getElementById("pncInput").value);
-}
-
+/* ===== SCROLL TO TOP FUNCTION END ===== */
 </script>
-
+<!-- ===== SCROLL TO TOP BUTTON START ===== -->
+<button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+<!-- ===== SCROLL TO TOP BUTTON END ===== -->
 </body>
 </html>
