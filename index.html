@@ -1,0 +1,136 @@
+Poniżej masz gotową aplikację MENU zgodną z Twoim AEG THEME 👇
+– kontenery w kontenerze
+– nagłówki
+– przyciski otwierające się w nowej karcie (target="_blank")
+– spójny styl
+
+Możesz to wkleić jako nową stronę (np. menu.html).
+
+⸻
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>AEG – Menu aplikacji</title>
+  <link rel="stylesheet" href="aeg-theme.css">
+</head>
+
+<body>
+
+<div class="app">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="logo mb-20">
+        <img src="AEG.png" alt="AEG Logo">
+      </div>
+
+      <a href="#">Dashboard</a>
+      <a href="#">Narzędzia</a>
+      <a href="#">System</a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <h1>AEG – Menu aplikacji</h1>
+
+      <!-- ===== GŁÓWNY CONTAINER ===== -->
+      <div class="container-card mt-20">
+
+        <h2>Wybierz narzędzie</h2>
+        <p class="mb-20">Kliknij, aby otworzyć w nowej karcie</p>
+
+        <!-- GRID -->
+        <div class="grid grid-3">
+
+          <!-- ===== SEKCJA 1 ===== -->
+          <div class="container-card">
+            <h3>Narzędzia klienta</h3>
+            <div class="divider"></div>
+
+            <a href="email-tool.html" target="_blank">
+              <button class="btn btn-primary mb-20">Email Buchstabieren</button>
+            </a>
+
+            <a href="product-finder.html" target="_blank">
+              <button class="btn btn-outline mb-20">Produkt Finder</button>
+            </a>
+
+            <a href="order-check.html" target="_blank">
+              <button class="btn btn-secondary">Status zamówienia</button>
+            </a>
+          </div>
+
+          <!-- ===== SEKCJA 2 ===== -->
+          <div class="container-card">
+            <h3>System</h3>
+            <div class="divider"></div>
+
+            <a href="database.html" target="_blank">
+              <button class="btn btn-primary mb-20">Baza danych</button>
+            </a>
+
+            <a href="reports.html" target="_blank">
+              <button class="btn btn-outline mb-20">Raporty</button>
+            </a>
+
+            <a href="logs.html" target="_blank">
+              <button class="btn btn-secondary">Logi systemowe</button>
+            </a>
+          </div>
+
+          <!-- ===== SEKCJA 3 ===== -->
+          <div class="container-card">
+            <h3>Ustawienia</h3>
+            <div class="divider"></div>
+
+            <a href="profile.html" target="_blank">
+              <button class="btn btn-primary mb-20">Profil</button>
+            </a>
+
+            <a href="preferences.html" target="_blank">
+              <button class="btn btn-outline mb-20">Preferencje</button>
+            </a>
+
+            <a href="help.html" target="_blank">
+              <button class="btn btn-secondary">Pomoc</button>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ===== DRUGI CONTAINER ===== -->
+      <div class="container-card mt-20">
+
+        <h2>Szybkie akcje</h2>
+
+        <div class="grid grid-2 mt-20">
+
+          <a href="new-ticket.html" target="_blank">
+            <div class="container-dark text-center">
+              <h3>Nowe zgłoszenie</h3>
+            </div>
+          </a>
+
+          <a href="contact.html" target="_blank">
+            <div class="container-dark text-center">
+              <h3>Kontakt</h3>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        © 2026 AEG Shortcut – Gabriel Korzeniowski
+      </div>
+
+    </
