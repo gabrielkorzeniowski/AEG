@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>AEG - Produktdaten Finder</title>
+  <link rel="stylesheet" href="aeg-theme.css">
+
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .app {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .layout {
+      height: 100%;
+      justify-items: center;
+    }
+
+    .main {
+      width: 1400px;
+      height: 100%;
+      overflow-y: auto;
+      padding: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="layout" style="grid-template-columns: 1fr;">
+
+    <div class="main">
+
+      <div class="container-card">
+
+        <h1>Produktdaten Finder</h1>
+
+        <!-- SELECT -->
+        <div class="input-group">
+          <label>Typ urządzenia</label>
+          <select id="productSelect">
+            <option value="">-- Wybierz --</option>
+            <option value="washer">Pralka</option>
+            <option value="dishwasher">Zmywarka</option>
+            <option value="oven">Piekarnik</option>
+          </select>
+        </div>
+
+        <!-- PNC -->
+        <div id="pncBox" class="container-card mt-20 hidden">
+          <h2>PNC</h2>
+          <div id="pncList" class="grid grid-3"></div>
+        </div>
+
+        <!-- SERIAL -->
+        <div id="serialBox" class="container-card mt-20 hidden">
+
+          <h2>Seriennummer</h2>
+
+          <div class="input-group">
+            <label>Seriennummer</label>
+            <input type="text" id="serialInput" maxlength="8">
+          </div>
+
+          <button class="btn btn-primary" onclick="analyzeSerial()">Analizuj</button>
+          <button class="btn btn-outline" onclick="copySerial()">Kopiuj</button>
+
+          <div id="serialResult" class="mt-20"></div>
+
+          <div class="divider"></div>
+
+          <!-- PNC INPUT -->
+          <h3>PNC</h3>
+
+          <div class="input-group">
+            <input type="text" id="pncInput" placeholder="911XXXXXX">
+          </div>
+		  
+		            <!-- ===== FEHLERCODES BUTTON START ===== -->
+          <button class="btn btn-primary" onclick="showErrors()">Fehlercodes</button>
+          <!-- ===== FEHLERCODES BUTTON END ===== -->
+
+          <button class="btn btn-outline" onclick="copyPNC()">Kopiuj PNC</button>
+
+
+
+        </div>
+
+        <!-- ===== FEHLERCODES CONTAINER START ===== -->
+        <div id="errorBox" class="container-card mt-20 hidden">
+          <h2>Fehlercodes</h2>
+          <div id="errorList" class="grid grid-1"></div>
+        </div>
+        <!-- ===== FEHLERCODES CONTAINER END ===== -->
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* ===== FEHLERCODES DATABASE START ===== */
+const errorDatabase = {
+  "911": [
+    {
+      code:"E10",
+      desc:"Brak dopływu wody",
+      solutions:["Sprawdź zawór", "albo coś innego"],
+      level:"Agent"
+    },
+    {
+      code:"E20",
+      desc:"Problem z odpływem",
+      solutions:["Wyczyść filtr"],
+      level:"Technik"
+    }
+  ],
+  "944": [
+    {
+      code:"i20",
+      desc:"Błąd odpływu",
+      solutions:["Wyczyść filtr"],
+      level:"Agent"
+    }
+  ],
+  "945": [
+    {
+      code:"F1",
+      desc:"Błąd temperatury",
+      solutions:["Diagnostyka"],
+      level:"Technik"
+    }
+  ]
+};
+/* ===== FEHLERCODES DATABASE END ===== */
+
+const productData = {
+  washer: {
+    pncs: ["911XXXXXX", "914XXXXXX"]
+  },
+  dishwasher: {
+    pncs: ["911XXXXXX", "944XXXXXX"]
+  },
+  oven: {
+    pncs: ["911XXXXXX", "945XXXXXX"]
+  }
+};
+
+const select = document.getElementById("productSelect");
+
+select.addEventListener("change", function () {
+  const value = this.value;
+  if (!value) return;
+
+  const data = productData[value];
+
+  document.getElementById("pncBox").classList.remove("hidden");
+  document.getElementById("serialBox").classList.remove("hidden");
+
+  const pncList = document.getElementById("pncList");
+  pncList.innerHTML = "";
+
+  data.pncs.forEach(pnc => {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-outline";
+    btn.style.padding = "14px";
+    btn.textContent = pnc;
+
+    btn.onclick = () => {
+      document.getElementById("pncInput").value = pnc;
+    };
+
+    pncList.appendChild(btn);
+  });
+});
+
+/* ===== SHOW ERRORS FUNCTION START ===== */
+function showErrors() {
+  const pnc = document.getElementById("pncInput").value;
+  const prefix = pnc.substring(0,3);
+
+  const errors = errorDatabase[prefix];
+  const box = document.getElementById("errorBox");
+  const list = document.getElementById("errorList");
+
+  list.innerHTML = "";
+
+  if (!errors) {
+    list.innerHTML = "<div class='alert alert-error'>Brak danych dla tego PNC</div>";
+    box.classList.remove("hidden");
+    return;
+  }
+
+  errors.forEach(err => {
+    const div = document.createElement("div");
+    div.className = "container-card";
+
+    /* ===== GENERATE SOLUTIONS LIST START ===== */
+    let solutionsHTML = "";
+    if (err.solutions) {
+      err.solutions.forEach(sol => {
+        solutionsHTML += `<div>- ${sol}</div>`;
+      });
+    } else {
+      solutionsHTML = `<div>- ${err.solution}</div>`;
+    }
+    /* ===== GENERATE SOLUTIONS LIST END ===== */
+
+    /* ===== BADGE COLOR ===== */
+    let badgeColor = err.level === "Agent" ? "#111111" : "#c62828";
+
+    div.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3>${err.code}</h3>
+<span class="badge" style="background:${badgeColor}; font-size:0.9rem; padding:6px 36px;">${err.level}</span>
+      </div>
+
+      <div class="mt-20">
+        <strong>Opis:</strong><br>
+        ${err.desc}
+      </div>
+
+      <div class="mt-20">
+        <strong>Rozwiązanie:</strong><br>
+        ${solutionsHTML}
+      </div>
+    `;
+
+    list.appendChild(div);
+  });
+
+  box.classList.remove("hidden");
+
+  // auto scroll
+  box.scrollIntoView({ behavior: "smooth" });
+}
+/* ===== SHOW ERRORS FUNCTION END ===== */
+
+// SERIAL
+function analyzeSerial() {
+  const input = document.getElementById("serialInput").value;
+  const result = document.getElementById("serialResult");
+
+  if (input.length !== 8) return;
+
+  const y = parseInt(input[0]);
+  const w = parseInt(input.slice(1,3));
+
+  const years = [2000+y, 2010+y, 2020+y];
+
+  let html = "<div class='alert alert-success'>";
+
+  years.forEach(year => {
+    html += `<div>${year} - tydzień ${w}</div>`;
+  });
+
+  html += "</div>";
+
+  result.innerHTML = html;
+}
+
+// COPY
+function copySerial() {
+  navigator.clipboard.writeText(document.getElementById("serialInput").value);
+}
+
+function copyPNC() {
+  navigator.clipboard.writeText(document.getElementById("pncInput").value);
+}
+
+</script>
+
+</body>
+</html>
