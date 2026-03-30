@@ -2,87 +2,58 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Notatka rozmowy</title>
+  <title>Notatka rozmowy PRO</title>
   <link rel="stylesheet" href="aeg-theme.css">
 </head>
 <body>
 
 <div class="app">
   <div class="layout" style="grid-template-columns: 1fr;">
-
     <div class="main">
 
       <div class="container-card">
 
         <h1>Notatka rozmowy</h1>
 
-        <!-- ===== PYTANIA ===== -->
+        <!-- ===== SEKCJA 1 ===== -->
         <div class="container-card mb-20">
-          <h2>Pytania do klienta</h2>
+          <h2>Opis zgłoszenia</h2>
 
           <div class="input-group">
-            <label><input type="checkbox" onclick="addNote('Model urządzenia potwierdzony')"> Model urządzenia</label>
-            <label><input type="checkbox" onclick="addNote('Numer PNC sprawdzony')"> Numer PNC</label>
-            <label><input type="checkbox" onclick="addNote('Data zakupu podana')"> Data zakupu</label>
-            <label><input type="checkbox" onclick="addNote('Objawy usterki opisane')"> Opis usterki</label>
+            <label>Co się stało</label>
+            <textarea id="problem"></textarea>
           </div>
+
+          <div class="input-group">
+            <label>Co już zostało zrobione</label>
+            <textarea id="done"></textarea>
+          </div>
+
+          <div class="input-group">
+            <label>Fehlercode</label>
+            <input type="text" id="error">
+          </div>
+
+          <!-- CHECKBOXY -->
+          <div class="mt-20">
+            <label><input type="checkbox" value="Woda wycieka spod pralki"> Wyciek wody</label><br>
+            <label><input type="checkbox" value="Urządzenie nie włącza się"> Nie włącza się</label><br>
+            <label><input type="checkbox" value="Błąd na wyświetlaczu"> Błąd</label><br>
+            <label><input type="checkbox" value="Głośna praca urządzenia"> Głośna praca</label>
+          </div>
+
         </div>
 
-        <!-- ===== GWARANCJA ===== -->
+        <!-- ===== LINK ===== -->
         <div class="container-card mb-20">
-          <h2>Gwarancja</h2>
+          <h2>Link do bazy wiedzy</h2>
 
-          <select onchange="addNote('Gwarancja: ' + this.value)">
-            <option value="">-- wybierz --</option>
-            <option>Na gwarancji</option>
-            <option>Po gwarancji</option>
-            <option>Brak dowodu zakupu</option>
-          </select>
+          <input type="text" id="link" placeholder="Wklej link...">
         </div>
 
-        <!-- ===== KODY ===== -->
+        <!-- ===== GENERUJ ===== -->
         <div class="container-card mb-20">
-          <h2>Typ kodu</h2>
-
-          <button class="btn btn-outline" onclick="addNote('Kod typu A')">Typ A</button>
-          <button class="btn btn-outline" onclick="addNote('Kod typu B')">Typ B</button>
-        </div>
-
-        <!-- ===== SZYBKIE TEMATY ===== -->
-        <div class="container-card mb-20">
-          <h2>Szybkie tematy</h2>
-
-          <button class="btn btn-secondary" onclick="addNote('Woda wycieka spod pralki')">
-            Wyciek wody
-          </button>
-
-          <button class="btn btn-secondary" onclick="addNote('Urządzenie nie włącza się')">
-            Nie włącza się
-          </button>
-
-          <button class="btn btn-secondary" onclick="addNote('Błąd na wyświetlaczu')">
-            Błąd
-          </button>
-        </div>
-
-        <!-- ===== WŁASNA NOTATKA ===== -->
-        <div class="container-card mb-20">
-          <h2>Dodatkowe informacje</h2>
-
-          <textarea id="customNote" placeholder="Wpisz dodatkowe informacje..."></textarea>
-
-          <button class="btn btn-primary mt-20" onclick="addCustomNote()">
-            Dodaj do notatki
-          </button>
-        </div>
-
-        <!-- ===== GENEROWANIE ===== -->
-        <div class="container-card mb-20">
-          <h2>Generuj notatkę</h2>
-
-          <button class="btn btn-primary" onclick="generateNote()">
-            Dodaj
-          </button>
+          <button class="btn btn-primary" onclick="generateNote()">Generuj notatkę</button>
         </div>
 
         <!-- ===== OUTPUT ===== -->
@@ -91,9 +62,7 @@
 
           <textarea id="finalNote" rows="10"></textarea>
 
-          <button class="btn btn-secondary mt-20" onclick="copyNote()">
-            Kopiuj
-          </button>
+          <button class="btn btn-secondary mt-20" onclick="copyNote()">Kopiuj</button>
         </div>
 
       </div>
@@ -103,29 +72,41 @@
 </div>
 
 <script>
-let notes = [];
-
-function addNote(text) {
-  notes.push(text);
-}
-
-function addCustomNote() {
-  const value = document.getElementById('customNote').value;
-  if (value.trim() !== '') {
-    notes.push(value);
-    document.getElementById('customNote').value = '';
-  }
-}
-
 function generateNote() {
-  let finalText = '';
+  let parts = [];
 
-  notes.forEach(n => {
-    finalText += n + '\n';
+  const problem = document.getElementById('problem').value.trim();
+  const done = document.getElementById('done').value.trim();
+  const error = document.getElementById('error').value.trim();
+  const link = document.getElementById('link').value.trim();
+
+  // TEXT INPUTS
+  if (problem) parts.push(problem);
+  if (done) parts.push(done);
+  if (error) parts.push("Fehlercode: " + error);
+
+  // CHECKBOXY
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+    parts.push(cb.value);
   });
 
-  finalText += '\n***\n';
-  finalText += 'poinformowany o bda';
+  let finalParts = [];
+
+  // SEKCJA 1
+  if (parts.length > 0) {
+    finalParts.push(parts.join('; '));
+  }
+
+  // LINK (tylko jeśli istnieje)
+  if (link) {
+    finalParts.push(link);
+  }
+
+  // KOŃCÓWKA ZAWSZE
+  finalParts.push('poinformowany o bda');
+
+  // Łączenie w jednej linii
+  const finalText = finalParts.join(' *** ');
 
   document.getElementById('finalNote').value = finalText;
 }
