@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Notatka rozmowy</title>
+  <link rel="stylesheet" href="aeg-theme.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="layout" style="grid-template-columns: 1fr;">
+
+    <div class="main">
+
+      <div class="container-card">
+
+        <h1>Notatka rozmowy</h1>
+
+        <!-- ===== PYTANIA ===== -->
+        <div class="container-card mb-20">
+          <h2>Pytania do klienta</h2>
+
+          <div class="input-group">
+            <label><input type="checkbox" onclick="addNote('Model urządzenia potwierdzony')"> Model urządzenia</label>
+            <label><input type="checkbox" onclick="addNote('Numer PNC sprawdzony')"> Numer PNC</label>
+            <label><input type="checkbox" onclick="addNote('Data zakupu podana')"> Data zakupu</label>
+            <label><input type="checkbox" onclick="addNote('Objawy usterki opisane')"> Opis usterki</label>
+          </div>
+        </div>
+
+        <!-- ===== GWARANCJA ===== -->
+        <div class="container-card mb-20">
+          <h2>Gwarancja</h2>
+
+          <select onchange="addNote('Gwarancja: ' + this.value)">
+            <option value="">-- wybierz --</option>
+            <option>Na gwarancji</option>
+            <option>Po gwarancji</option>
+            <option>Brak dowodu zakupu</option>
+          </select>
+        </div>
+
+        <!-- ===== KODY ===== -->
+        <div class="container-card mb-20">
+          <h2>Typ kodu</h2>
+
+          <button class="btn btn-outline" onclick="addNote('Kod typu A')">Typ A</button>
+          <button class="btn btn-outline" onclick="addNote('Kod typu B')">Typ B</button>
+        </div>
+
+        <!-- ===== SZYBKIE TEMATY ===== -->
+        <div class="container-card mb-20">
+          <h2>Szybkie tematy</h2>
+
+          <button class="btn btn-secondary" onclick="addNote('Woda wycieka spod pralki')">
+            Wyciek wody
+          </button>
+
+          <button class="btn btn-secondary" onclick="addNote('Urządzenie nie włącza się')">
+            Nie włącza się
+          </button>
+
+          <button class="btn btn-secondary" onclick="addNote('Błąd na wyświetlaczu')">
+            Błąd
+          </button>
+        </div>
+
+        <!-- ===== WŁASNA NOTATKA ===== -->
+        <div class="container-card mb-20">
+          <h2>Dodatkowe informacje</h2>
+
+          <textarea id="customNote" placeholder="Wpisz dodatkowe informacje..."></textarea>
+
+          <button class="btn btn-primary mt-20" onclick="addCustomNote()">
+            Dodaj do notatki
+          </button>
+        </div>
+
+        <!-- ===== GENEROWANIE ===== -->
+        <div class="container-card mb-20">
+          <h2>Generuj notatkę</h2>
+
+          <button class="btn btn-primary" onclick="generateNote()">
+            Dodaj
+          </button>
+        </div>
+
+        <!-- ===== OUTPUT ===== -->
+        <div class="container-card">
+          <h2>Notatka końcowa</h2>
+
+          <textarea id="finalNote" rows="10"></textarea>
+
+          <button class="btn btn-secondary mt-20" onclick="copyNote()">
+            Kopiuj
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+let notes = [];
+
+function addNote(text) {
+  notes.push(text);
+}
+
+function addCustomNote() {
+  const value = document.getElementById('customNote').value;
+  if (value.trim() !== '') {
+    notes.push(value);
+    document.getElementById('customNote').value = '';
+  }
+}
+
+function generateNote() {
+  let finalText = '';
+
+  notes.forEach(n => {
+    finalText += n + '\n';
+  });
+
+  finalText += '\n***\n';
+  finalText += 'poinformowany o bda';
+
+  document.getElementById('finalNote').value = finalText;
+}
+
+function copyNote() {
+  const textarea = document.getElementById('finalNote');
+  textarea.select();
+  document.execCommand('copy');
+}
+</script>
+
+</body>
+</html>
