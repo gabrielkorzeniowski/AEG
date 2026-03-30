@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Notatka rozmowy</title>
+<link rel="stylesheet" href="aeg-theme.css">
+
+<style>
+/* Toggle buttons */
+.toggle-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000;
+}
+</style>
+
+</head>
+<body>
+
+<div class="app">
+  <div class="layout" style="grid-template-columns: 1fr;">
+    <div class="main">
+
+      <div class="container-card">
+
+        <h1>Notatka rozmowy</h1>
+
+        <!-- ================= OPIS ================= -->
+        <div class="container-card mb-20">
+          <h2>Opis zgłoszenia</h2>
+
+          <div class="input-group">
+            <label>Co się stało</label>
+            <textarea id="problem" oninput="updateNote()"></textarea>
+          </div>
+
+          <div class="input-group">
+            <label>Co już zrobiono</label>
+            <textarea id="done" oninput="updateNote()"></textarea>
+          </div>
+
+          <div class="input-group">
+            <label>Fehlercode</label>
+            <input type="text" id="error" oninput="updateNote()">
+          </div>
+
+          <!-- ===== TOGGLE BUTTONY ===== -->
+          <div class="mt-20">
+            <h3>Typowe przypadki</h3>
+
+            <div class="grid grid-3">
+
+              <button class="btn btn-primary toggle-btn" data-value="Woda wycieka spod pralki" onclick="toggleOption(this)">
+                Wyciek wody
+              </button>
+
+              <button class="btn btn-primary toggle-btn" data-value="Urządzenie nie włącza się" onclick="toggleOption(this)">
+                Nie włącza się
+              </button>
+
+              <button class="btn btn-primary toggle-btn" data-value="Błąd na wyświetlaczu" onclick="toggleOption(this)">
+                Błąd
+              </button>
+
+              <button class="btn btn-primary toggle-btn" data-value="Głośna praca urządzenia" onclick="toggleOption(this)">
+                Głośna praca
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= LINK ================= -->
+        <div class="container-card mb-20">
+          <h2>Link do bazy wiedzy</h2>
+          <input type="text" id="link" placeholder="Wklej link..." oninput="updateNote()">
+        </div>
+
+        <!-- ================= OUTPUT ================= -->
+        <div class="container-card mb-20">
+          <h2>Notatka (live)</h2>
+          <textarea id="finalNote" rows="6"></textarea>
+
+          <button class="btn btn-secondary mt-20" onclick="copyNote()">
+            Kopiuj
+          </button>
+
+          <button class="btn btn-secondary mt-20" onclick="resetForm()">
+            Reset
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedOptions = [];
+
+/* ===== TOGGLE ===== */
+function toggleOption(btn) {
+  const value = btn.getAttribute('data-value');
+
+  if (selectedOptions.includes(value)) {
+    selectedOptions = selectedOptions.filter(v => v !== value);
+    btn.classList.remove('active');
+  } else {
+    selectedOptions.push(value);
+    btn.classList.add('active');
+  }
+
+  updateNote();
+}
+
+/* ===== LIVE UPDATE ===== */
+function updateNote() {
+  const problem = document.getElementById('problem').value.trim();
+  const done = document.getElementById('done').value.trim();
+  const error = document.getElementById('error').value.trim();
+  const link = document.getElementById('link').value.trim();
+
+  let parts = [];
+
+  if (problem) parts.push(problem);
+  if (done) parts.push(done);
+  if (error) parts.push("Fehlercode: " + error);
+
+  selectedOptions.forEach(opt => parts.push(opt));
+
+  let finalParts = [];
+
+  if (parts.length > 0) {
+    finalParts.push(parts.join('; '));
+  }
+
+  if (link) {
+    finalParts.push(link);
+  }
+
+  finalParts.push('poinformowany o bda');
+
+  document.getElementById('finalNote').value = finalParts.join(' *** ');
+}
+
+/* ===== COPY ===== */
+function copyNote() {
+  const textarea = document.getElementById('finalNote');
+  textarea.select();
+  document.execCommand('copy');
+}
+
+/* ===== RESET ===== */
+function resetForm() {
+  document.getElementById('problem').value = '';
+  document.getElementById('done').value = '';
+  document.getElementById('error').value = '';
+  document.getElementById('link').value = '';
+  document.getElementById('finalNote').value = '';
+
+  selectedOptions = [];
+
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+}
+</script>
+
+</body>
+</html>
