@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>AEG – Termin technika</title>
+
+<style>
+
+/* ===== VARIABLES ===== */
+:root {
+  --color-black: #000000;
+  --color-dark: #111111;
+  --color-light: #fbfbfb;
+
+  --color-primary: #cc142e;
+  --color-primary-hover: #d21d35;
+
+  --color-border: #e5e5e5;
+  --color-muted: #777777;
+
+  --radius: 8px;
+  --transition: 0.25s ease-in-out;
+
+  --font-main: "Segoe UI", Arial, sans-serif;
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-light);
+  font-family: var(--font-main);
+}
+
+/* ===== MAIN ===== */
+.main {
+  padding: 20px;
+}
+
+/* ===== WRAPPER 1400px ===== */
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+/* ===== CARDS ===== */
+.container-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 15px;
+}
+
+/* ===== TYPO ===== */
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #111;
+  color: #fff;
+}
+
+.btn-outline {
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  background: transparent;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  gap: 10px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ===== UTIL ===== */
+.text-center {
+  text-align: center;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== ALERT ===== */
+.alert {
+  padding: 15px;
+  border-radius: var(--radius);
+  background: #e6f4ea;
+}
+
+/* ===== AUTO SPACING ===== */
+.container-wide > * {
+  margin-bottom: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main">
+  <div class="container-wide">
+
+    <h1>Tworzenie terminu dla technika</h1>
+
+    <!-- ================= CZĘŚĆ 1 ================= -->
+    <h2>Proces wspólny</h2>
+
+    <div class="container-card">1. Weryfikacja klienta</div>
+    <div class="text-center">⬇</div>
+
+    <div class="container-card">2. Identyfikacja urządzenia</div>
+    <div class="text-center">⬇</div>
+
+    <div class="container-card">3. Wstępna diagnoza</div>
+    <div class="text-center">⬇</div>
+
+    <div class="container-card">4. Dostępność klienta</div>
+    <div class="text-center">⬇</div>
+
+    <div class="container-card">5. Gotowość do wyboru serwisu</div>
+
+
+    <!-- ================= WYBÓR ================= -->
+    <div class="container-card">
+      <h2>Wybierz firmę</h2>
+
+      <div class="grid grid-3">
+        <button class="btn btn-primary" onclick="showFlow('a')">Firma A</button>
+        <button class="btn btn-secondary" onclick="showFlow('b')">Firma B</button>
+        <button class="btn btn-outline" onclick="showFlow('c')">Firma C</button>
+      </div>
+    </div>
+
+
+    <!-- ================= FIRMA A ================= -->
+    <div id="a" class="hidden">
+      <div class="container-card">Zgłoszenie w systemie</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Automatyczne przypisanie</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">SMS do klienta</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Wizyta zaplanowana</div>
+    </div>
+
+    <!-- ================= FIRMA B ================= -->
+    <div id="b" class="hidden">
+      <div class="container-card">Manualne zgłoszenie</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Telefon technika</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Ustalenie terminu</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Oczekiwanie na wizytę</div>
+    </div>
+
+    <!-- ================= FIRMA C ================= -->
+    <div id="c" class="hidden">
+      <div class="container-card">Sprawdzenie części</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Zamówienie</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Kontakt po dostawie</div>
+      <div class="text-center">⬇</div>
+
+      <div class="container-card">Termin po dostawie</div>
+    </div>
+
+
+    <!-- ================= WYNIK ================= -->
+    <div class="container-card">
+      <h2>Podsumowanie</h2>
+
+      <div id="resultBox" class="alert">
+        Wybierz firmę...
+      </div>
+
+      <div style="margin-top:15px;">
+        <button class="btn btn-primary" onclick="copyText()">
+          Kopiuj
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+let text = "";
+
+function showFlow(type) {
+
+  document.getElementById("a").classList.add("hidden");
+  document.getElementById("b").classList.add("hidden");
+  document.getElementById("c").classList.add("hidden");
+
+  document.getElementById(type).classList.remove("hidden");
+
+  if (type === "a") {
+    text = "Firma A – wizyta zaplanowana automatycznie.";
+  }
+
+  if (type === "b") {
+    text = "Firma B – technik skontaktuje się telefonicznie.";
+  }
+
+  if (type === "c") {
+    text = "Firma C – termin po dostępności części.";
+  }
+
+  document.getElementById("resultBox").innerText = text;
+}
+
+function copyText() {
+  if (!text) return;
+  navigator.clipboard.writeText(text);
+}
+
+</script>
+
+</body>
+</html>
