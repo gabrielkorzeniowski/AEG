@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>AEG Shortcut</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #111111;
+}
+
+/* ===== BUTTONS ===== */
+.nav-btn {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  background: #cc142e;
+  color: #ffffff;
+  transition: 0.2s;
+}
+
+.nav-btn.active {
+  background: #ffffff;
+  color: #cc142e;
+}
+
+/* ===== IFRAME ===== */
+.viewer {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #333333;
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+  <button class="nav-btn active" onclick="loadPage(this, 'technik.html')">Demo</button>
+  <button class="nav-btn" onclick="loadPage(this, 'buchstabieren.html')">App 1</button>
+  <button class="nav-btn" onclick="loadPage(this, 'typenschild.html')">App 2</button>
+</div>
+
+<!-- IFRAME -->
+<iframe id="viewer" class="viewer" src="demo.html"></iframe>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 Gabriel Korzeniowski. Alle Rechte vorbehalten.
+</div>
+
+<script>
+function loadPage(btn, page) {
+  document.getElementById('viewer').src = page;
+
+  // zmiana aktywnego przycisku
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
