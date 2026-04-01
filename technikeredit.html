@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Technik Edit</title>
+
+<style>
+
+/* ===== BASE (Twój styl uproszczony) ===== */
+:root {
+  --color-primary: #cc142e;
+  --color-primary-hover: #d21d35;
+  --color-border: #e5e5e5;
+  --radius: 8px;
+  --transition: 0.25s ease-in-out;
+  --color-light: #fbfbfb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: var(--color-light);
+}
+
+.main {
+  padding: 20px;
+}
+
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.container-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  gap: 15px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ===== INPUT ===== */
+select {
+  padding: 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+/* ===== LINK COPY ===== */
+.copy-link {
+  color: var(--color-primary);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.copy-link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ===== ALERT ===== */
+.alert {
+  padding: 15px;
+  border-radius: var(--radius);
+  background: #e6f4ea;
+}
+
+/* ===== TYPO ===== */
+h1 { margin-bottom: 20px; }
+h2 { margin-bottom: 15px; }
+
+</style>
+</head>
+
+<body>
+
+<div class="main">
+  <div class="container-wide">
+
+    <h1>Technik Edit – Generator instrukcji</h1>
+
+    <!-- ================= WYBÓR ================= -->
+    <div class="container-card">
+
+      <h2>Parametry</h2>
+
+      <div class="grid grid-3">
+
+        <select id="herausforderung" onchange="updateInstruction()">
+          <option value="">Herausforderung</option>
+          <option value="storno">Storno</option>
+          <option value="terminverschiebung">Terminverschiebung</option>
+          <option value="doppelauftrag">Doppelauftrag</option>
+          <option value="techniker_nicht_da">Techniker nicht da</option>
+        </select>
+
+        <select id="status" onchange="updateInstruction()">
+          <option value="">Status</option>
+          <option value="offen">Offen</option>
+          <option value="angenommen">Angenommen</option>
+          <option value="teile">Teile bestellt</option>
+        </select>
+
+        <select id="techniker" onchange="updateInstruction()">
+          <option value="">Techniker</option>
+          <option value="wkd">WKd</option>
+          <option value="p1">P1 (operatec)</option>
+          <option value="sp">SP</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <!-- ================= WYNIK ================= -->
+    <div class="container-card">
+
+      <h2>Instrukcja</h2>
+
+      <div id="instructionBox" class="alert">
+        <span class="copy-link" onclick="copyInline(this)">
+          Wybierz wszystkie parametry...
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+/* ===== DRZEWKO ===== */
+const rules = {
+
+  storno: {
+    offen: {
+      wkd: "Anuluj zgłoszenie w systemie WKd.",
+      p1: "Przekaż anulację do P1 (operatec).",
+      sp: "Skontaktuj się z SP w celu anulacji."
+    },
+    angenommen: {
+      wkd: "Skontaktuj się z technikiem WKd i anuluj wizytę.",
+      p1: "Anuluj zgłoszenie w P1 i potwierdź.",
+      sp: "Potwierdź anulację z SP."
+    },
+    teile: {
+      wkd: "Anuluj zamówienie części i zgłoszenie.",
+      p1: "Zatrzymaj części i anuluj wizytę.",
+      sp: "Skontaktuj się z SP – anuluj części i wizytę."
+    }
+  },
+
+  terminverschiebung: {
+    offen: {
+      wkd: "Zmień termin w systemie WKd.",
+      p1: "Przekaż zmianę terminu do P1.",
+      sp: "Skontaktuj się z SP w celu zmiany."
+    },
+    angenommen: {
+      wkd: "Ustal nowy termin z technikiem.",
+      p1: "Poproś P1 o zmianę terminu.",
+      sp: "Technik SP oddzwoni do klienta."
+    },
+    teile: {
+      wkd: "Termin po dostawie części.",
+      p1: "Zmień termin po dostępności części.",
+      sp: "SP ustali termin po dostawie."
+    }
+  },
+
+  doppelauftrag: {
+    offen: {
+      wkd: "Usuń duplikat zgłoszenia.",
+      p1: "Zamknij jeden z duplikatów.",
+      sp: "Zweryfikuj i usuń duplikat w SP."
+    },
+    angenommen: {
+      wkd: "Pozostaw jedno aktywne zgłoszenie.",
+      p1: "Zamknij zbędne zgłoszenie.",
+      sp: "Potwierdź z SP właściwe zgłoszenie."
+    },
+    teile: {
+      wkd: "Anuluj części dla duplikatu.",
+      p1: "Zatrzymaj zamówienie części.",
+      sp: "Zweryfikuj części w SP."
+    }
+  },
+
+  techniker_nicht_da: {
+    offen: {
+      wkd: "Sprawdź status wizyty.",
+      p1: "Zweryfikuj zgłoszenie w P1.",
+      sp: "Skontaktuj się z SP."
+    },
+    angenommen: {
+      wkd: "Skontaktuj się z technikiem.",
+      p1: "Poproś o wyjaśnienie sytuacji.",
+      sp: "SP sprawdzi status wizyty."
+    },
+    teile: {
+      wkd: "Sprawdź dostępność części.",
+      p1: "Zweryfikuj status części.",
+      sp: "SP potwierdzi dostawę części."
+    }
+  }
+
+};
+
+/* ===== UPDATE ===== */
+function updateInstruction() {
+
+  const h = document.getElementById("herausforderung").value;
+  const s = document.getElementById("status").value;
+  const t = document.getElementById("techniker").value;
+
+  let text = "Wybierz wszystkie parametry...";
+
+  if (h && s && t) {
+    text = rules[h]?.[s]?.[t] || "Brak instrukcji.";
+  }
+
+  document.getElementById("instructionBox").innerHTML =
+    `<span class="copy-link" onclick="copyInline(this)">${text}</span>`;
+}
+
+/* ===== COPY ===== */
+function copyInline(el) {
+  const text = el.innerText;
+
+  navigator.clipboard.writeText(text);
+
+  const original = el.innerText;
+  el.innerText = "Skopiowano ✓";
+
+  setTimeout(() => {
+    el.innerText = original;
+  }, 1500);
+}
+
+</script>
+
+</body>
+</html>
