@@ -1,0 +1,129 @@
+<select id="herausforderung" onchange="updateInstruction()">
+  <option value="">Herausforderung</option>
+  <option value="storno">Storno</option>
+  <option value="terminverschiebung">Terminverschiebung</option>
+  <option value="doppelauftrag">Doppelauftrag</option>
+  <option value="techniker_nicht_da">Techniker nicht da</option>
+</select>
+
+<select id="status" onchange="updateInstruction()">
+  <option value="">Status</option>
+  <option value="offen">Offen</option>
+  <option value="angenommen">Angenommen</option>
+  <option value="teile">Teile bestellt</option>
+</select>
+
+<select id="techniker" onchange="updateInstruction()">
+  <option value="">Techniker</option>
+  <option value="wkd">WKd</option>
+  <option value="p1">P1 (operatec)</option>
+  <option value="sp">SP</option>
+</select>
+
+
+
+
+
+function updateInstruction() {
+
+  const h = document.getElementById("herausforderung").value;
+  const s = document.getElementById("status").value;
+  const t = document.getElementById("techniker").value;
+
+  if (!h || !s || !t) {
+    document.getElementById("instructionBox").innerText =
+      "Wybierz wszystkie parametry...";
+    return;
+  }
+
+  const text = getInstruction(h, s, t);
+
+  document.getElementById("instructionBox").innerText = text;
+}
+
+
+
+function getInstruction(h, s, t) {
+  return rules[h]?.[s]?.[t] || "Brak instrukcji dla tej kombinacji";
+}
+
+
+
+
+
+// ===== DRZEWKO DECYZYJNE =====
+const rules = {
+
+  storno: {
+    offen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    angenommen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    teile: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    }
+  },
+
+  terminverschiebung: {
+    offen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    angenommen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    teile: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    }
+  },
+
+  doppelauftrag: {
+    offen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    angenommen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    teile: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    }
+  },
+
+  techniker_nicht_da: {
+    offen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    angenommen: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    },
+    teile: {
+      wkd: "TODO",
+      p1: "TODO",
+      sp: "TODO"
+    }
+  }
+
+};
