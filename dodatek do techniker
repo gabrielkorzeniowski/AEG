@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Technik Edit</title>
+<title>Standardowe sformułowania</title>
 
 <style>
 :root {
@@ -39,60 +39,23 @@ body {
   margin-bottom: 20px;
 }
 
-/* GRID */
-.grid {
-  display: grid;
-  gap: 10px;
-}
-
-.grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-/* RADIO TILE */
-.radio-box {
-  border: 1px solid var(--color-border);
+/* TEXT ITEMS */
+.copy-item {
   padding: 10px;
-  border-radius: var(--radius);
+  border-bottom: 1px solid var(--color-border);
   cursor: pointer;
 }
 
-.radio-box:hover {
-  border-color: var(--color-primary);
-}
-
-.radio-box input {
-  display: none;
-}
-
-.radio-box.active {
-  border: 2px solid var(--color-primary);
+.copy-item:hover {
+  color: var(--color-primary);
   background: #fff5f6;
 }
 
-/* FLOW */
-.step {
-  border: 1px solid var(--color-border);
-  padding: 12px;
-  border-radius: var(--radius);
-  cursor: pointer;
+.copy-item:last-child {
+  border-bottom: none;
 }
 
-.step:hover {
-  border-color: var(--color-primary);
-}
-
-.arrow {
-  text-align: center;
-  margin: 8px 0;
-}
-
-/* COPY */
-.copy-link {
-  cursor: pointer;
-}
-
-/* TYPO */
+/* HEADINGS */
 h1 { margin-bottom: 20px; }
 h2 { margin-bottom: 10px; }
 
@@ -104,31 +67,83 @@ h2 { margin-bottom: 10px; }
 <div class="main">
   <div class="container-wide">
 
-    <h1>Technik Edit – Flow instrukcji</h1>
+    <h1>Standardowe sformułowania</h1>
 
-    <!-- ================= HERAUSFORDERUNG ================= -->
+    <!-- ================= POWITANIE ================= -->
     <div class="container-card">
-      <h2>Herausforderung</h2>
-      <div class="grid grid-3" id="hGroup"></div>
+      <h2>Powitanie</h2>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Dzień dobry, w czym mogę pomóc?
+      </div>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Dzień dobry, dziękuję za kontakt z serwisem AEG.
+      </div>
     </div>
 
-    <!-- ================= STATUS ================= -->
+    <!-- ================= WERYFIKACJA ================= -->
     <div class="container-card">
-      <h2>Status</h2>
-      <div class="grid grid-3" id="sGroup"></div>
+      <h2>Weryfikacja danych</h2>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Czy mogę prosić o podanie numeru zgłoszenia?
+      </div>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Proszę o potwierdzenie adresu wizyty.
+      </div>
     </div>
 
-    <!-- ================= TECHNIK ================= -->
+    <!-- ================= INFORMOWANIE ================= -->
     <div class="container-card">
-      <h2>Techniker</h2>
-      <div class="grid grid-3" id="tGroup"></div>
+      <h2>Informowanie klienta</h2>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Już sprawdzam status zgłoszenia.
+      </div>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Proszę o chwilę cierpliwości.
+      </div>
     </div>
 
-    <!-- ================= FLOW ================= -->
+    <!-- ================= TERMIN ================= -->
     <div class="container-card">
-      <h2>Instrukcja (krok po kroku)</h2>
-      <div id="flowBox">
-        Wybierz parametry...
+      <h2>Ustalanie terminu</h2>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Proszę wskazać dogodny termin wizyty.
+      </div>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Czy ten termin jest dla Pana/Pani odpowiedni?
+      </div>
+    </div>
+
+    <!-- ================= PROBLEM ================= -->
+    <div class="container-card">
+      <h2>Problem / diagnoza</h2>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Proszę opisać problem z urządzeniem.
+      </div>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Czy urządzenie było wcześniej naprawiane?
+      </div>
+    </div>
+
+    <!-- ================= ZAKOŃCZENIE ================= -->
+    <div class="container-card">
+      <h2>Zakończenie rozmowy</h2>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Czy mogę pomóc w czymś jeszcze?
+      </div>
+
+      <div class="copy-item" onclick="copyText(this)">
+        Dziękuję za rozmowę i życzę miłego dnia.
       </div>
     </div>
 
@@ -136,204 +151,19 @@ h2 { margin-bottom: 10px; }
 </div>
 
 <script>
+function copyText(el) {
+  const text = el.innerText;
 
-/* ===== OPCJE ===== */
-const H = {
-  storno: "Storno",
-  terminverschiebung: "Terminverschiebung",
-  doppelauftrag: "Doppelauftrag",
-  techniker_nicht_da: "Techniker nicht da"
-};
-
-const S = {
-  offen: "Offen",
-  angenommen: "Angenommen",
-  teile: "Teile bestellt"
-};
-
-const T = {
-  wkd: "WKd",
-  p1: "P1 (operatec)",
-  sp: "SP"
-};
-
-/* ===== FLOW (każdy przypadek = lista kroków) ===== */
-const rules = {
-  storno: {
-    offen: {
-      wkd: [
-        "Wejdź do systemu WKd",
-        "Znajdź zgłoszenie",
-        "Anuluj zgłoszenie",
-        "Potwierdź klientowi"
-      ]
-    }
-  },
-
-  terminverschiebung: {
-    angenommen: {
-      p1: [
-        "Otwórz zgłoszenie w P1",
-        "Skontaktuj się z technikiem",
-        "Ustal nowy termin",
-        "Zapisz zmiany"
-      ]
-    }
-  }
-};
-
-/* ===== STATE ===== */
-let state = {
-  h: null,
-  s: null,
-  t: null
-};
-
-/* ===== GENERATOR RADIO ===== */
-function createGroup(data, containerId, key) {
-  const container = document.getElementById(containerId);
-
-  Object.entries(data).forEach(([value, label]) => {
-    const el = document.createElement("div");
-    el.className = "radio-box";
-    el.innerText = label;
-
-    el.onclick = () => {
-      state[key] = value;
-
-      [...container.children].forEach(c => c.classList.remove("active"));
-      el.classList.add("active");
-
-      updateFlow();
-    };
-
-    container.appendChild(el);
-  });
-}
-
-/* ===== FLOW ===== */
-function updateFlow() {
-
-  const {h, s, t} = state;
-
-  if (!h || !s || !t) {
-    document.getElementById("flowBox").innerText = "Wybierz wszystkie parametry...";
-    return;
-  }
-
-  const steps = rules[h]?.[s]?.[t];
-
-  if (!steps) {
-    document.getElementById("flowBox").innerText = "Brak instrukcji.";
-    return;
-  }
-
-  let html = "";
-
-  steps.forEach((step, index) => {
-    html += `<div class="step copy-link" onclick="copyText('${step}')">${step}</div>`;
-
-    if (index < steps.length - 1) {
-      html += `<div class="arrow">⬇</div>`;
-    }
-  });
-
-  document.getElementById("flowBox").innerHTML = html;
-}
-
-/* ===== COPY ===== */
-function copyText(text) {
   navigator.clipboard.writeText(text);
+
+  const original = el.innerText;
+  el.innerText = "Skopiowano ✓";
+
+  setTimeout(() => {
+    el.innerText = original;
+  }, 1500);
 }
-
-/* ===== INIT ===== */
-createGroup(H, "hGroup", "h");
-createGroup(S, "sGroup", "s");
-createGroup(T, "tGroup", "t");
-
 </script>
 
 </body>
 </html>
-
-
-
-
-
-const rules = {
-
-  storno: {
-    offen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    angenommen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    teile: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    }
-  },
-
-  terminverschiebung: {
-    offen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    angenommen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    teile: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    }
-  },
-
-  doppelauftrag: {
-    offen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    angenommen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    teile: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    }
-  },
-
-  techniker_nicht_da: {
-    offen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    angenommen: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    },
-    teile: {
-      wkd: ["todo1", "todo2", "todo3"],
-      p1: ["todo1", "todo2", "todo3"],
-      sp: ["todo1", "todo2", "todo3"]
-    }
-  }
-
-};
-
-
