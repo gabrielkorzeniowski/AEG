@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Logowanie</title>
+
+<script src="auth.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #111111;
+  color: #fbfbfb;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ===== MAIN ===== */
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== CARD (CZARNY ZAOKRĄGLONY DIV) ===== */
+.box {
+  width: 320px;
+  padding: 30px;
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  margin: 0;
+  font-weight: 500;
+}
+
+h5 {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-weight: 300;
+  color: #777777;
+}
+
+/* ===== INPUT ===== */
+input {
+  width: 280px;
+  padding: 10px;
+  margin-bottom: 12px;
+
+  background: #111111;
+  border: 1px solid #333333;
+  border-radius: 8px;
+
+  color: #fbfbfb;
+  font-size: 0.9rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #cc142e;
+}
+
+/* ===== BUTTON ===== */
+button {
+  width: 100px;
+  padding: 10px;
+  margin-top: 10px;
+
+  background: #cc142e;
+  border: none;
+  border-radius: 8px;
+
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #d21d35;
+}
+
+/* ===== ERROR ===== */
+.error {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #cc142e;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.7rem;
+  color: #777777;
+}
+</style>
+
+</head>
+<body>
+
+<div class="main">
+
+  <div class="box">
+      <h1>AEG Shortcut</h1>
+    <h5><br>If you do not know the password, <br>ask <b>Gabriel Korzeniowski</b> for access.</h5>
+
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <div id="error" class="error"></div>
+
+  </div>
+</div>
+
+<div class="footer">
+  © 2026 Gabriel Korzeniowski. Alle Rechte vorbehalten.
+</div>
+
+<script>
+async function login() {
+  const input = document.getElementById("password").value;
+  const ok = await verifyPassword(input);
+
+  if (ok) {
+    setSession();
+    window.location.href = "index.html";
+  } else {
+    document.getElementById("error").innerText = "Incorrect password";
+  }
+}
+</script>
+
+</body>
+</html>
