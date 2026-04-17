@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Autocomplete DE PRO</title>
+<title>Autocomplete ulic DE</title>
 
 <style>
 body { font-family: Arial; }
@@ -12,10 +12,10 @@ body { font-family: Arial; }
   width: 400px;
 }
 
-#address {
+input {
   width: 100%;
   padding: 10px;
-  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 #suggestions {
@@ -23,17 +23,16 @@ body { font-family: Arial; }
   width: 100%;
   border: 1px solid #ccc;
   background: white;
-  max-height: 250px;
+  max-height: 200px;
   overflow-y: auto;
   z-index: 1000;
 }
 
 .item {
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
 }
 
-.item.active,
 .item:hover {
   background: #eee;
 }
@@ -45,19 +44,21 @@ body { font-family: Arial; }
 <h2>Adres (DE)</h2>
 
 <div id="wrapper">
-  <input id="address" placeholder="Wpisz ulicę (min. 3 znaki)" autocomplete="off">
+  <input id="streetInput" placeholder="Ulica (min. 3 litery)" autocomplete="off">
   <div id="suggestions"></div>
 </div>
 
+<input id="street" placeholder="Ulica">
+<input id="house" placeholder="Nr domu">
+<input id="plz" placeholder="Kod pocztowy">
+<input id="city" placeholder="Miasto">
+
 <script>
 let timeout = null;
-let currentIndex = -1;
-let currentResults = [];
 
-const input = document.getElementById("address");
+const input = document.getElementById("streetInput");
 const container = document.getElementById("suggestions");
 
-// debounce input
 input.addEventListener("input", () => {
   clearTimeout(timeout);
 
@@ -71,89 +72,59 @@ input.addEventListener("input", () => {
   timeout = setTimeout(() => fetchSuggestions(query), 300);
 });
 
-// keyboard navigation
-input.addEventListener("keydown", (e) => {
-  const items = document.querySelectorAll(".item");
-
-  if (e.key === "ArrowDown") {
-    currentIndex++;
-    updateActive(items);
-  }
-
-  if (e.key === "ArrowUp") {
-    currentIndex--;
-    updateActive(items);
-  }
-
-  if (e.key === "Enter" && currentIndex >= 0) {
-    items[currentIndex].click();
-  }
-});
-
-function updateActive(items) {
-  items.forEach(item => item.classList.remove("active"));
-
-  if (currentIndex >= items.length) currentIndex = 0;
-  if (currentIndex < 0) currentIndex = items.length - 1;
-
-  if (items[currentIndex]) {
-    items[currentIndex].classList.add("active");
-  }
-}
-
-// fetch from Nominatim
 async function fetchSuggestions(query) {
 
-  // cache
-  const cached = localStorage.getItem(query);
-  if (cached) {
-    render(JSON.parse(cached), query);
-    return;
-  }
-
-  const url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=7&countrycodes=de&q=${encodeURIComponent(query)}`;
+  const url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=10&countrycodes=de&q=${encodeURIComponent(query)}`;
 
   const res = await fetch(url, {
-    headers: { "User-Agent": "autocomplete-pro" }
+    headers: { "User-Agent": "street-autocomplete" }
   });
 
   const data = await res.json();
 
-  localStorage.setItem(query, JSON.stringify(data));
+  // 🔥 filtr tylko ulic zaczynających się od query
+  const filtered = data.filter(place => {
+    if (!place.address || !place.address.road) return false;
 
-  render(data, query);
+    const street = place.address.road.toLowerCase();
+    return street.startsWith(query.toLowerCase());
+  });
+
+  render(filtered);
 }
 
-// render dropdown
-function render(data, query) {
+function render(data) {
   container.innerHTML = "";
-  currentIndex = -1;
-  currentResults = data;
 
-  data.forEach((place, index) => {
+  data.forEach(place => {
     const div = document.createElement("div");
     div.className = "item";
 
-    div.innerHTML = highlight(place.display_name, query);
+    const street = place.address.road || "";
+    const city = place.address.city || place.address.town || "";
+    const plz = place.address.postcode || "";
 
-    div.onclick = () => {
-      input.value = place.display_name;
-      container.innerHTML = "";
+    div.innerText = `${street}, ${plz} ${city}`;
 
-      console.log("Wybrany adres:", place);
-    };
+    div.onclick = () => selectAddress(place);
 
     container.appendChild(div);
   });
 }
 
-// highlight match
-function highlight(text, query) {
-  const regex = new RegExp(`(${query})`, "gi");
-  return text.replace(regex, "<b>$1</b>");
+function selectAddress(place) {
+  const addr = place.address;
+
+  document.getElementById("street").value = addr.road || "";
+  document.getElementById("house").value = addr.house_number || "";
+  document.getElementById("plz").value = addr.postcode || "";
+  document.getElementById("city").value = addr.city || addr.town || "";
+
+  input.value = addr.road || "";
+  container.innerHTML = "";
 }
 
-// close dropdown when clicking outside
+// zamknięcie dropdown
 document.addEventListener("click", (e) => {
   if (!document.getElementById("wrapper").contains(e.target)) {
     container.innerHTML = "";
