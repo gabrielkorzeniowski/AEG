@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autocomplete DE PRO</title>
+
+<style>
+body { font-family: Arial; }
+
+#wrapper {
+  position: relative;
+  width: 400px;
+}
+
+#address {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#suggestions {
+  position: absolute;
+  width: 100%;
+  border: 1px solid #ccc;
+  background: white;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.item.active,
+.item:hover {
+  background: #eee;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Adres (DE)</h2>
+
+<div id="wrapper">
+  <input id="address" placeholder="Wpisz ulicę (min. 3 znaki)" autocomplete="off">
+  <div id="suggestions"></div>
+</div>
+
+<script>
+let timeout = null;
+let currentIndex = -1;
+let currentResults = [];
+
+const input = document.getElementById("address");
+const container = document.getElementById("suggestions");
+
+// debounce input
+input.addEventListener("input", () => {
+  clearTimeout(timeout);
+
+  const query = input.value.trim();
+
+  if (query.length < 3) {
+    container.innerHTML = "";
+    return;
+  }
+
+  timeout = setTimeout(() => fetchSuggestions(query), 300);
+});
+
+// keyboard navigation
+input.addEventListener("keydown", (e) => {
+  const items = document.querySelectorAll(".item");
+
+  if (e.key === "ArrowDown") {
+    currentIndex++;
+    updateActive(items);
+  }
+
+  if (e.key === "ArrowUp") {
+    currentIndex--;
+    updateActive(items);
+  }
+
+  if (e.key === "Enter" && currentIndex >= 0) {
+    items[currentIndex].click();
+  }
+});
+
+function updateActive(items) {
+  items.forEach(item => item.classList.remove("active"));
+
+  if (currentIndex >= items.length) currentIndex = 0;
+  if (currentIndex < 0) currentIndex = items.length - 1;
+
+  if (items[currentIndex]) {
+    items[currentIndex].classList.add("active");
+  }
+}
+
+// fetch from Nominatim
+async function fetchSuggestions(query) {
+
+  // cache
+  const cached = localStorage.getItem(query);
+  if (cached) {
+    render(JSON.parse(cached), query);
+    return;
+  }
+
+  const url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=7&countrycodes=de&q=${encodeURIComponent(query)}`;
+
+  const res = await fetch(url, {
+    headers: { "User-Agent": "autocomplete-pro" }
+  });
+
+  const data = await res.json();
+
+  localStorage.setItem(query, JSON.stringify(data));
+
+  render(data, query);
+}
+
+// render dropdown
+function render(data, query) {
+  container.innerHTML = "";
+  currentIndex = -1;
+  currentResults = data;
+
+  data.forEach((place, index) => {
+    const div = document.createElement("div");
+    div.className = "item";
+
+    div.innerHTML = highlight(place.display_name, query);
+
+    div.onclick = () => {
+      input.value = place.display_name;
+      container.innerHTML = "";
+
+      console.log("Wybrany adres:", place);
+    };
+
+    container.appendChild(div);
+  });
+}
+
+// highlight match
+function highlight(text, query) {
+  const regex = new RegExp(`(${query})`, "gi");
+  return text.replace(regex, "<b>$1</b>");
+}
+
+// close dropdown when clicking outside
+document.addEventListener("click", (e) => {
+  if (!document.getElementById("wrapper").contains(e.target)) {
+    container.innerHTML = "";
+  }
+});
+</script>
+
+</body>
+</html>
