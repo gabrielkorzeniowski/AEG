@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,11 +7,6 @@
 <title>AEG Process Base</title>
 
 <style>
-
-/* =========================================================
-   AEG PROCESS BASE
-   STYLE
-========================================================= */
 
 :root {
     --bg: #f5f6f7;
@@ -68,7 +62,6 @@ body {
 
 button,
 input,
-textarea,
 select {
     font: inherit;
 }
@@ -77,9 +70,7 @@ button {
     cursor: pointer;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* HEADER */
 
 header {
     position: sticky;
@@ -135,13 +126,11 @@ header {
 
 .header-actions {
     display: flex;
-    gap: 8px;
     align-items: center;
+    gap: 8px;
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+/* BUTTONS */
 
 .btn {
     border: 1px solid var(--border);
@@ -159,26 +148,6 @@ header {
     transform: translateY(-1px);
 }
 
-.btn-primary {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-}
-
-.btn-primary:hover {
-    background: var(--accent-dark);
-    border-color: var(--accent-dark);
-}
-
-.btn-danger {
-    color: var(--accent);
-}
-
-.btn-small {
-    padding: 6px 10px;
-    font-size: 12px;
-}
-
 .icon-btn {
     width: 38px;
     height: 38px;
@@ -187,9 +156,7 @@ header {
     place-items: center;
 }
 
-/* =========================================================
-   MAIN
-========================================================= */
+/* MAIN */
 
 main {
     max-width: 1500px;
@@ -214,9 +181,7 @@ main {
     font-size: 14px;
 }
 
-/* =========================================================
-   FILTERS
-========================================================= */
+/* FILTERS */
 
 .filters {
     background: var(--surface);
@@ -289,26 +254,7 @@ main {
     color: white;
 }
 
-.active-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 15px;
-}
-
-.active-filter {
-    background: var(--accent-light);
-    color: var(--accent);
-    border-radius: 999px;
-    padding: 5px 9px;
-    font-size: 11px;
-    font-weight: 650;
-    cursor: pointer;
-}
-
-/* =========================================================
-   TOOLBAR
-========================================================= */
+/* TOOLBAR */
 
 .toolbar {
     display: flex;
@@ -328,14 +274,11 @@ main {
     min-width: 190px;
 }
 
-/* =========================================================
-   CARDS
-========================================================= */
+/* CARDS */
 
 .entries-grid {
     display: grid;
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
+    grid-template-columns: repeat(3,minmax(0,1fr));
     gap: 18px;
     align-items: start;
 }
@@ -422,12 +365,18 @@ main {
 }
 
 .tag {
+    border: none;
     background: var(--surface-2);
     color: var(--muted);
     border-radius: 999px;
     padding: 4px 8px;
     font-size: 10px;
     font-weight: 650;
+    cursor: pointer;
+}
+
+.tag:hover {
+    color: var(--accent);
 }
 
 .entry-details {
@@ -502,9 +451,7 @@ main {
     gap: 7px;
 }
 
-/* =========================================================
-   EMPTY
-========================================================= */
+/* EMPTY */
 
 .empty-state {
     grid-column: 1/-1;
@@ -530,150 +477,7 @@ main {
     font-size: 13px;
 }
 
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 500;
-    background: rgba(0,0,0,.55);
-    backdrop-filter: blur(5px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal-overlay.active {
-    display: flex;
-}
-
-.modal {
-    width: min(700px,100%);
-    max-height: 90vh;
-    overflow-y: auto;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    box-shadow: 0 25px 70px rgba(0,0,0,.25);
-    animation: modalIn .25s ease;
-}
-
-.modal-header {
-    padding: 20px 22px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h2 {
-    margin: 0;
-    font-size: 19px;
-}
-
-.modal-body {
-    padding: 22px;
-}
-
-.form-group {
-    margin-bottom: 17px;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 7px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-textarea {
-    min-height: 230px;
-    resize: vertical;
-}
-
-.tag-checkboxes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-}
-
-.tag-checkbox {
-    position: relative;
-}
-
-.tag-checkbox input {
-    position: absolute;
-    opacity: 0;
-}
-
-.tag-checkbox label {
-    display: block;
-    padding: 7px 11px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--surface-2);
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.tag-checkbox input:checked + label {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-}
-
-.modal-footer {
-    padding: 16px 22px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-/* =========================================================
-   TAG MANAGER
-========================================================= */
-
-.tag-manager-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-bottom: 20px;
-}
-
-.managed-tag {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--surface-2);
-    border-radius: 999px;
-    padding: 5px 8px 5px 10px;
-    font-size: 12px;
-}
-
-.remove-tag {
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font-size: 16px;
-    padding: 0 2px;
-}
-
-.remove-tag:hover {
-    color: var(--accent);
-}
-
-.add-tag-row {
-    display: flex;
-    gap: 8px;
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
+/* TOAST */
 
 .toast-container {
     position: fixed;
@@ -695,9 +499,7 @@ textarea {
     animation: toastIn .25s ease;
 }
 
-/* =========================================================
-   ANIMATIONS
-========================================================= */
+/* ANIMATIONS */
 
 @keyframes cardIn {
     from {
@@ -708,18 +510,6 @@ textarea {
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes modalIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px) scale(.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
     }
 }
 
@@ -735,15 +525,12 @@ textarea {
     }
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* RESPONSIVE */
 
 @media(max-width:1100px) {
 
     .entries-grid {
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
+        grid-template-columns: repeat(2,minmax(0,1fr));
     }
 
 }
@@ -754,13 +541,16 @@ textarea {
         padding: 14px 16px;
     }
 
-    .header-actions .btn:not(.btn-primary) {
+    .brand-text span {
+        display: none;
+    }
+
+    .header-actions .btn:not(.icon-btn) {
         display: none;
     }
 
     main {
-        padding:
-            25px 16px 50px;
+        padding: 25px 16px 50px;
     }
 
     .entries-grid {
@@ -785,9 +575,7 @@ textarea {
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -801,9 +589,7 @@ AEG
 
 <div class="brand-text">
 
-<h1>
-Process Base
-</h1>
+<h1>Process Base</h1>
 
 <span>
 Customer Service Knowledge Base
@@ -813,26 +599,7 @@ Customer Service Knowledge Base
 
 </div>
 
-
 <div class="header-actions">
-
-<button
-class="btn"
-onclick="openTagManager()">
-
-Zarządzaj tagami
-
-</button>
-
-
-<button
-class="btn"
-onclick="exportDatabase()">
-
-Eksportuj bazę
-
-</button>
-
 
 <button
 class="btn icon-btn"
@@ -840,15 +607,6 @@ onclick="toggleTheme()"
 title="Zmień motyw">
 
 ◐
-
-</button>
-
-
-<button
-class="btn btn-primary"
-onclick="openAddModal()">
-
-+ Dodaj wpis
 
 </button>
 
@@ -861,12 +619,9 @@ onclick="openAddModal()">
 
 <main>
 
-
 <section class="page-intro">
 
-<h2>
-Baza procesów
-</h2>
+<h2>Baza procesów</h2>
 
 <p>
 Wewnętrzna baza procedur i procesów obsługi klienta.
@@ -877,16 +632,14 @@ Wewnętrzna baza procedur i procesów obsługi klienta.
 
 <section class="filters">
 
-
 <div class="search-row">
 
 <input
 id="searchInput"
 class="input"
 type="text"
-placeholder="Szukaj po numerze wpisu lub tytule..."
+placeholder="Szukaj po numerze, tytule, treści lub źródle..."
 oninput="renderEntries()">
-
 
 <button
 class="btn"
@@ -932,13 +685,6 @@ Wszystkie źródła
 
 </div>
 
-
-<div
-id="activeFilters"
-class="active-filters">
-</div>
-
-
 </section>
 
 
@@ -948,7 +694,6 @@ class="active-filters">
 id="resultCount"
 class="result-count">
 </div>
-
 
 <select
 id="sortSelect"
@@ -981,245 +726,7 @@ id="entriesGrid"
 class="entries-grid">
 </section>
 
-
 </main>
-
-
-<!-- =========================================================
-     MODAL DODAWANIA / EDYCJI
-========================================================= -->
-
-<div
-id="entryModal"
-class="modal-overlay">
-
-<div class="modal">
-
-
-<div class="modal-header">
-
-<h2 id="modalTitle">
-Dodaj nowy wpis
-</h2>
-
-<button
-class="btn icon-btn"
-onclick="closeModal()">
-
-×
-
-</button>
-
-</div>
-
-
-<div class="modal-body">
-
-
-<input
-type="hidden"
-id="editOriginalId">
-
-
-<div class="form-group">
-
-<label class="form-label">
-Numer wpisu *
-</label>
-
-<input
-id="entryId"
-class="input"
-type="text"
-maxlength="4"
-placeholder="np. 0042">
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Tytuł *
-</label>
-
-<input
-id="entryTitle"
-class="input"
-type="text"
-placeholder="np. Proces reklamacji produktu">
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Tagi
-</label>
-
-<div
-id="entryTags"
-class="tag-checkboxes">
-</div>
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Treść *
-</label>
-
-<textarea
-id="entryContent"
-class="input"
-placeholder="Wpisz treść procesu...
-
-Możesz używać HTML:
-
-<h3>Procedura</h3>
-
-<p>Opis procesu.</p>
-
-<ol>
-<li>Pierwszy krok</li>
-<li>Drugi krok</li>
-</ol>"></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Źródło
-</label>
-
-<input
-id="entrySource"
-class="input"
-type="text"
-placeholder="np. AEG Manual">
-
-</div>
-
-
-</div>
-
-
-<div class="modal-footer">
-
-<button
-class="btn"
-onclick="closeModal()">
-
-Anuluj
-
-</button>
-
-
-<button
-class="btn btn-primary"
-onclick="saveEntry()">
-
-Zapisz wpis
-
-</button>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     MODAL TAGÓW
-========================================================= -->
-
-<div
-id="tagModal"
-class="modal-overlay">
-
-<div class="modal">
-
-
-<div class="modal-header">
-
-<h2>
-Zarządzanie tagami
-</h2>
-
-<button
-class="btn icon-btn"
-onclick="closeTagManager()">
-
-×
-
-</button>
-
-</div>
-
-
-<div class="modal-body">
-
-
-<p
-style="color:var(--muted);font-size:13px">
-
-Lista tagów dostępnych w aplikacji.
-
-</p>
-
-
-<div
-id="managedTags"
-class="tag-manager-list">
-</div>
-
-
-<div class="add-tag-row">
-
-<input
-id="newTagInput"
-class="input"
-type="text"
-placeholder="Nazwa nowego tagu">
-
-
-<button
-class="btn btn-primary"
-onclick="addTag()">
-
-Dodaj
-
-</button>
-
-</div>
-
-
-</div>
-
-
-<div class="modal-footer">
-
-<button
-class="btn"
-onclick="closeTagManager()">
-
-Zamknij
-
-</button>
-
-</div>
-
-
-</div>
-
-</div>
 
 
 <div
@@ -1231,3202 +738,23 @@ class="toast-container">
 <script>
 
 /* =========================================================
-   DANE POCZĄTKOWE
-========================================================= */
+   DODAWANIE WPISÓW
+   =========================================================
 
-const DEFAULT_TAGS = [
+   Każdy wpis powinien mieć:
 
-"obsługa klienta",
-"reklamacje",
-"zwroty",
-"płatności",
-"zamówienia",
-"dostawa",
-"produkty",
-"techniczne",
-"konto klienta",
-"kontakt",
-"inne"
+   id      - dokładnie 4 cyfry
+   title   - tytuł wpisu
+   tags    - lista tagów
+   content - treść HTML
+   source  - źródło
 
-];
+   Skopiuj poniższy wzór i dodaj nowy obiekt
+   przed ostatnim wpisem.
 
-
-const DEFAULT_ENTRIES = [
-
-{
-
-id: "0001",
-
-title: "Przykładowy proces obsługi klienta",
-
-tags: [
-"obsługa klienta",
-"kontakt"
-],
-
-content: `
-
-<h3>Cel procesu</h3>
-
-<p>
-To jest przykładowy wpis demonstracyjny.
-Możesz go zastąpić własną procedurą.
-</p>
-
-<h3>Przebieg</h3>
-
-<ol>
-
-<li>
-Zweryfikuj dane klienta.
-</li>
-
-<li>
-Ustal przedmiot zgłoszenia.
-</li>
-
-<li>
-Sprawdź odpowiednią procedurę.
-</li>
-
-<li>
-Przekaż klientowi dalsze instrukcje.
-</li>
-
-</ol>
-
-<h3>Uwagi</h3>
-
-<p>
-W tym miejscu możesz umieścić dodatkowe informacje.
-</p>
-
-`,
-
-source: "Przykładowa procedura AEG"
-
-},
-
-
-{
-
-id: "0002",
-
-title: "Przykładowy proces reklamacji",
-
-tags: [
-"reklamacje",
-"produkty"
-],
-
-content: `
-
-<h3>Opis</h3>
-
-<p>
-Przykładowy proces reklamacyjny.
-</p>
-
-<h3>Procedura</h3>
-
-<ol>
-
-<li>
-Przyjmij zgłoszenie klienta.
-</li>
-
-<li>
-Zweryfikuj dane zamówienia.
-</li>
-
-<li>
-Sprawdź możliwość realizacji reklamacji.
-</li>
-
-<li>
-Poinformuj klienta o dalszych krokach.
-</li>
-
-</ol>
-
-`,
-
-source: "AEG Customer Service Manual"
-
-},
-
-
-{
-
-id: "0003",
-
-title: "Przykładowy problem techniczny",
-
-tags: [
-"techniczne",
-"obsługa klienta"
-],
-
-content: `
-
-<h3>Diagnoza problemu</h3>
-
-<p>
-Przykładowa procedura postępowania
-w przypadku problemu technicznego.
-</p>
-
-<ul>
-
-<li>
-Ustal model produktu.
-</li>
-
-<li>
-Poproś klienta o opis problemu.
-</li>
-
-<li>
-Sprawdź podstawowe rozwiązania.
-</li>
-
-<li>
-Przejdź do kolejnego etapu procedury.
-</li>
-
-</ul>
-
-`,
-
-source: "Wewnętrzna baza wiedzy"
-
-}
-
-];
-
-
-/* =========================================================
-   STAN
-========================================================= */
-
-let entries = loadEntries();
-
-let tags = loadTags();
-
-let selectedTags = new Set();
-
-let expandedEntries = new Set();
-
-let editingEntryId = null;
-
-
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
-
-function loadEntries() {
-
-const saved =
-localStorage.getItem(
-"aeg_process_entries"
-);
-
-if(saved) {
-
-try {
-
-return JSON.parse(saved);
-
-}
-
-catch(e) {
-
-console.error(e);
-
-}
-
-}
-
-return JSON.parse(
-JSON.stringify(DEFAULT_ENTRIES)
-);
-
-}
-
-
-function loadTags() {
-
-const saved =
-localStorage.getItem(
-"aeg_process_tags"
-);
-
-if(saved) {
-
-try {
-
-return JSON.parse(saved);
-
-}
-
-catch(e) {
-
-console.error(e);
-
-}
-
-}
-
-return [
-...DEFAULT_TAGS
-];
-
-}
-
-
-function saveDatabase() {
-
-localStorage.setItem(
-"aeg_process_entries",
-JSON.stringify(entries)
-);
-
-localStorage.setItem(
-"aeg_process_tags",
-JSON.stringify(tags)
-);
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-document.addEventListener(
-"DOMContentLoaded",
-function() {
-
-renderTagFilters();
-
-renderSourceFilter();
-
-renderEntries();
-
-applySavedTheme();
-
-}
-);
-
-
-/* =========================================================
-   TAGI
-========================================================= */
-
-function renderTagFilters() {
-
-const container =
-document.getElementById(
-"tagFilters"
-);
-
-container.innerHTML = "";
-
-
-const all =
-document.createElement(
-"button"
-);
-
-all.className =
-"tag-filter " +
-(
-selectedTags.size === 0
-? "active"
-: ""
-);
-
-all.textContent =
-"Wszystkie";
-
-all.onclick =
-function() {
-
-selectedTags.clear();
-
-renderTagFilters();
-
-renderEntries();
-
-};
-
-container.appendChild(all);
-
-
-tags.forEach(
-function(tag) {
-
-const button =
-document.createElement(
-"button"
-);
-
-button.className =
-"tag-filter " +
-(
-selectedTags.has(tag)
-? "active"
-: ""
-);
-
-button.textContent =
-tag;
-
-button.onclick =
-function() {
-
-if(
-selectedTags.has(tag)
-) {
-
-selectedTags.delete(tag);
-
-}
-
-else {
-
-selectedTags.add(tag);
-
-}
-
-renderTagFilters();
-
-renderEntries();
-
-};
-
-container.appendChild(button);
-
-}
-);
-
-}
-
-
-/* =========================================================
-   ŹRÓDŁA
-========================================================= */
-
-function renderSourceFilter() {
-
-const select =
-document.getElementById(
-"sourceFilter"
-);
-
-const current =
-select.value;
-
-const sources =
-[
-...new Set(
-entries
-.map(
-entry => entry.source
-)
-.filter(Boolean)
-)
-];
-
-select.innerHTML = `
-
-<option value="">
-Wszystkie źródła
-</option>
-
-`;
-
-
-sources
-.sort(
-(a,b) =>
-a.localeCompare(
-b,
-"pl"
-)
-)
-.forEach(
-source => {
-
-const option =
-document.createElement(
-"option"
-);
-
-option.value =
-source;
-
-option.textContent =
-source;
-
-select.appendChild(
-option
-);
-
-}
-);
-
-
-select.value =
-current;
-
-}
-
-
-/* =========================================================
-   RENDER WPISÓW
-========================================================= */
-
-function renderEntries() {
-
-const grid =
-document.getElementById(
-"entriesGrid"
-);
-
-const search =
-document.getElementById(
-"searchInput"
-)
-.value
-.trim()
-.toLowerCase();
-
-
-const source =
-document.getElementById(
-"sourceFilter"
-)
-.value;
-
-
-const sort =
-document.getElementById(
-"sortSelect"
-)
-.value;
-
-
-let filtered =
-entries.filter(
-entry => {
-
-const matchesSearch =
-
-!search ||
-
-entry.id
-.toLowerCase()
-.includes(search)
-
-||
-
-entry.title
-.toLowerCase()
-.includes(search);
-
-
-const matchesTags =
-
-selectedTags.size === 0
-
-||
-
-[
-...selectedTags
-]
-.every(
-tag =>
-entry.tags.includes(tag)
-);
-
-
-const matchesSource =
-
-!source
-
-||
-
-entry.source === source;
-
-
-return (
-
-matchesSearch &&
-
-matchesTags &&
-
-matchesSource
-
-);
-
-}
-);
-
-
-/* SORTOWANIE */
-
-filtered.sort(
-(a,b) => {
-
-if(
-sort === "id-desc"
-) {
-
-return Number(b.id)
--
-Number(a.id);
-
-}
-
-if(
-sort === "title-asc"
-) {
-
-return a.title.localeCompare(
-b.title,
-"pl"
-);
-
-}
-
-if(
-sort === "title-desc"
-) {
-
-return b.title.localeCompare(
-a.title,
-"pl"
-);
-
-}
-
-return Number(a.id)
--
-Number(b.id);
-
-}
-);
-
-
-/* LICZNIK */
-
-document.getElementById(
-"resultCount"
-)
-.textContent =
-
-`Wyświetlono ${filtered.length} z ${entries.length} wpisów`;
-
-
-/* AKTYWNE FILTRY */
-
-renderActiveFilters();
-
-
-grid.innerHTML = "";
-
-
-if(
-filtered.length === 0
-) {
-
-grid.innerHTML = `
-
-<div class="empty-state">
-
-<div class="empty-icon">
-🔎
-</div>
-
-<h3>
-Nie znaleziono wpisów
-</h3>
-
-<p>
-Zmień kryteria wyszukiwania
-lub wyczyść filtry.
-</p>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-filtered.forEach(
-(entry,index) => {
-
-const card =
-createEntryCard(entry);
-
-card.style.animationDelay =
-`${index * .025}s`;
-
-grid.appendChild(card);
-
-}
-);
-
-}
-
-
-/* =========================================================
-   KARTA
-========================================================= */
-
-function createEntryCard(entry) {
-
-const card =
-document.createElement(
-"article"
-);
-
-card.className =
-"entry-card";
-
-
-if(
-expandedEntries.has(entry.id)
-) {
-
-card.classList.add(
-"expanded"
-);
-
-}
-
-
-const tagsHTML =
-entry.tags
-.map(
-tag =>
-`
-<span class="tag">
-#${escapeHTML(tag)}
-</span>
-`
-)
-.join("");
-
-
-card.innerHTML = `
-
-<div
-class="entry-head"
-onclick="toggleEntry('${entry.id}')">
-
-
-<div class="entry-top">
-
-<span class="entry-id">
-
-#${escapeHTML(entry.id)}
-
-</span>
-
-
-<span class="expand-icon">
-
-↓
-
-</span>
-
-</div>
-
-
-<h3 class="entry-title">
-
-${escapeHTML(entry.title)}
-
-</h3>
-
-
-<p class="entry-preview">
-
-${getPreview(entry.content)}
-
-</p>
-
-
-<div class="entry-tags">
-
-${tagsHTML}
-
-</div>
-
-
-</div>
-
-
-<div class="entry-details">
-
-
-<div class="entry-details-inner">
-
-
-<div class="entry-content">
-
-${entry.content}
-
-</div>
-
-
-${
-entry.source
-
-?
-
-`
-
-<div class="entry-source">
-
-Źródło:
-
-<strong>
-
-${escapeHTML(entry.source)}
-
-</strong>
-
-</div>
-
-`
-
-:
-
-""
-
-}
-
-
-<div class="entry-actions">
-
-
-<button
-class="btn btn-small"
-onclick="event.stopPropagation();editEntry('${entry.id}')">
-
-Edytuj
-
-</button>
-
-
-<button
-class="btn btn-small"
-onclick="event.stopPropagation();copyEntryCode('${entry.id}')">
-
-Kopiuj kod
-
-</button>
-
-
-<button
-class="btn btn-small btn-danger"
-onclick="event.stopPropagation();deleteEntry('${entry.id}')">
-
-Usuń
-
-</button>
-
-
-</div>
-
-
-</div>
-
-</div>
-
-`;
-
-
-return card;
-
-}
-
-
-/* =========================================================
-   ROZWIJANIE
-========================================================= */
-
-function toggleEntry(id) {
-
-if(
-expandedEntries.has(id)
-) {
-
-expandedEntries.delete(id);
-
-}
-
-else {
-
-expandedEntries.add(id);
-
-}
-
-renderEntries();
-
-}
-
-
-/* =========================================================
-   PREVIEW
-========================================================= */
-
-function getPreview(html) {
-
-const temp =
-document.createElement(
-"div"
-);
-
-temp.innerHTML =
-html;
-
-return escapeHTML(
-(
-temp.textContent ||
-""
-)
-.trim()
-);
-
-}
-
-
-/* =========================================================
-   AKTYWNE FILTRY
-========================================================= */
-
-function renderActiveFilters() {
-
-const container =
-document.getElementById(
-"activeFilters"
-);
-
-container.innerHTML = "";
-
-
-selectedTags.forEach(
-tag => {
-
-const item =
-document.createElement(
-"span"
-);
-
-item.className =
-"active-filter";
-
-item.textContent =
-`#${tag} ×`;
-
-item.onclick =
-function() {
-
-selectedTags.delete(
-tag
-);
-
-renderTagFilters();
-
-renderEntries();
-
-};
-
-container.appendChild(item);
-
-}
-);
-
-}
-
-
-/* =========================================================
-   WYCZYŚĆ
-========================================================= */
-
-function clearFilters() {
-
-document.getElementById(
-"searchInput"
-)
-.value = "";
-
-
-document.getElementById(
-"sourceFilter"
-)
-.value = "";
-
-
-selectedTags.clear();
-
-
-renderTagFilters();
-
-renderEntries();
-
-}
-
-
-/* =========================================================
-   DODAJ
-========================================================= */
-
-function openAddModal() {
-
-editingEntryId = null;
-
-
-document.getElementById(
-"modalTitle"
-)
-.textContent =
-"Dodaj nowy wpis";
-
-
-document.getElementById(
-"entryId"
-)
-.value = "";
-
-
-document.getElementById(
-"entryTitle"
-)
-.value = "";
-
-
-document.getElementById(
-"entryContent"
-)
-.value = "";
-
-
-document.getElementById(
-"entrySource"
-)
-.value = "";
-
-
-renderEntryTagCheckboxes();
-
-
-document.getElementById(
-"entryModal"
-)
-.classList.add(
-"active"
-);
-
-}
-
-
-/* =========================================================
-   EDYCJA
-========================================================= */
-
-function editEntry(id) {
-
-const entry =
-entries.find(
-item =>
-item.id === id
-);
-
-if(!entry) return;
-
-
-editingEntryId =
-id;
-
-
-document.getElementById(
-"modalTitle"
-)
-.textContent =
-"Edytuj wpis";
-
-
-document.getElementById(
-"entryId"
-)
-.value =
-entry.id;
-
-
-document.getElementById(
-"entryTitle"
-)
-.value =
-entry.title;
-
-
-document.getElementById(
-"entryContent"
-)
-.value =
-entry.content;
-
-
-document.getElementById(
-"entrySource"
-)
-.value =
-entry.source || "";
-
-
-renderEntryTagCheckboxes(
-entry.tags
-);
-
-
-document.getElementById(
-"entryModal"
-)
-.classList.add(
-"active"
-);
-
-}
-
-
-/* =========================================================
-   TAGI FORMULARZA
-========================================================= */
-
-function renderEntryTagCheckboxes(
-selected = []
-) {
-
-const container =
-document.getElementById(
-"entryTags"
-);
-
-container.innerHTML = "";
-
-
-tags.forEach(
-(tag,index) => {
-
-const wrapper =
-document.createElement(
-"div"
-);
-
-wrapper.className =
-"tag-checkbox";
-
-
-const id =
-`tag-checkbox-${index}`;
-
-
-wrapper.innerHTML = `
-
-<input
-type="checkbox"
-id="${id}"
-value="${escapeHTML(tag)}"
-${selected.includes(tag)
-? "checked"
-: ""}>
-
-
-<label
-for="${id}">
-
-${escapeHTML(tag)}
-
-</label>
-
-`;
-
-
-container.appendChild(
-wrapper
-);
-
-}
-);
-
-}
-
-
-/* =========================================================
-   ZAPIS
-========================================================= */
-
-function saveEntry() {
-
-const id =
-document.getElementById(
-"entryId"
-)
-.value
-.trim();
-
-
-const title =
-document.getElementById(
-"entryTitle"
-)
-.value
-.trim();
-
-
-const content =
-document.getElementById(
-"entryContent"
-)
-.value
-.trim();
-
-
-const source =
-document.getElementById(
-"entrySource"
-)
-.value
-.trim();
-
-
-const selected =
-[
-...
-document.querySelectorAll(
-"#entryTags input:checked"
-)
-]
-.map(
-input =>
-input.value
-);
-
-
-if(
-!/^\d{4}$/.test(id)
-) {
-
-showToast(
-"Numer wpisu musi mieć dokładnie 4 cyfry."
-);
-
-return;
-
-}
-
-
-if(!title) {
-
-showToast(
-"Podaj tytuł wpisu."
-);
-
-return;
-
-}
-
-
-if(!content) {
-
-showToast(
-"Podaj treść wpisu."
-);
-
-return;
-
-}
-
-
-/* EDYCJA */
-
-if(editingEntryId) {
-
-const duplicate =
-entries.some(
-entry =>
-entry.id === id &&
-entry.id !== editingEntryId
-);
-
-if(duplicate) {
-
-showToast(
-"Wpis o takim numerze już istnieje."
-);
-
-return;
-
-}
-
-
-const index =
-entries.findIndex(
-entry =>
-entry.id === editingEntryId
-);
-
-
-entries[index] = {
-
-id,
-
-title,
-
-tags: selected,
-
-content,
-
-source
-
-};
-
-
-showToast(
-"Wpis został zaktualizowany."
-);
-
-}
-
-
-/* NOWY */
-
-else {
-
-const duplicate =
-entries.some(
-entry =>
-entry.id === id
-);
-
-if(duplicate) {
-
-showToast(
-"Wpis o takim numerze już istnieje."
-);
-
-return;
-
-}
-
-
-entries.push({
-
-id,
-
-title,
-
-tags: selected,
-
-content,
-
-source
-
-});
-
-
-showToast(
-"Wpis został dodany."
-);
-
-}
-
-
-saveDatabase();
-
-closeModal();
-
-renderSourceFilter();
-
-renderEntries();
-
-}
-
-
-/* =========================================================
-   USUWANIE
-========================================================= */
-
-function deleteEntry(id) {
-
-const entry =
-entries.find(
-item =>
-item.id === id
-);
-
-if(!entry) return;
-
-
-if(
-!confirm(
-`Czy na pewno usunąć wpis #${id} — "${entry.title}"?`
-)
-) {
-
-return;
-
-}
-
-
-entries =
-entries.filter(
-item =>
-item.id !== id
-);
-
-
-expandedEntries.delete(
-id
-);
-
-
-saveDatabase();
-
-renderSourceFilter();
-
-renderEntries();
-
-showToast(
-"Wpis został usunięty."
-);
-
-}
-
-
-/* =========================================================
-   TAG MANAGER
-========================================================= */
-
-function openTagManager() {
-
-renderManagedTags();
-
-document.getElementById(
-"tagModal"
-)
-.classList.add(
-"active"
-);
-
-}
-
-
-function closeTagManager() {
-
-document.getElementById(
-"tagModal"
-)
-.classList.remove(
-"active"
-);
-
-}
-
-
-function renderManagedTags() {
-
-const container =
-document.getElementById(
-"managedTags"
-);
-
-container.innerHTML = "";
-
-
-tags.forEach(
-tag => {
-
-const element =
-document.createElement(
-"div"
-);
-
-element.className =
-"managed-tag";
-
-
-const span =
-document.createElement(
-"span"
-);
-
-span.textContent =
-tag;
-
-
-const button =
-document.createElement(
-"button"
-);
-
-button.className =
-"remove-tag";
-
-button.textContent =
-"×";
-
-button.onclick =
-function() {
-
-removeTag(tag);
-
-};
-
-
-element.appendChild(span);
-
-element.appendChild(button);
-
-container.appendChild(
-element
-);
-
-}
-);
-
-}
-
-
-/* =========================================================
-   DODAWANIE TAGU
-========================================================= */
-
-function addTag() {
-
-const input =
-document.getElementById(
-"newTagInput"
-);
-
-const tag =
-input.value.trim();
-
-
-if(!tag) return;
-
-
-if(
-tags.includes(tag)
-) {
-
-showToast(
-"Taki tag już istnieje."
-);
-
-return;
-
-}
-
-
-tags.push(tag);
-
-tags.sort(
-(a,b) =>
-a.localeCompare(
-b,
-"pl"
-)
-);
-
-
-input.value = "";
-
-
-saveDatabase();
-
-renderManagedTags();
-
-renderTagFilters();
-
-renderEntryTagCheckboxes();
-
-renderEntries();
-
-
-showToast(
-"Tag został dodany."
-);
-
-}
-
-
-/* =========================================================
-   USUWANIE TAGU
-========================================================= */
-
-function removeTag(tag) {
-
-const used =
-entries.some(
-entry =>
-entry.tags.includes(tag)
-);
-
-
-if(used) {
-
-if(
-!confirm(
-`Tag "${tag}" jest używany w istniejących wpisach. Usunąć go również z tych wpisów?`
-)
-) {
-
-return;
-
-}
-
-
-entries.forEach(
-entry => {
-
-entry.tags =
-entry.tags.filter(
-item =>
-item !== tag
-);
-
-}
-);
-
-}
-
-
-tags =
-tags.filter(
-item =>
-item !== tag
-);
-
-
-selectedTags.delete(tag);
-
-
-saveDatabase();
-
-renderManagedTags();
-
-renderTagFilters();
-
-renderEntries();
-
-
-showToast(
-"Tag został usunięty."
-);
-
-}
-
-
-/* =========================================================
-   KOPIOWANIE KODU WPISU
-========================================================= */
-
-function copyEntryCode(id) {
-
-const entry =
-entries.find(
-item =>
-item.id === id
-);
-
-if(!entry) return;
-
-
-const code = `{
-    id: "${entry.id}",
-    title: ${JSON.stringify(entry.title)},
-    tags: ${JSON.stringify(entry.tags)},
-    content: ${JSON.stringify(entry.content)},
-    source: ${JSON.stringify(entry.source || "")}
-}`;
-
-
-if(
-navigator.clipboard
-) {
-
-navigator.clipboard.writeText(
-code
-)
-.then(
-() =>
-showToast(
-"Kod wpisu skopiowany."
-)
-);
-
-}
-
-else {
-
-showToast(
-"Nie można skopiować kodu."
-);
-
-}
-
-}
-
-
-/* =========================================================
-   EKSPORT PEŁNEJ APLIKACJI
-========================================================= */
-
-function exportDatabase() {
-
-/*
-    Eksport tworzy kompletny plik HTML.
-
-    Dane z localStorage zostają wpisane
-    do sekcji DEFAULT_ENTRIES oraz DEFAULT_TAGS.
-
-    Dzięki temu nowy plik działa samodzielnie.
 */
 
-
-const entriesString =
-JSON.stringify(
-entries,
-null,
-4
-);
-
-
-const tagsString =
-JSON.stringify(
-tags,
-null,
-4
-);
-
-
-/*
-    Pobieramy aktualny kod dokumentu.
-*/
-
-let html =
-"<!DOCTYPE html>\n" +
-document.documentElement.outerHTML;
-
-
-/*
-    Zamieniamy dane początkowe.
-
-    Dzięki temu eksportowana aplikacja
-    posiada aktualną bazę.
-*/
-
-
-const entriesRegex =
-/const DEFAULT_ENTRIES = \[[\s\S]*?\];/;
-
-
-const tagsRegex =
-/const DEFAULT_TAGS = \[[\s\S]*?\];/;
-
-
-html =
-html.replace(
-entriesRegex,
-`const DEFAULT_ENTRIES = ${entriesString};`
-);
-
-
-html =
-html.replace(
-tagsRegex,
-`const DEFAULT_TAGS = ${tagsString};`
-);
-
-
-/*
-    Czyścimy localStorage w eksportowanej wersji.
-
-    Dzięki temu nowa aplikacja
-    rozpocznie pracę z wyeksportowaną bazą.
-*/
-
-
-html =
-html.replace(
-"<script>",
-`<script>
-localStorage.removeItem("aeg_process_entries");
-localStorage.removeItem("aeg_process_tags");`,
-1
-);
-
-
-/*
-    Tworzymy plik.
-*/
-
-const blob =
-new Blob(
-[
-html
-],
-{
-type:
-"text/html;charset=utf-8"
-}
-);
-
-
-const url =
-URL.createObjectURL(
-blob
-);
-
-
-const link =
-document.createElement(
-"a"
-);
-
-
-link.href =
-url;
-
-
-link.download =
-"aeg-process-base.html";
-
-
-document.body.appendChild(
-link
-);
-
-
-link.click();
-
-
-link.remove();
-
-
-setTimeout(
-() =>
-URL.revokeObjectURL(
-url
-),
-1000
-);
-
-
-showToast(
-"Pełna baza została wyeksportowana."
-);
-
-}
-
-
-/* =========================================================
-   MOTYW
-========================================================= */
-
-function toggleTheme() {
-
-const current =
-document.documentElement
-.getAttribute(
-"data-theme"
-);
-
-
-const next =
-current === "dark"
-? "light"
-: "dark";
-
-
-document.documentElement
-.setAttribute(
-"data-theme",
-next
-);
-
-
-localStorage.setItem(
-"aeg_theme",
-next
-);
-
-}
-
-
-function applySavedTheme() {
-
-const theme =
-localStorage.getItem(
-"aeg_theme"
-);
-
-
-if(theme) {
-
-document.documentElement
-.setAttribute(
-"data-theme",
-theme
-);
-
-}
-
-}
-
-
-/* =========================================================
-   ZAMYKANIE MODALI
-========================================================= */
-
-function closeModal() {
-
-document.getElementById(
-"entryModal"
-)
-.classList.remove(
-"active"
-);
-
-editingEntryId =
-null;
-
-}
-
-
-document.addEventListener(
-"click",
-function(event) {
-
-if(
-event.target.classList.contains(
-"modal-overlay"
-)
-) {
-
-event.target.classList.remove(
-"active"
-);
-
-}
-
-}
-);
-
-
-/* =========================================================
-   ESC
-========================================================= */
-
-document.addEventListener(
-"keydown",
-function(event) {
-
-if(
-event.key === "Escape"
-) {
-
-closeModal();
-
-closeTagManager();
-
-}
-
-}
-);
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message) {
-
-const container =
-document.getElementById(
-"toastContainer"
-);
-
-
-const toast =
-document.createElement(
-"div"
-);
-
-
-toast.className =
-"toast";
-
-
-toast.textContent =
-message;
-
-
-container.appendChild(
-toast
-);
-
-
-setTimeout(
-function() {
-
-toast.remove();
-
-},
-2800
-);
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(text) {
-
-const div =
-document.createElement(
-"div"
-);
-
-div.textContent =
-String(text);
-
-
-return div.innerHTML;
-
-}
-
-</script>
-
-
-</body>
-</html>
-```
-            --accent: #ff2634;
-            --accent-dark: #ff4a56;
-            --accent-light: rgba(227, 6, 19, 0.14);
-            --tag-bg: #292c32;
-            --shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-            line-height: 1.6;
-            transition:
-                background 0.25s ease,
-                color 0.25s ease;
-        }
-
-        button,
-        input,
-        textarea,
-        select {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        /* =========================================================
-           HEADER
-        ========================================================= */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: color-mix(
-                in srgb,
-                var(--surface) 92%,
-                transparent
-            );
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .header-inner {
-            max-width: 1500px;
-            margin: auto;
-            padding: 18px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 0;
-        }
-
-        .brand-mark {
-            width: 38px;
-            height: 38px;
-            background: var(--accent);
-            color: white;
-            border-radius: 10px;
-            display: grid;
-            place-items: center;
-            font-weight: 800;
-            font-size: 13px;
-            letter-spacing: -0.5px;
-            flex-shrink: 0;
-        }
-
-        .brand-text h1 {
-            margin: 0;
-            font-size: 17px;
-            line-height: 1.2;
-            font-weight: 750;
-            letter-spacing: -0.3px;
-        }
-
-        .brand-text span {
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        /* =========================================================
-           BUTTONS
-        ========================================================= */
-
-        .btn {
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            padding: 9px 14px;
-            border-radius: 9px;
-            font-size: 13px;
-            font-weight: 650;
-            transition:
-                transform 0.18s ease,
-                background 0.18s ease,
-                border-color 0.18s ease;
-        }
-
-        .btn:hover {
-            background: var(--surface-hover);
-            transform: translateY(-1px);
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            border-color: var(--accent-dark);
-        }
-
-        .btn-danger {
-            color: var(--accent);
-        }
-
-        .btn-small {
-            padding: 6px 10px;
-            font-size: 12px;
-        }
-
-        .icon-btn {
-            width: 38px;
-            height: 38px;
-            padding: 0;
-            display: grid;
-            place-items: center;
-        }
-
-        /* =========================================================
-           MAIN
-        ========================================================= */
-
-        main {
-            max-width: 1500px;
-            margin: auto;
-            padding: 35px 28px 70px;
-        }
-
-        .page-intro {
-            margin-bottom: 30px;
-        }
-
-        .page-intro h2 {
-            margin: 0 0 6px;
-            font-size: clamp(25px, 3vw, 38px);
-            line-height: 1.15;
-            letter-spacing: -1.3px;
-        }
-
-        .page-intro p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        /* =========================================================
-           SEARCH PANEL
-        ========================================================= */
-
-        .filters {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 28px;
-            box-shadow: var(--shadow);
-        }
-
-        .search-row {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 10px;
-        }
-
-        .input {
-            width: 100%;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            color: var(--text);
-            border-radius: 9px;
-            padding: 11px 13px;
-            outline: none;
-            transition:
-                border-color 0.18s ease,
-                box-shadow 0.18s ease;
-        }
-
-        .input:focus,
-        textarea:focus,
-        select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-light);
-        }
-
-        .filter-section {
-            margin-top: 18px;
-        }
-
-        .filter-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 11px;
-            font-weight: 750;
-            text-transform: uppercase;
-            letter-spacing: 0.7px;
-            color: var(--muted);
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
-
-        .tag-filter {
-            border: 1px solid var(--border);
-            background: var(--tag-bg);
-            color: var(--text);
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 12px;
-            transition: all 0.18s ease;
-        }
-
-        .tag-filter:hover {
-            border-color: var(--accent);
-        }
-
-        .tag-filter.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .active-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 15px;
-        }
-
-        .active-filter {
-            background: var(--accent-light);
-            color: var(--accent);
-            border-radius: 999px;
-            padding: 5px 9px;
-            font-size: 11px;
-            font-weight: 650;
-        }
-
-        /* =========================================================
-           TOOLBAR
-        ========================================================= */
-
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-
-        .result-count {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .sort-select {
-            width: auto;
-            min-width: 180px;
-        }
-
-        /* =========================================================
-           CARDS
-        ========================================================= */
-
-        .entries-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
-            align-items: start;
-        }
-
-        .entry-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition:
-                transform 0.22s ease,
-                box-shadow 0.22s ease,
-                border-color 0.22s ease;
-            animation: cardIn 0.35s ease both;
-        }
-
-        .entry-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.09);
-        }
-
-        .entry-card.expanded {
-            border-color: var(--accent);
-        }
-
-        .entry-head {
-            padding: 20px;
-            cursor: pointer;
-        }
-
-        .entry-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .entry-id {
-            color: var(--accent);
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 0.7px;
-        }
-
-        .expand-icon {
-            width: 27px;
-            height: 27px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            color: var(--muted);
-            transition: transform 0.25s ease;
-        }
-
-        .entry-card.expanded .expand-icon {
-            transform: rotate(180deg);
-            color: var(--accent);
-            border-color: var(--accent);
-        }
-
-        .entry-title {
-            margin: 0 0 12px;
-            font-size: 17px;
-            line-height: 1.35;
-            letter-spacing: -0.3px;
-        }
-
-        .entry-preview {
-            margin: 0;
-            color: var(--muted);
-            font-size: 13px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .entry-tags {
-            margin-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            background: var(--tag-bg);
-            color: var(--muted);
-            border-radius: 999px;
-            padding: 4px 8px;
-            font-size: 10px;
-            font-weight: 650;
-        }
-
-        .entry-details {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            border-top: 1px solid transparent;
-            transition:
-                max-height 0.35s ease,
-                opacity 0.25s ease,
-                border-color 0.25s ease;
-        }
-
-        .entry-card.expanded .entry-details {
-            max-height: 1500px;
-            opacity: 1;
-            border-color: var(--border);
-        }
-
-        .entry-details-inner {
-            padding: 20px;
-        }
-
-        .entry-content {
-            font-size: 14px;
-            line-height: 1.75;
-        }
-
-        .entry-content h1,
-        .entry-content h2,
-        .entry-content h3 {
-            margin-top: 20px;
-            margin-bottom: 8px;
-        }
-
-        .entry-content h3:first-child {
-            margin-top: 0;
-        }
-
-        .entry-content ul,
-        .entry-content ol {
-            padding-left: 22px;
-        }
-
-        .entry-content code {
-            background: var(--tag-bg);
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-
-        .entry-source {
-            margin-top: 22px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .entry-source strong {
-            color: var(--text);
-        }
-
-        .entry-actions {
-            margin-top: 18px;
-            display: flex;
-            gap: 7px;
-            flex-wrap: wrap;
-        }
-
-        /* =========================================================
-           EMPTY STATE
-        ========================================================= */
-
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 70px 20px;
-            background: var(--surface);
-            border: 1px dashed var(--border);
-            border-radius: var(--radius);
-        }
-
-        .empty-icon {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-
-        .empty-state h3 {
-            margin: 0 0 5px;
-        }
-
-        .empty-state p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        /* =========================================================
-           MODAL
-        ========================================================= */
-
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 500;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(5px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            width: min(700px, 100%);
-            max-height: 90vh;
-            overflow-y: auto;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
-            animation: modalIn 0.25s ease;
-        }
-
-        .modal-header {
-            padding: 20px 22px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 19px;
-        }
-
-        .modal-body {
-            padding: 22px;
-        }
-
-        .form-group {
-            margin-bottom: 17px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 7px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        textarea {
-            min-height: 220px;
-            resize: vertical;
-        }
-
-        select.input {
-            appearance: auto;
-        }
-
-        .tag-checkboxes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
-
-        .tag-checkbox {
-            position: relative;
-        }
-
-        .tag-checkbox input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .tag-checkbox label {
-            display: block;
-            padding: 7px 11px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: var(--tag-bg);
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.18s ease;
-        }
-
-        .tag-checkbox input:checked + label {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .modal-footer {
-            padding: 16px 22px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-        }
-
-        /* =========================================================
-           TAG MANAGER
-        ========================================================= */
-
-        .tag-manager-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 20px;
-        }
-
-        .managed-tag {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: var(--tag-bg);
-            border-radius: 999px;
-            padding: 5px 8px 5px 10px;
-            font-size: 12px;
-        }
-
-        .remove-tag {
-            border: none;
-            background: transparent;
-            color: var(--muted);
-            font-size: 16px;
-            line-height: 1;
-            padding: 0 2px;
-        }
-
-        .remove-tag:hover {
-            color: var(--accent);
-        }
-
-        .add-tag-row {
-            display: flex;
-            gap: 8px;
-        }
-
-        /* =========================================================
-           TOAST
-        ========================================================= */
-
-        .toast-container {
-            position: fixed;
-            bottom: 22px;
-            right: 22px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .toast {
-            background: var(--text);
-            color: var(--surface);
-            padding: 11px 15px;
-            border-radius: 9px;
-            font-size: 13px;
-            box-shadow: var(--shadow);
-            animation: toastIn 0.25s ease;
-        }
-
-        /* =========================================================
-           ANIMATIONS
-        ========================================================= */
-
-        @keyframes cardIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px) scale(0.98);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes toastIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
-
-        @media (max-width: 1100px) {
-            .entries-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 700px) {
-            .header-inner {
-                padding: 14px 16px;
-            }
-
-            .header-actions .btn:not(.btn-primary) {
-                display: none;
-            }
-
-            main {
-                padding: 25px 16px 50px;
-            }
-
-            .entries-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .search-row {
-                grid-template-columns: 1fr;
-            }
-
-            .toolbar {
-                align-items: stretch;
-                flex-direction: column;
-            }
-
-            .sort-select {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<header>
-    <div class="header-inner">
-
-        <div class="brand">
-            <div class="brand-mark">AEG</div>
-
-            <div class="brand-text">
-                <h1>Process Base</h1>
-                <span>Customer Service Knowledge Base</span>
-            </div>
-        </div>
-
-        <div class="header-actions">
-
-            <button
-                class="btn"
-                onclick="openTagManager()">
-                Zarządzaj tagami
-            </button>
-
-            <button
-                class="btn"
-                onclick="exportDatabase()">
-                Eksportuj bazę
-            </button>
-
-            <button
-                class="btn icon-btn"
-                onclick="toggleTheme()"
-                title="Zmień motyw">
-                ◐
-            </button>
-
-            <button
-                class="btn btn-primary"
-                onclick="openAddModal()">
-                + Dodaj wpis
-            </button>
-
-        </div>
-
-    </div>
-</header>
-
-
-<main>
-
-    <section class="page-intro">
-
-        <h2>Baza procesów</h2>
-
-        <p>
-            Wewnętrzna baza procedur i procesów obsługi klienta.
-        </p>
-
-    </section>
-
-
-    <!-- FILTRY -->
-
-    <section class="filters">
-
-        <div class="search-row">
-
-            <input
-                id="searchInput"
-                class="input"
-                type="text"
-                placeholder="Szukaj po numerze wpisu lub tytule..."
-                oninput="renderEntries()">
-
-            <button
-                class="btn"
-                onclick="clearFilters()">
-                Wyczyść filtry
-            </button>
-
-        </div>
-
-
-        <div class="filter-section">
-
-            <span class="filter-label">
-                Filtruj po tagach
-            </span>
-
-            <div
-                id="tagFilters"
-                class="tags">
-            </div>
-
-        </div>
-
-
-        <div class="filter-section">
-
-            <span class="filter-label">
-                Filtruj po źródle
-            </span>
-
-            <select
-                id="sourceFilter"
-                class="input"
-                onchange="renderEntries()">
-
-                <option value="">
-                    Wszystkie źródła
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div
-            id="activeFilters"
-            class="active-filters">
-        </div>
-
-    </section>
-
-
-    <!-- TOOLBAR -->
-
-    <div class="toolbar">
-
-        <div
-            id="resultCount"
-            class="result-count">
-        </div>
-
-        <select
-            id="sortSelect"
-            class="input sort-select"
-            onchange="renderEntries()">
-
-            <option value="id-asc">
-                ID — rosnąco
-            </option>
-
-            <option value="id-desc">
-                ID — malejąco
-            </option>
-
-            <option value="title-asc">
-                Tytuł — A-Z
-            </option>
-
-            <option value="title-desc">
-                Tytuł — Z-A
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <!-- WYNIKI -->
-
-    <section
-        id="entriesGrid"
-        class="entries-grid">
-    </section>
-
-</main>
-
-
-<!-- MODAL: DODAJ / EDYTUJ -->
-
-<div
-    id="entryModal"
-    class="modal-overlay">
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h2 id="modalTitle">
-                Dodaj nowy wpis
-            </h2>
-
-            <button
-                class="btn icon-btn"
-                onclick="closeModal()">
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="modal-body">
-
-            <input
-                type="hidden"
-                id="editOriginalId">
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Numer wpisu *
-                </label>
-
-                <input
-                    id="entryId"
-                    class="input"
-                    type="text"
-                    maxlength="4"
-                    placeholder="np. 0042">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Tytuł *
-                </label>
-
-                <input
-                    id="entryTitle"
-                    class="input"
-                    type="text"
-                    placeholder="np. Proces reklamacji produktu">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Tagi
-                </label>
-
-                <div
-                    id="entryTags"
-                    class="tag-checkboxes">
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Treść *
-                </label>
-
-                <textarea
-                    id="entryContent"
-                    class="input"
-                    placeholder="Wpisz treść procesu...
-
-Możesz używać prostego HTML, np.:
-
-<h3>Krok 1</h3>
-<p>Opis czynności.</p>
-
-<ol>
-    <li>Pierwszy krok</li>
-    <li>Drugi krok</li>
-</ol>"></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Źródło
-                </label>
-
-                <input
-                    id="entrySource"
-                    class="input"
-                    type="text"
-                    placeholder="np. AEG Manual / wewnętrzna procedura">
-
-            </div>
-
-        </div>
-
-
-        <div class="modal-footer">
-
-            <button
-                class="btn"
-                onclick="closeModal()">
-                Anuluj
-            </button>
-
-            <button
-                class="btn btn-primary"
-                onclick="saveEntry()">
-                Zapisz wpis
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- MODAL: ZARZĄDZANIE TAGAMI -->
-
-<div
-    id="tagModal"
-    class="modal-overlay">
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h2>
-                Zarządzanie tagami
-            </h2>
-
-            <button
-                class="btn icon-btn"
-                onclick="closeTagManager()">
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="modal-body">
-
-            <p
-                style="color: var(--muted); font-size: 13px;">
-                Lista tagów dostępnych podczas dodawania i filtrowania wpisów.
-            </p>
-
-
-            <div
-                id="managedTags"
-                class="tag-manager-list">
-            </div>
-
-
-            <div class="add-tag-row">
-
-                <input
-                    id="newTagInput"
-                    class="input"
-                    type="text"
-                    placeholder="Nazwa nowego tagu">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="addTag()">
-                    Dodaj
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="modal-footer">
-
-            <button
-                class="btn"
-                onclick="closeTagManager()">
-                Zamknij
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- TOAST -->
-
-<div
-    id="toastContainer"
-    class="toast-container">
-</div>
-
-
-<script>
-/* ============================================================
-   AEG PROCESS BASE
-   JAVASCRIPT
-============================================================ */
-
-
-/* ============================================================
-   DOMYŚLNE TAGI
-   ============================================================
-   Tutaj możesz zmienić początkową listę tagów.
-============================================================ */
-
-const DEFAULT_TAGS = [
-    "obsługa klienta",
-    "reklamacje",
-    "zwroty",
-    "płatności",
-    "zamówienia",
-    "dostawa",
-    "produkty",
-    "techniczne",
-    "konto klienta",
-    "kontakt",
-    "inne"
-];
-
-
-/* ============================================================
-   PRZYKŁADOWE WPISY
-   ============================================================
-   To jest Twoja przykładowa baza.
-
-   Każdy wpis posiada:
-
-   id       → dokładnie 4 cyfry
-   title    → tytuł
-   tags     → tablica tagów
-   content  → treść, może zawierać HTML
-   source   → źródło
-
-   Możesz dodawać wpisy bezpośrednio tutaj.
-============================================================ */
-
-const DEFAULT_ENTRIES = [
+const ENTRIES = [
 
     {
         id: "0001",
@@ -4439,11 +767,12 @@ const DEFAULT_ENTRIES = [
         ],
 
         content: `
+
             <h3>Cel procesu</h3>
 
             <p>
                 To jest przykładowy wpis demonstracyjny.
-                Możesz go usunąć i zastąpić własnymi procesami.
+                Możesz go zastąpić własną procedurą.
             </p>
 
             <h3>Przebieg</h3>
@@ -4458,9 +787,9 @@ const DEFAULT_ENTRIES = [
             <h3>Uwagi</h3>
 
             <p>
-                W tym miejscu możesz umieścić dodatkowe informacje
-                dotyczące procesu.
+                W tym miejscu możesz umieścić dodatkowe informacje.
             </p>
+
         `,
 
         source: "Przykładowa procedura AEG"
@@ -4478,6 +807,7 @@ const DEFAULT_ENTRIES = [
         ],
 
         content: `
+
             <h3>Opis</h3>
 
             <p>
@@ -4492,6 +822,7 @@ const DEFAULT_ENTRIES = [
                 <li>Sprawdź możliwość realizacji reklamacji.</li>
                 <li>Poinformuj klienta o dalszych krokach.</li>
             </ol>
+
         `,
 
         source: "AEG Customer Service Manual"
@@ -4509,122 +840,97 @@ const DEFAULT_ENTRIES = [
         ],
 
         content: `
+
             <h3>Diagnoza problemu</h3>
 
             <p>
-                Przykładowa procedura postępowania w przypadku
-                zgłoszenia problemu technicznego.
+                Przykładowa procedura postępowania
+                w przypadku problemu technicznego.
             </p>
 
             <ul>
-                <li>Ustal dokładny model produktu.</li>
+                <li>Ustal model produktu.</li>
                 <li>Poproś klienta o opis problemu.</li>
                 <li>Sprawdź podstawowe rozwiązania.</li>
-                <li>Jeżeli problem nadal występuje, przejdź do kolejnego etapu procedury.</li>
+                <li>Przejdź do kolejnego etapu procedury.</li>
             </ul>
+
         `,
 
         source: "Wewnętrzna baza wiedzy"
-    }
+    },
+
+
+    /*
+        WZÓR NOWEGO WPISU
+
+        {
+            id: "0004",
+
+            title: "Tytuł procesu",
+
+            tags: [
+                "obsługa klienta",
+                "reklamacje"
+            ],
+
+            content: `
+
+                <h3>Opis</h3>
+
+                <p>
+                    Treść procesu.
+                </p>
+
+                <h3>Procedura</h3>
+
+                <ol>
+                    <li>Pierwszy krok.</li>
+                    <li>Drugi krok.</li>
+                    <li>Trzeci krok.</li>
+                </ol>
+
+            `,
+
+            source: "Nazwa źródła"
+        }
+
+    */
 
 ];
 
 
-/* ============================================================
-   STAN APLIKACJI
-============================================================ */
+/* =========================================================
+   USTAWIENIA
+========================================================= */
 
-let entries = loadEntries();
+const DEFAULT_TAGS = [
+    "obsługa klienta",
+    "reklamacje",
+    "zwroty",
+    "płatności",
+    "zamówienia",
+    "dostawa",
+    "produkty",
+    "techniczne",
+    "konto klienta",
+    "kontakt",
+    "inne"
+];
 
-let tags = loadTags();
 
 let selectedTags = new Set();
 
 let expandedEntries = new Set();
 
-let editingEntryId = null;
 
-
-/* ============================================================
-   LOCAL STORAGE
-============================================================ */
-
-function loadEntries() {
-
-    const saved = localStorage.getItem(
-        "aeg_process_entries"
-    );
-
-    if (saved) {
-
-        try {
-            return JSON.parse(saved);
-
-        } catch (error) {
-
-            console.error(
-                "Nie udało się odczytać bazy.",
-                error
-            );
-
-        }
-
-    }
-
-    return DEFAULT_ENTRIES;
-
-}
-
-
-function loadTags() {
-
-    const saved = localStorage.getItem(
-        "aeg_process_tags"
-    );
-
-    if (saved) {
-
-        try {
-            return JSON.parse(saved);
-
-        } catch (error) {
-
-            console.error(
-                "Nie udało się odczytać tagów.",
-                error
-            );
-
-        }
-
-    }
-
-    return DEFAULT_TAGS;
-
-}
-
-
-function saveDatabase() {
-
-    localStorage.setItem(
-        "aeg_process_entries",
-        JSON.stringify(entries)
-    );
-
-    localStorage.setItem(
-        "aeg_process_tags",
-        JSON.stringify(tags)
-    );
-
-}
-
-
-/* ============================================================
-   INICJALIZACJA
-============================================================ */
+/* =========================================================
+   START
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    () => {
 
         renderTagFilters();
 
@@ -4638,9 +944,28 @@ document.addEventListener(
 );
 
 
-/* ============================================================
-   RENDER TAGÓW
-============================================================ */
+/* =========================================================
+   TAGI
+========================================================= */
+
+function getAllTags() {
+
+    const entryTags = ENTRIES.flatMap(
+        entry => entry.tags || []
+    );
+
+    return [
+        ...new Set([
+            ...DEFAULT_TAGS,
+            ...entryTags
+        ])
+    ].sort(
+        (a,b) =>
+            a.localeCompare(b,"pl")
+    );
+
+}
+
 
 function renderTagFilters() {
 
@@ -4652,22 +977,24 @@ function renderTagFilters() {
     container.innerHTML = "";
 
 
-    const allButton =
-        document.createElement("button");
+    const all =
+        document.createElement(
+            "button"
+        );
 
-    allButton.className =
+    all.className =
         "tag-filter " +
         (
             selectedTags.size === 0
-                ? "active"
-                : ""
+            ? "active"
+            : ""
         );
 
-    allButton.textContent =
+    all.textContent =
         "Wszystkie";
 
-    allButton.onclick =
-        function () {
+    all.onclick =
+        () => {
 
             selectedTags.clear();
 
@@ -4677,38 +1004,40 @@ function renderTagFilters() {
 
         };
 
-    container.appendChild(
-        allButton
-    );
+    container.appendChild(all);
 
 
-    tags.forEach(
-        function (tag) {
+    getAllTags().forEach(
+        tag => {
 
             const button =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
             button.className =
                 "tag-filter " +
                 (
                     selectedTags.has(tag)
-                        ? "active"
-                        : ""
+                    ? "active"
+                    : ""
                 );
 
             button.textContent =
                 tag;
 
             button.onclick =
-                function () {
+                () => {
 
-                    if (
+                    if(
                         selectedTags.has(tag)
                     ) {
 
                         selectedTags.delete(tag);
 
-                    } else {
+                    }
+
+                    else {
 
                         selectedTags.add(tag);
 
@@ -4720,9 +1049,7 @@ function renderTagFilters() {
 
                 };
 
-            container.appendChild(
-                button
-            );
+            container.appendChild(button);
 
         }
     );
@@ -4730,9 +1057,9 @@ function renderTagFilters() {
 }
 
 
-/* ============================================================
-   FILTR ŹRÓDEŁ
-============================================================ */
+/* =========================================================
+   ŹRÓDŁA
+========================================================= */
 
 function renderSourceFilter() {
 
@@ -4741,63 +1068,70 @@ function renderSourceFilter() {
             "sourceFilter"
         );
 
-    const currentValue =
+    const current =
         select.value;
 
-    const sources = [
-        ...new Set(
-            entries
-                .map(
-                    entry => entry.source
-                )
-                .filter(Boolean)
-        )
-    ];
 
-    select.innerHTML = `
-        <option value="">
-            Wszystkie źródła
-        </option>
-    `;
-
-    sources
+    const sources =
+        [
+            ...new Set(
+                ENTRIES
+                    .map(
+                        entry =>
+                            entry.source
+                    )
+                    .filter(Boolean)
+            )
+        ]
         .sort(
-            (a, b) =>
+            (a,b) =>
                 a.localeCompare(
                     b,
                     "pl"
                 )
-        )
-        .forEach(
-            function (source) {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-                option.value =
-                    source;
-
-                option.textContent =
-                    source;
-
-                select.appendChild(
-                    option
-                );
-
-            }
         );
 
+
+    select.innerHTML = `
+
+        <option value="">
+            Wszystkie źródła
+        </option>
+
+    `;
+
+
+    sources.forEach(
+        source => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                source;
+
+            option.textContent =
+                source;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
     select.value =
-        currentValue;
+        current;
 
 }
 
 
-/* ============================================================
-   RENDER WPISÓW
-============================================================ */
+/* =========================================================
+   RENDEROWANIE
+========================================================= */
 
 function renderEntries() {
 
@@ -4806,71 +1140,79 @@ function renderEntries() {
             "entriesGrid"
         );
 
+
     const search =
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
 
 
     const source =
-        document
-            .getElementById(
-                "sourceFilter"
-            )
-            .value;
+        document.getElementById(
+            "sourceFilter"
+        )
+        .value;
 
 
     const sort =
-        document
-            .getElementById(
-                "sortSelect"
-            )
-            .value;
+        document.getElementById(
+            "sortSelect"
+        )
+        .value;
 
 
     let filtered =
-        entries.filter(
-            function (entry) {
+        ENTRIES.filter(
+            entry => {
+
+                const searchableText = [
+
+                    entry.id,
+
+                    entry.title,
+
+                    entry.content
+                        .replace(
+                            /<[^>]*>/g,
+                            " "
+                        ),
+
+                    entry.source || "",
+
+                    ...(entry.tags || [])
+
+                ]
+                .join(" ")
+                .toLowerCase();
+
 
                 const matchesSearch =
 
                     !search ||
 
-                    entry.id
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    entry.title
-                        .toLowerCase()
-                        .includes(search);
+                    searchableText.includes(
+                        search
+                    );
 
 
                 const matchesTags =
 
-                    selectedTags.size === 0
+                    selectedTags.size === 0 ||
 
-                    ||
-
-                    [...selectedTags]
-                        .every(
-                            tag =>
-                                entry.tags.includes(
-                                    tag
-                                )
-                        );
+                    [...selectedTags].every(
+                        tag =>
+                            entry.tags.includes(
+                                tag
+                            )
+                    );
 
 
                 const matchesSource =
 
-                    !source
-
-                    ||
+                    !source ||
 
                     entry.source === source;
 
@@ -4889,74 +1231,64 @@ function renderEntries() {
         );
 
 
-    /* SORTOWANIE */
-
     filtered.sort(
-        function (a, b) {
+        (a,b) => {
 
-            switch (sort) {
+            if(
+                sort === "id-desc"
+            ) {
 
-                case "id-desc":
-
-                    return Number(b.id)
-                        -
-                        Number(a.id);
-
-
-                case "title-asc":
-
-                    return a.title.localeCompare(
-                        b.title,
-                        "pl"
-                    );
-
-
-                case "title-desc":
-
-                    return b.title.localeCompare(
-                        a.title,
-                        "pl"
-                    );
-
-
-                case "id-asc":
-
-                default:
-
-                    return Number(a.id)
-                        -
-                        Number(b.id);
+                return Number(b.id)
+                    -
+                    Number(a.id);
 
             }
+
+
+            if(
+                sort === "title-asc"
+            ) {
+
+                return a.title.localeCompare(
+                    b.title,
+                    "pl"
+                );
+
+            }
+
+
+            if(
+                sort === "title-desc"
+            ) {
+
+                return b.title.localeCompare(
+                    a.title,
+                    "pl"
+                );
+
+            }
+
+
+            return Number(a.id)
+                -
+                Number(b.id);
 
         }
     );
 
 
-    /* LICZNIK */
+    document.getElementById(
+        "resultCount"
+    )
+    .textContent =
 
-    document
-        .getElementById(
-            "resultCount"
-        )
-        .textContent =
+        `Wyświetlono ${filtered.length} z ${ENTRIES.length} wpisów`;
 
-        `Wyświetlono ${filtered.length} z ${entries.length} wpisów`;
-
-
-    /* AKTYWNE FILTRY */
-
-    renderActiveFilters();
-
-
-    /* WYCZYŚĆ */
 
     grid.innerHTML = "";
 
 
-    /* BRAK WYNIKÓW */
-
-    if (
+    if(
         filtered.length === 0
     ) {
 
@@ -4986,10 +1318,8 @@ function renderEntries() {
     }
 
 
-    /* KARTY */
-
     filtered.forEach(
-        function (entry, index) {
+        (entry,index) => {
 
             const card =
                 createEntryCard(
@@ -4997,7 +1327,7 @@ function renderEntries() {
                 );
 
             card.style.animationDelay =
-                `${index * 0.025}s`;
+                `${index * .025}s`;
 
             grid.appendChild(
                 card
@@ -5009,13 +1339,11 @@ function renderEntries() {
 }
 
 
-/* ============================================================
-   TWORZENIE KARTY
-============================================================ */
+/* =========================================================
+   KARTA WPISU
+========================================================= */
 
-function createEntryCard(
-    entry
-) {
+function createEntryCard(entry) {
 
     const card =
         document.createElement(
@@ -5027,7 +1355,7 @@ function createEntryCard(
         "entry-card";
 
 
-    if (
+    if(
         expandedEntries.has(
             entry.id
         )
@@ -5041,42 +1369,65 @@ function createEntryCard(
 
 
     const tagsHTML =
-        entry.tags
-            .map(
-                tag =>
-                    `<span class="tag">
-                        #${escapeHTML(tag)}
-                    </span>`
-            )
-            .join("");
+
+        (entry.tags || [])
+        .map(
+            tag => `
+
+                <button
+                    class="tag"
+                    onclick="
+                        event.stopPropagation();
+                        filterByTag('${escapeAttribute(tag)}')
+                    ">
+
+                    #${escapeHTML(tag)}
+
+                </button>
+
+            `
+        )
+        .join("");
 
 
     card.innerHTML = `
 
         <div
             class="entry-head"
-            onclick="toggleEntry('${entry.id}')">
+            onclick="
+                toggleEntry('${escapeAttribute(entry.id)}')
+            ">
+
 
             <div class="entry-top">
 
                 <span class="entry-id">
+
                     #${escapeHTML(entry.id)}
+
                 </span>
 
+
                 <span class="expand-icon">
+
                     ↓
+
                 </span>
 
             </div>
 
 
             <h3 class="entry-title">
+
                 ${escapeHTML(entry.title)}
+
             </h3>
 
 
             <p class="entry-preview">
+
                 ${getPreview(entry.content)}
+
             </p>
 
 
@@ -5086,12 +1437,15 @@ function createEntryCard(
 
             </div>
 
+
         </div>
 
 
         <div class="entry-details">
 
+
             <div class="entry-details-inner">
+
 
                 <div class="entry-content">
 
@@ -5103,55 +1457,46 @@ function createEntryCard(
                 ${
                     entry.source
 
-                        ? `
+                    ?
 
-                            <div class="entry-source">
+                    `
 
-                                Źródło:
+                    <div class="entry-source">
 
-                                <strong>
-                                    ${escapeHTML(
-                                        entry.source
-                                    )}
-                                </strong>
+                        Źródło:
 
-                            </div>
+                        <strong>
 
-                          `
+                            ${escapeHTML(entry.source)}
 
-                        : ""
+                        </strong>
+
+                    </div>
+
+                    `
+
+                    :
+
+                    ""
+
                 }
 
 
                 <div class="entry-actions">
 
                     <button
-                        class="btn btn-small"
-                        onclick="event.stopPropagation(); editEntry('${entry.id}')">
+                        class="btn"
+                        onclick="
+                            event.stopPropagation();
+                            copyEntryCode('${escapeAttribute(entry.id)}')
+                        ">
 
-                        Edytuj
-
-                    </button>
-
-
-                    <button
-                        class="btn btn-small"
-                        onclick="event.stopPropagation(); copyEntryCode('${entry.id}')">
-
-                        Kopiuj kod
-
-                    </button>
-
-
-                    <button
-                        class="btn btn-small btn-danger"
-                        onclick="event.stopPropagation(); deleteEntry('${entry.id}')">
-
-                        Usuń
+                        Kopiuj kod wpisu
 
                     </button>
 
                 </div>
+
 
             </div>
 
@@ -5165,38 +1510,59 @@ function createEntryCard(
 }
 
 
-/* ============================================================
+/* =========================================================
    ROZWIJANIE WPISU
-============================================================ */
+========================================================= */
 
-function toggleEntry(
-    id
-) {
+function toggleEntry(id) {
 
-    if (
+    if(
         expandedEntries.has(id)
     ) {
 
         expandedEntries.delete(id);
 
-    } else {
+    }
+
+    else {
 
         expandedEntries.add(id);
 
     }
+
 
     renderEntries();
 
 }
 
 
-/* ============================================================
-   PREVIEW
-============================================================ */
+/* =========================================================
+   FILTROWANIE TAGIEM
+========================================================= */
 
-function getPreview(
-    html
-) {
+function filterByTag(tag) {
+
+    selectedTags.clear();
+
+    selectedTags.add(tag);
+
+    renderTagFilters();
+
+    renderEntries();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================================================
+   PODGLĄD
+========================================================= */
+
+function getPreview(html) {
 
     const temp =
         document.createElement(
@@ -5206,89 +1572,34 @@ function getPreview(
     temp.innerHTML =
         html;
 
-    const text =
-        temp.textContent
-            ||
-        temp.innerText
-            ||
-        "";
 
     return escapeHTML(
-        text.trim()
+        (
+            temp.textContent ||
+            ""
+        )
+        .trim()
     );
 
 }
 
 
-/* ============================================================
-   AKTYWNE FILTRY
-============================================================ */
-
-function renderActiveFilters() {
-
-    const container =
-        document.getElementById(
-            "activeFilters"
-        );
-
-    container.innerHTML = "";
-
-
-    selectedTags.forEach(
-        function (tag) {
-
-            const element =
-                document.createElement(
-                    "span"
-                );
-
-            element.className =
-                "active-filter";
-
-            element.textContent =
-                `#${tag} ×`;
-
-            element.onclick =
-                function () {
-
-                    selectedTags.delete(
-                        tag
-                    );
-
-                    renderTagFilters();
-
-                    renderEntries();
-
-                };
-
-            container.appendChild(
-                element
-            );
-
-        }
-    );
-
-}
-
-
-/* ============================================================
+/* =========================================================
    WYCZYŚĆ FILTRY
-============================================================ */
+========================================================= */
 
 function clearFilters() {
 
-    document
-        .getElementById(
-            "searchInput"
-        )
-        .value = "";
+    document.getElementById(
+        "searchInput"
+    )
+    .value = "";
 
 
-    document
-        .getElementById(
-            "sourceFilter"
-        )
-        .value = "";
+    document.getElementById(
+        "sourceFilter"
+    )
+    .value = "";
 
 
     selectedTags.clear();
@@ -5301,884 +1612,55 @@ function clearFilters() {
 }
 
 
-/* ============================================================
-   MODAL DODAWANIA
-============================================================ */
+/* =========================================================
+   KOPIOWANIE WPISU
+========================================================= */
 
-function openAddModal() {
-
-    editingEntryId = null;
-
-
-    document
-        .getElementById(
-            "modalTitle"
-        )
-        .textContent =
-        "Dodaj nowy wpis";
-
-
-    document
-        .getElementById(
-            "editOriginalId"
-        )
-        .value = "";
-
-
-    document
-        .getElementById(
-            "entryId"
-        )
-        .value = "";
-
-
-    document
-        .getElementById(
-            "entryTitle"
-        )
-        .value = "";
-
-
-    document
-        .getElementById(
-            "entryContent"
-        )
-        .value = "";
-
-
-    document
-        .getElementById(
-            "entrySource"
-        )
-        .value = "";
-
-
-    renderEntryTagCheckboxes();
-
-
-    document
-        .getElementById(
-            "entryModal"
-        )
-        .classList.add(
-            "active"
-        );
-
-}
-
-
-/* ============================================================
-   MODAL EDYCJI
-============================================================ */
-
-function editEntry(
-    id
-) {
+function copyEntryCode(id) {
 
     const entry =
-        entries.find(
+        ENTRIES.find(
             item =>
                 item.id === id
         );
 
 
-    if (!entry) {
-
+    if(!entry) {
         return;
-
-    }
-
-
-    editingEntryId =
-        id;
-
-
-    document
-        .getElementById(
-            "modalTitle"
-        )
-        .textContent =
-        "Edytuj wpis";
-
-
-    document
-        .getElementById(
-            "editOriginalId"
-        )
-        .value =
-        id;
-
-
-    document
-        .getElementById(
-            "entryId"
-        )
-        .value =
-        entry.id;
-
-
-    document
-        .getElementById(
-            "entryTitle"
-        )
-        .value =
-        entry.title;
-
-
-    document
-        .getElementById(
-            "entryContent"
-        )
-        .value =
-        entry.content;
-
-
-    document
-        .getElementById(
-            "entrySource"
-        )
-        .value =
-        entry.source
-            ||
-        "";
-
-
-    renderEntryTagCheckboxes(
-        entry.tags
-    );
-
-
-    document
-        .getElementById(
-            "entryModal"
-        )
-        .classList.add(
-            "active"
-        );
-
-}
-
-
-/* ============================================================
-   TAGI W FORMULARZU
-============================================================ */
-
-function renderEntryTagCheckboxes(
-    selected = []
-) {
-
-    const container =
-        document.getElementById(
-            "entryTags"
-        );
-
-    container.innerHTML = "";
-
-
-    tags.forEach(
-        function (tag, index) {
-
-            const wrapper =
-                document.createElement(
-                    "div"
-                );
-
-            wrapper.className =
-                "tag-checkbox";
-
-
-            const checkboxId =
-                `tag-${index}`;
-
-
-            wrapper.innerHTML = `
-
-                <input
-                    type="checkbox"
-                    id="${checkboxId}"
-                    value="${escapeHTML(tag)}"
-                    ${selected.includes(tag)
-                        ? "checked"
-                        : ""}>
-
-                <label
-                    for="${checkboxId}">
-
-                    ${escapeHTML(tag)}
-
-                </label>
-
-            `;
-
-
-            container.appendChild(
-                wrapper
-            );
-
-        }
-    );
-
-}
-
-
-/* ============================================================
-   ZAPIS WPISU
-============================================================ */
-
-function saveEntry() {
-
-    let id =
-        document
-            .getElementById(
-                "entryId"
-            )
-            .value
-            .trim();
-
-
-    const title =
-        document
-            .getElementById(
-                "entryTitle"
-            )
-            .value
-            .trim();
-
-
-    const content =
-        document
-            .getElementById(
-                "entryContent"
-            )
-            .value
-            .trim();
-
-
-    const source =
-        document
-            .getElementById(
-                "entrySource"
-            )
-            .value
-            .trim();
-
-
-    const selected =
-        [
-            ...
-            document.querySelectorAll(
-                "#entryTags input:checked"
-            )
-        ]
-        .map(
-            input =>
-                input.value
-        );
-
-
-    /* WALIDACJA ID */
-
-    if (
-        !/^\d{4}$/.test(id)
-    ) {
-
-        showToast(
-            "Numer wpisu musi zawierać dokładnie 4 cyfry."
-        );
-
-        return;
-
-    }
-
-
-    if (!title) {
-
-        showToast(
-            "Podaj tytuł wpisu."
-        );
-
-        return;
-
-    }
-
-
-    if (!content) {
-
-        showToast(
-            "Podaj treść wpisu."
-        );
-
-        return;
-
-    }
-
-
-    /* EDYCJA */
-
-    if (editingEntryId) {
-
-        const index =
-            entries.findIndex(
-                entry =>
-                    entry.id ===
-                    editingEntryId
-            );
-
-
-        if (
-            index === -1
-        ) {
-
-            return;
-
-        }
-
-
-        const duplicate =
-            entries.some(
-                entry =>
-                    entry.id === id
-                    &&
-                    entry.id !==
-                    editingEntryId
-            );
-
-
-        if (duplicate) {
-
-            showToast(
-                "Wpis o takim numerze już istnieje."
-            );
-
-            return;
-
-        }
-
-
-        entries[index] = {
-
-            id,
-
-            title,
-
-            tags: selected,
-
-            content,
-
-            source
-
-        };
-
-
-        showToast(
-            "Wpis został zaktualizowany."
-        );
-
-    }
-
-
-    /* NOWY WPIS */
-
-    else {
-
-        const duplicate =
-            entries.some(
-                entry =>
-                    entry.id === id
-            );
-
-
-        if (duplicate) {
-
-            showToast(
-                "Wpis o takim numerze już istnieje."
-            );
-
-            return;
-
-        }
-
-
-        entries.push({
-
-            id,
-
-            title,
-
-            tags: selected,
-
-            content,
-
-            source
-
-        });
-
-
-        showToast(
-            "Wpis został dodany."
-        );
-
-    }
-
-
-    saveDatabase();
-
-
-    closeModal();
-
-
-    renderSourceFilter();
-
-    renderEntries();
-
-}
-
-
-/* ============================================================
-   USUWANIE WPISU
-============================================================ */
-
-function deleteEntry(
-    id
-) {
-
-    const entry =
-        entries.find(
-            item =>
-                item.id === id
-        );
-
-
-    if (!entry) {
-
-        return;
-
-    }
-
-
-    const confirmed =
-        confirm(
-            `Czy na pewno chcesz usunąć wpis #${id} — "${entry.title}"?`
-        );
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-    entries =
-        entries.filter(
-            item =>
-                item.id !== id
-        );
-
-
-    expandedEntries.delete(
-        id
-    );
-
-
-    saveDatabase();
-
-
-    renderSourceFilter();
-
-    renderEntries();
-
-
-    showToast(
-        "Wpis został usunięty."
-    );
-
-}
-
-
-/* ============================================================
-   KOPIOWANIE KODU WPISU
-============================================================ */
-
-function copyEntryCode(
-    id
-) {
-
-    const entry =
-        entries.find(
-            item =>
-                item.id === id
-        );
-
-
-    if (!entry) {
-
-        return;
-
     }
 
 
     const code = `{
     id: "${entry.id}",
-    title: "${entry.title.replaceAll(
-        '"',
-        '\\"'
-    )}",
-    tags: ${JSON.stringify(
-        entry.tags
-    )},
-    content: \`
-${entry.content}
-    \`,
-    source: "${(
-        entry.source || ""
-    ).replaceAll(
-        '"',
-        '\\"'
-    )}"
+    title: ${JSON.stringify(entry.title)},
+    tags: ${JSON.stringify(entry.tags)},
+    content: ${JSON.stringify(entry.content)},
+    source: ${JSON.stringify(entry.source || "")}
 }`;
 
 
-    navigator.clipboard
-        .writeText(
+    if(
+        navigator.clipboard
+    ) {
+
+        navigator.clipboard.writeText(
             code
         )
         .then(
-            function () {
-
+            () =>
                 showToast(
                     "Kod wpisu skopiowany."
-                );
-
-            }
-        );
-
-}
-
-
-/* ============================================================
-   ZARZĄDZANIE TAGAMI
-============================================================ */
-
-function openTagManager() {
-
-    renderManagedTags();
-
-    document
-        .getElementById(
-            "tagModal"
-        )
-        .classList.add(
-            "active"
-        );
-
-}
-
-
-function closeTagManager() {
-
-    document
-        .getElementById(
-            "tagModal"
-        )
-        .classList.remove(
-            "active"
-        );
-
-}
-
-
-function renderManagedTags() {
-
-    const container =
-        document.getElementById(
-            "managedTags"
-        );
-
-    container.innerHTML = "";
-
-
-    tags.forEach(
-        function (tag) {
-
-            const element =
-                document.createElement(
-                    "div"
-                );
-
-            element.className =
-                "managed-tag";
-
-
-            element.innerHTML = `
-
-                <span>
-                    ${escapeHTML(tag)}
-                </span>
-
-                <button
-                    class="remove-tag"
-                    onclick="removeTag('${escapeHTML(tag)}')">
-
-                    ×
-
-                </button>
-
-            `;
-
-
-            container.appendChild(
-                element
-            );
-
-        }
-    );
-
-}
-
-
-function addTag() {
-
-    const input =
-        document.getElementById(
-            "newTagInput"
-        );
-
-
-    const tag =
-        input.value.trim();
-
-
-    if (!tag) {
-
-        return;
-
-    }
-
-
-    if (
-        tags.includes(tag)
-    ) {
-
-        showToast(
-            "Taki tag już istnieje."
-        );
-
-        return;
-
-    }
-
-
-    tags.push(
-        tag
-    );
-
-
-    tags.sort(
-        (a, b) =>
-            a.localeCompare(
-                b,
-                "pl"
-            )
-    );
-
-
-    input.value = "";
-
-
-    saveDatabase();
-
-
-    renderManagedTags();
-
-    renderTagFilters();
-
-    renderEntries();
-
-
-    showToast(
-        "Tag został dodany."
-    );
-
-}
-
-
-function removeTag(
-    tag
-) {
-
-    const used =
-        entries.some(
-            entry =>
-                entry.tags.includes(
-                    tag
                 )
         );
 
-
-    if (used) {
-
-        const confirmed =
-            confirm(
-                `Tag "${tag}" jest używany w istniejących wpisach. Usunąć go z listy tagów?`
-            );
-
-
-        if (!confirmed) {
-
-            return;
-
-        }
-
-
-        entries.forEach(
-            entry => {
-
-                entry.tags =
-                    entry.tags.filter(
-                        item =>
-                            item !== tag
-                    );
-
-            }
-        );
-
     }
 
-
-    tags =
-        tags.filter(
-            item =>
-                item !== tag
-        );
-
-
-    selectedTags.delete(
-        tag
-    );
-
-
-    saveDatabase();
-
-
-    renderManagedTags();
-
-    renderTagFilters();
-
-    renderEntries();
-
-
-    showToast(
-        "Tag został usunięty."
-    );
-
 }
 
 
-/* ============================================================
-   EKSPORT BAZY
-============================================================ */
-
-function exportDatabase() {
-
-    const data =
-        JSON.stringify(
-            entries,
-            null,
-            4
-        );
-
-
-    const tagsData =
-        JSON.stringify(
-            tags,
-            null,
-            4
-        );
-
-
-    const exportCode =
-
-`<!DOCTYPE html>
-<html lang="pl">
-
-<!--
-    AEG PROCESS BASE
-
-    Wygenerowana kopia bazy:
-    ${new Date().toLocaleString("pl-PL")}
-
-    WPISY:
--->
-
-<script>
-
-const DEFAULT_ENTRIES = ${data};
-
-const DEFAULT_TAGS = ${tagsData};
-
-</script>
-
-<!--
-    Aby zachować pełną aplikację,
-    użyj oryginalnego pliku index.html
-    i zaktualizuj dane w sekcjach
-    DEFAULT_ENTRIES oraz DEFAULT_TAGS.
-
-    Ta funkcja eksportuje dane bazy.
--->
-
-
-    const blob =
-        new Blob(
-            [
-                exportCode
-            ],
-            {
-                type:
-                    "text/html;charset=utf-8"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    const link =
-        document.createElement(
-            "a"
-        );
-
-
-    link.href =
-        url;
-
-
-    link.download =
-        "aeg-process-database.html";
-
-
-    link.click();
-
-
-    URL.revokeObjectURL(
-        url
-    );
-
-
-    showToast(
-        "Baza została wyeksportowana."
-    );
-
-}
-
-
-/* ============================================================
+/* =========================================================
    MOTYW
-============================================================ */
+========================================================= */
 
 function toggleTheme() {
 
@@ -6190,9 +1672,12 @@ function toggleTheme() {
 
 
     const next =
+
         current === "dark"
-            ? "light"
-            : "dark";
+
+        ? "light"
+
+        : "dark";
 
 
     document.documentElement
@@ -6218,7 +1703,7 @@ function applySavedTheme() {
         );
 
 
-    if (theme) {
+    if(theme) {
 
         document.documentElement
             .setAttribute(
@@ -6231,33 +1716,11 @@ function applySavedTheme() {
 }
 
 
-/* ============================================================
-   MODAL
-============================================================ */
-
-function closeModal() {
-
-    document
-        .getElementById(
-            "entryModal"
-        )
-        .classList.remove(
-            "active"
-        );
-
-    editingEntryId =
-        null;
-
-}
-
-
-/* ============================================================
+/* =========================================================
    TOAST
-============================================================ */
+========================================================= */
 
-function showToast(
-    message
-) {
+function showToast(message) {
 
     const container =
         document.getElementById(
@@ -6285,24 +1748,22 @@ function showToast(
 
 
     setTimeout(
-        function () {
+        () => {
 
             toast.remove();
 
         },
-        2800
+        2500
     );
 
 }
 
 
-/* ============================================================
+/* =========================================================
    ESCAPE HTML
-============================================================ */
+========================================================= */
 
-function escapeHTML(
-    text
-) {
+function escapeHTML(text) {
 
     const div =
         document.createElement(
@@ -6311,7 +1772,7 @@ function escapeHTML(
 
 
     div.textContent =
-        text;
+        String(text);
 
 
     return div.innerHTML;
@@ -6319,47 +1780,52 @@ function escapeHTML(
 }
 
 
-/* ============================================================
-   ZAMYKANIE MODALI
-============================================================ */
+function escapeAttribute(text) {
 
-document.addEventListener(
-    "click",
-    function (event) {
+    return String(text)
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        );
 
-        if (
-            event.target.classList
-                .contains(
-                    "modal-overlay"
-                )
-        ) {
-
-            event.target
-                .classList.remove(
-                    "active"
-                );
-
-        }
-
-    }
-);
+}
 
 
-/* ============================================================
-   ESC — ZAMKNIJ MODAL
-============================================================ */
+/* =========================================================
+   SKRÓTY KLAWIATUROWE
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    function (event) {
+    event => {
 
-        if (
+        if(
+            event.key === "/" &&
+            document.activeElement.tagName !== "INPUT"
+        ) {
+
+            event.preventDefault();
+
+            document.getElementById(
+                "searchInput"
+            ).focus();
+
+        }
+
+
+        if(
             event.key === "Escape"
         ) {
 
-            closeModal();
+            document.getElementById(
+                "searchInput"
+            ).value = "";
 
-            closeTagManager();
+            renderEntries();
 
         }
 
