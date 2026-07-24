@@ -1,0 +1,3185 @@
+```html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AEG Process Base</title>
+
+    <style>
+        /* =========================================================
+           AEG PROCESS BASE
+           CSS
+        ========================================================= */
+
+        :root {
+            --bg: #f4f5f7;
+            --surface: #ffffff;
+            --surface-hover: #fafafa;
+            --border: #e2e4e8;
+            --text: #17191c;
+            --muted: #6f747c;
+            --accent: #e30613;
+            --accent-dark: #bd000b;
+            --accent-light: #fff0f1;
+            --tag-bg: #f0f1f3;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --radius: 14px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #111214;
+            --surface: #1a1c20;
+            --surface-hover: #202227;
+            --border: #303339;
+            --text: #f1f2f4;
+            --muted: #9da1a9;
+            --accent: #ff2634;
+            --accent-dark: #ff4a56;
+            --accent-light: rgba(227, 6, 19, 0.14);
+            --tag-bg: #292c32;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+            line-height: 1.6;
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: color-mix(
+                in srgb,
+                var(--surface) 92%,
+                transparent
+            );
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1500px;
+            margin: auto;
+            padding: 18px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            background: var(--accent);
+            color: white;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: -0.5px;
+            flex-shrink: 0;
+        }
+
+        .brand-text h1 {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.2;
+            font-weight: 750;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-text span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .btn {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            padding: 9px 14px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 650;
+            transition:
+                transform 0.18s ease,
+                background 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .btn:hover {
+            background: var(--surface-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            border-color: var(--accent-dark);
+        }
+
+        .btn-danger {
+            color: var(--accent);
+        }
+
+        .btn-small {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            padding: 0;
+            display: grid;
+            place-items: center;
+        }
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        main {
+            max-width: 1500px;
+            margin: auto;
+            padding: 35px 28px 70px;
+        }
+
+        .page-intro {
+            margin-bottom: 30px;
+        }
+
+        .page-intro h2 {
+            margin: 0 0 6px;
+            font-size: clamp(25px, 3vw, 38px);
+            line-height: 1.15;
+            letter-spacing: -1.3px;
+        }
+
+        .page-intro p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           SEARCH PANEL
+        ========================================================= */
+
+        .filters {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+        }
+
+        .input {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            border-radius: 9px;
+            padding: 11px 13px;
+            outline: none;
+            transition:
+                border-color 0.18s ease,
+                box-shadow 0.18s ease;
+        }
+
+        .input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .filter-section {
+            margin-top: 18px;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            color: var(--muted);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .tag-filter {
+            border: 1px solid var(--border);
+            background: var(--tag-bg);
+            color: var(--text);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            transition: all 0.18s ease;
+        }
+
+        .tag-filter:hover {
+            border-color: var(--accent);
+        }
+
+        .tag-filter.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 15px;
+        }
+
+        .active-filter {
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 999px;
+            padding: 5px 9px;
+            font-size: 11px;
+            font-weight: 650;
+        }
+
+        /* =========================================================
+           TOOLBAR
+        ========================================================= */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .result-count {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .sort-select {
+            width: auto;
+            min-width: 180px;
+        }
+
+        /* =========================================================
+           CARDS
+        ========================================================= */
+
+        .entries-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            align-items: start;
+        }
+
+        .entry-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease,
+                border-color 0.22s ease;
+            animation: cardIn 0.35s ease both;
+        }
+
+        .entry-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.09);
+        }
+
+        .entry-card.expanded {
+            border-color: var(--accent);
+        }
+
+        .entry-head {
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .entry-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .entry-id {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+        }
+
+        .expand-icon {
+            width: 27px;
+            height: 27px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: var(--muted);
+            transition: transform 0.25s ease;
+        }
+
+        .entry-card.expanded .expand-icon {
+            transform: rotate(180deg);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .entry-title {
+            margin: 0 0 12px;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.3px;
+        }
+
+        .entry-preview {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .entry-tags {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background: var(--tag-bg);
+            color: var(--muted);
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 650;
+        }
+
+        .entry-details {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            border-top: 1px solid transparent;
+            transition:
+                max-height 0.35s ease,
+                opacity 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .entry-card.expanded .entry-details {
+            max-height: 1500px;
+            opacity: 1;
+            border-color: var(--border);
+        }
+
+        .entry-details-inner {
+            padding: 20px;
+        }
+
+        .entry-content {
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        .entry-content h1,
+        .entry-content h2,
+        .entry-content h3 {
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .entry-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .entry-content ul,
+        .entry-content ol {
+            padding-left: 22px;
+        }
+
+        .entry-content code {
+            background: var(--tag-bg);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .entry-source {
+            margin-top: 22px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .entry-source strong {
+            color: var(--text);
+        }
+
+        .entry-actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        /* =========================================================
+           EMPTY STATE
+        ========================================================= */
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 70px 20px;
+            background: var(--surface);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+        }
+
+        .empty-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 5px;
+        }
+
+        .empty-state p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: min(700px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+            animation: modalIn 0.25s ease;
+        }
+
+        .modal-header {
+            padding: 20px 22px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 19px;
+        }
+
+        .modal-body {
+            padding: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        textarea {
+            min-height: 220px;
+            resize: vertical;
+        }
+
+        select.input {
+            appearance: auto;
+        }
+
+        .tag-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .tag-checkbox {
+            position: relative;
+        }
+
+        .tag-checkbox input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tag-checkbox label {
+            display: block;
+            padding: 7px 11px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--tag-bg);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.18s ease;
+        }
+
+        .tag-checkbox input:checked + label {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .modal-footer {
+            padding: 16px 22px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        /* =========================================================
+           TAG MANAGER
+        ========================================================= */
+
+        .tag-manager-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 20px;
+        }
+
+        .managed-tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--tag-bg);
+            border-radius: 999px;
+            padding: 5px 8px 5px 10px;
+            font-size: 12px;
+        }
+
+        .remove-tag {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1;
+            padding: 0 2px;
+        }
+
+        .remove-tag:hover {
+            color: var(--accent);
+        }
+
+        .add-tag-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .toast-container {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            background: var(--text);
+            color: var(--surface);
+            padding: 11px 15px;
+            border-radius: 9px;
+            font-size: 13px;
+            box-shadow: var(--shadow);
+            animation: toastIn 0.25s ease;
+        }
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+            .entries-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .header-inner {
+                padding: 14px 16px;
+            }
+
+            .header-actions .btn:not(.btn-primary) {
+                display: none;
+            }
+
+            main {
+                padding: 25px 16px 50px;
+            }
+
+            .entries-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .sort-select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+
+        <div class="brand">
+            <div class="brand-mark">AEG</div>
+
+            <div class="brand-text">
+                <h1>Process Base</h1>
+                <span>Customer Service Knowledge Base</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                class="btn"
+                onclick="openTagManager()">
+                Zarządzaj tagami
+            </button>
+
+            <button
+                class="btn"
+                onclick="exportDatabase()">
+                Eksportuj bazę
+            </button>
+
+            <button
+                class="btn icon-btn"
+                onclick="toggleTheme()"
+                title="Zmień motyw">
+                ◐
+            </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="openAddModal()">
+                + Dodaj wpis
+            </button>
+
+        </div>
+
+    </div>
+</header>
+
+
+<main>
+
+    <section class="page-intro">
+
+        <h2>Baza procesów</h2>
+
+        <p>
+            Wewnętrzna baza procedur i procesów obsługi klienta.
+        </p>
+
+    </section>
+
+
+    <!-- FILTRY -->
+
+    <section class="filters">
+
+        <div class="search-row">
+
+            <input
+                id="searchInput"
+                class="input"
+                type="text"
+                placeholder="Szukaj po numerze wpisu lub tytule..."
+                oninput="renderEntries()">
+
+            <button
+                class="btn"
+                onclick="clearFilters()">
+                Wyczyść filtry
+            </button>
+
+        </div>
+
+
+        <div class="filter-section">
+
+            <span class="filter-label">
+                Filtruj po tagach
+            </span>
+
+            <div
+                id="tagFilters"
+                class="tags">
+            </div>
+
+        </div>
+
+
+        <div class="filter-section">
+
+            <span class="filter-label">
+                Filtruj po źródle
+            </span>
+
+            <select
+                id="sourceFilter"
+                class="input"
+                onchange="renderEntries()">
+
+                <option value="">
+                    Wszystkie źródła
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="activeFilters"
+            class="active-filters">
+        </div>
+
+    </section>
+
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+        <div
+            id="resultCount"
+            class="result-count">
+        </div>
+
+        <select
+            id="sortSelect"
+            class="input sort-select"
+            onchange="renderEntries()">
+
+            <option value="id-asc">
+                ID — rosnąco
+            </option>
+
+            <option value="id-desc">
+                ID — malejąco
+            </option>
+
+            <option value="title-asc">
+                Tytuł — A-Z
+            </option>
+
+            <option value="title-desc">
+                Tytuł — Z-A
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- WYNIKI -->
+
+    <section
+        id="entriesGrid"
+        class="entries-grid">
+    </section>
+
+</main>
+
+
+<!-- MODAL: DODAJ / EDYTUJ -->
+
+<div
+    id="entryModal"
+    class="modal-overlay">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Dodaj nowy wpis
+            </h2>
+
+            <button
+                class="btn icon-btn"
+                onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <input
+                type="hidden"
+                id="editOriginalId">
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Numer wpisu *
+                </label>
+
+                <input
+                    id="entryId"
+                    class="input"
+                    type="text"
+                    maxlength="4"
+                    placeholder="np. 0042">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Tytuł *
+                </label>
+
+                <input
+                    id="entryTitle"
+                    class="input"
+                    type="text"
+                    placeholder="np. Proces reklamacji produktu">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Tagi
+                </label>
+
+                <div
+                    id="entryTags"
+                    class="tag-checkboxes">
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Treść *
+                </label>
+
+                <textarea
+                    id="entryContent"
+                    class="input"
+                    placeholder="Wpisz treść procesu...
+
+Możesz używać prostego HTML, np.:
+
+<h3>Krok 1</h3>
+<p>Opis czynności.</p>
+
+<ol>
+    <li>Pierwszy krok</li>
+    <li>Drugi krok</li>
+</ol>"></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Źródło
+                </label>
+
+                <input
+                    id="entrySource"
+                    class="input"
+                    type="text"
+                    placeholder="np. AEG Manual / wewnętrzna procedura">
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn"
+                onclick="closeModal()">
+                Anuluj
+            </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="saveEntry()">
+                Zapisz wpis
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL: ZARZĄDZANIE TAGAMI -->
+
+<div
+    id="tagModal"
+    class="modal-overlay">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                Zarządzanie tagami
+            </h2>
+
+            <button
+                class="btn icon-btn"
+                onclick="closeTagManager()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <p
+                style="color: var(--muted); font-size: 13px;">
+                Lista tagów dostępnych podczas dodawania i filtrowania wpisów.
+            </p>
+
+
+            <div
+                id="managedTags"
+                class="tag-manager-list">
+            </div>
+
+
+            <div class="add-tag-row">
+
+                <input
+                    id="newTagInput"
+                    class="input"
+                    type="text"
+                    placeholder="Nazwa nowego tagu">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="addTag()">
+                    Dodaj
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn"
+                onclick="closeTagManager()">
+                Zamknij
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toastContainer"
+    class="toast-container">
+</div>
+
+
+<script>
+/* ============================================================
+   AEG PROCESS BASE
+   JAVASCRIPT
+============================================================ */
+
+
+/* ============================================================
+   DOMYŚLNE TAGI
+   ============================================================
+   Tutaj możesz zmienić początkową listę tagów.
+============================================================ */
+
+const DEFAULT_TAGS = [
+    "obsługa klienta",
+    "reklamacje",
+    "zwroty",
+    "płatności",
+    "zamówienia",
+    "dostawa",
+    "produkty",
+    "techniczne",
+    "konto klienta",
+    "kontakt",
+    "inne"
+];
+
+
+/* ============================================================
+   PRZYKŁADOWE WPISY
+   ============================================================
+   To jest Twoja przykładowa baza.
+
+   Każdy wpis posiada:
+
+   id       → dokładnie 4 cyfry
+   title    → tytuł
+   tags     → tablica tagów
+   content  → treść, może zawierać HTML
+   source   → źródło
+
+   Możesz dodawać wpisy bezpośrednio tutaj.
+============================================================ */
+
+const DEFAULT_ENTRIES = [
+
+    {
+        id: "0001",
+
+        title: "Przykładowy proces obsługi klienta",
+
+        tags: [
+            "obsługa klienta",
+            "kontakt"
+        ],
+
+        content: `
+            <h3>Cel procesu</h3>
+
+            <p>
+                To jest przykładowy wpis demonstracyjny.
+                Możesz go usunąć i zastąpić własnymi procesami.
+            </p>
+
+            <h3>Przebieg</h3>
+
+            <ol>
+                <li>Zweryfikuj dane klienta.</li>
+                <li>Ustal przedmiot zgłoszenia.</li>
+                <li>Sprawdź odpowiednią procedurę.</li>
+                <li>Przekaż klientowi dalsze instrukcje.</li>
+            </ol>
+
+            <h3>Uwagi</h3>
+
+            <p>
+                W tym miejscu możesz umieścić dodatkowe informacje
+                dotyczące procesu.
+            </p>
+        `,
+
+        source: "Przykładowa procedura AEG"
+    },
+
+
+    {
+        id: "0002",
+
+        title: "Przykładowy proces reklamacji",
+
+        tags: [
+            "reklamacje",
+            "produkty"
+        ],
+
+        content: `
+            <h3>Opis</h3>
+
+            <p>
+                Przykładowy proces reklamacyjny.
+            </p>
+
+            <h3>Procedura</h3>
+
+            <ol>
+                <li>Przyjmij zgłoszenie klienta.</li>
+                <li>Zweryfikuj dane zamówienia.</li>
+                <li>Sprawdź możliwość realizacji reklamacji.</li>
+                <li>Poinformuj klienta o dalszych krokach.</li>
+            </ol>
+        `,
+
+        source: "AEG Customer Service Manual"
+    },
+
+
+    {
+        id: "0003",
+
+        title: "Przykładowy problem techniczny",
+
+        tags: [
+            "techniczne",
+            "obsługa klienta"
+        ],
+
+        content: `
+            <h3>Diagnoza problemu</h3>
+
+            <p>
+                Przykładowa procedura postępowania w przypadku
+                zgłoszenia problemu technicznego.
+            </p>
+
+            <ul>
+                <li>Ustal dokładny model produktu.</li>
+                <li>Poproś klienta o opis problemu.</li>
+                <li>Sprawdź podstawowe rozwiązania.</li>
+                <li>Jeżeli problem nadal występuje, przejdź do kolejnego etapu procedury.</li>
+            </ul>
+        `,
+
+        source: "Wewnętrzna baza wiedzy"
+    }
+
+];
+
+
+/* ============================================================
+   STAN APLIKACJI
+============================================================ */
+
+let entries = loadEntries();
+
+let tags = loadTags();
+
+let selectedTags = new Set();
+
+let expandedEntries = new Set();
+
+let editingEntryId = null;
+
+
+/* ============================================================
+   LOCAL STORAGE
+============================================================ */
+
+function loadEntries() {
+
+    const saved = localStorage.getItem(
+        "aeg_process_entries"
+    );
+
+    if (saved) {
+
+        try {
+            return JSON.parse(saved);
+
+        } catch (error) {
+
+            console.error(
+                "Nie udało się odczytać bazy.",
+                error
+            );
+
+        }
+
+    }
+
+    return DEFAULT_ENTRIES;
+
+}
+
+
+function loadTags() {
+
+    const saved = localStorage.getItem(
+        "aeg_process_tags"
+    );
+
+    if (saved) {
+
+        try {
+            return JSON.parse(saved);
+
+        } catch (error) {
+
+            console.error(
+                "Nie udało się odczytać tagów.",
+                error
+            );
+
+        }
+
+    }
+
+    return DEFAULT_TAGS;
+
+}
+
+
+function saveDatabase() {
+
+    localStorage.setItem(
+        "aeg_process_entries",
+        JSON.stringify(entries)
+    );
+
+    localStorage.setItem(
+        "aeg_process_tags",
+        JSON.stringify(tags)
+    );
+
+}
+
+
+/* ============================================================
+   INICJALIZACJA
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        renderTagFilters();
+
+        renderSourceFilter();
+
+        renderEntries();
+
+        applySavedTheme();
+
+    }
+);
+
+
+/* ============================================================
+   RENDER TAGÓW
+============================================================ */
+
+function renderTagFilters() {
+
+    const container =
+        document.getElementById(
+            "tagFilters"
+        );
+
+    container.innerHTML = "";
+
+
+    const allButton =
+        document.createElement("button");
+
+    allButton.className =
+        "tag-filter " +
+        (
+            selectedTags.size === 0
+                ? "active"
+                : ""
+        );
+
+    allButton.textContent =
+        "Wszystkie";
+
+    allButton.onclick =
+        function () {
+
+            selectedTags.clear();
+
+            renderTagFilters();
+
+            renderEntries();
+
+        };
+
+    container.appendChild(
+        allButton
+    );
+
+
+    tags.forEach(
+        function (tag) {
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "tag-filter " +
+                (
+                    selectedTags.has(tag)
+                        ? "active"
+                        : ""
+                );
+
+            button.textContent =
+                tag;
+
+            button.onclick =
+                function () {
+
+                    if (
+                        selectedTags.has(tag)
+                    ) {
+
+                        selectedTags.delete(tag);
+
+                    } else {
+
+                        selectedTags.add(tag);
+
+                    }
+
+                    renderTagFilters();
+
+                    renderEntries();
+
+                };
+
+            container.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   FILTR ŹRÓDEŁ
+============================================================ */
+
+function renderSourceFilter() {
+
+    const select =
+        document.getElementById(
+            "sourceFilter"
+        );
+
+    const currentValue =
+        select.value;
+
+    const sources = [
+        ...new Set(
+            entries
+                .map(
+                    entry => entry.source
+                )
+                .filter(Boolean)
+        )
+    ];
+
+    select.innerHTML = `
+        <option value="">
+            Wszystkie źródła
+        </option>
+    `;
+
+    sources
+        .sort(
+            (a, b) =>
+                a.localeCompare(
+                    b,
+                    "pl"
+                )
+        )
+        .forEach(
+            function (source) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    source;
+
+                option.textContent =
+                    source;
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+    select.value =
+        currentValue;
+
+}
+
+
+/* ============================================================
+   RENDER WPISÓW
+============================================================ */
+
+function renderEntries() {
+
+    const grid =
+        document.getElementById(
+            "entriesGrid"
+        );
+
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const source =
+        document
+            .getElementById(
+                "sourceFilter"
+            )
+            .value;
+
+
+    const sort =
+        document
+            .getElementById(
+                "sortSelect"
+            )
+            .value;
+
+
+    let filtered =
+        entries.filter(
+            function (entry) {
+
+                const matchesSearch =
+
+                    !search ||
+
+                    entry.id
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    entry.title
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesTags =
+
+                    selectedTags.size === 0
+
+                    ||
+
+                    [...selectedTags]
+                        .every(
+                            tag =>
+                                entry.tags.includes(
+                                    tag
+                                )
+                        );
+
+
+                const matchesSource =
+
+                    !source
+
+                    ||
+
+                    entry.source === source;
+
+
+                return (
+
+                    matchesSearch &&
+
+                    matchesTags &&
+
+                    matchesSource
+
+                );
+
+            }
+        );
+
+
+    /* SORTOWANIE */
+
+    filtered.sort(
+        function (a, b) {
+
+            switch (sort) {
+
+                case "id-desc":
+
+                    return Number(b.id)
+                        -
+                        Number(a.id);
+
+
+                case "title-asc":
+
+                    return a.title.localeCompare(
+                        b.title,
+                        "pl"
+                    );
+
+
+                case "title-desc":
+
+                    return b.title.localeCompare(
+                        a.title,
+                        "pl"
+                    );
+
+
+                case "id-asc":
+
+                default:
+
+                    return Number(a.id)
+                        -
+                        Number(b.id);
+
+            }
+
+        }
+    );
+
+
+    /* LICZNIK */
+
+    document
+        .getElementById(
+            "resultCount"
+        )
+        .textContent =
+
+        `Wyświetlono ${filtered.length} z ${entries.length} wpisów`;
+
+
+    /* AKTYWNE FILTRY */
+
+    renderActiveFilters();
+
+
+    /* WYCZYŚĆ */
+
+    grid.innerHTML = "";
+
+
+    /* BRAK WYNIKÓW */
+
+    if (
+        filtered.length === 0
+    ) {
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Nie znaleziono wpisów
+                </h3>
+
+                <p>
+                    Zmień kryteria wyszukiwania
+                    lub wyczyść filtry.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* KARTY */
+
+    filtered.forEach(
+        function (entry, index) {
+
+            const card =
+                createEntryCard(
+                    entry
+                );
+
+            card.style.animationDelay =
+                `${index * 0.025}s`;
+
+            grid.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   TWORZENIE KARTY
+============================================================ */
+
+function createEntryCard(
+    entry
+) {
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "entry-card";
+
+
+    if (
+        expandedEntries.has(
+            entry.id
+        )
+    ) {
+
+        card.classList.add(
+            "expanded"
+        );
+
+    }
+
+
+    const tagsHTML =
+        entry.tags
+            .map(
+                tag =>
+                    `<span class="tag">
+                        #${escapeHTML(tag)}
+                    </span>`
+            )
+            .join("");
+
+
+    card.innerHTML = `
+
+        <div
+            class="entry-head"
+            onclick="toggleEntry('${entry.id}')">
+
+            <div class="entry-top">
+
+                <span class="entry-id">
+                    #${escapeHTML(entry.id)}
+                </span>
+
+                <span class="expand-icon">
+                    ↓
+                </span>
+
+            </div>
+
+
+            <h3 class="entry-title">
+                ${escapeHTML(entry.title)}
+            </h3>
+
+
+            <p class="entry-preview">
+                ${getPreview(entry.content)}
+            </p>
+
+
+            <div class="entry-tags">
+
+                ${tagsHTML}
+
+            </div>
+
+        </div>
+
+
+        <div class="entry-details">
+
+            <div class="entry-details-inner">
+
+                <div class="entry-content">
+
+                    ${entry.content}
+
+                </div>
+
+
+                ${
+                    entry.source
+
+                        ? `
+
+                            <div class="entry-source">
+
+                                Źródło:
+
+                                <strong>
+                                    ${escapeHTML(
+                                        entry.source
+                                    )}
+                                </strong>
+
+                            </div>
+
+                          `
+
+                        : ""
+                }
+
+
+                <div class="entry-actions">
+
+                    <button
+                        class="btn btn-small"
+                        onclick="event.stopPropagation(); editEntry('${entry.id}')">
+
+                        Edytuj
+
+                    </button>
+
+
+                    <button
+                        class="btn btn-small"
+                        onclick="event.stopPropagation(); copyEntryCode('${entry.id}')">
+
+                        Kopiuj kod
+
+                    </button>
+
+
+                    <button
+                        class="btn btn-small btn-danger"
+                        onclick="event.stopPropagation(); deleteEntry('${entry.id}')">
+
+                        Usuń
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* ============================================================
+   ROZWIJANIE WPISU
+============================================================ */
+
+function toggleEntry(
+    id
+) {
+
+    if (
+        expandedEntries.has(id)
+    ) {
+
+        expandedEntries.delete(id);
+
+    } else {
+
+        expandedEntries.add(id);
+
+    }
+
+    renderEntries();
+
+}
+
+
+/* ============================================================
+   PREVIEW
+============================================================ */
+
+function getPreview(
+    html
+) {
+
+    const temp =
+        document.createElement(
+            "div"
+        );
+
+    temp.innerHTML =
+        html;
+
+    const text =
+        temp.textContent
+            ||
+        temp.innerText
+            ||
+        "";
+
+    return escapeHTML(
+        text.trim()
+    );
+
+}
+
+
+/* ============================================================
+   AKTYWNE FILTRY
+============================================================ */
+
+function renderActiveFilters() {
+
+    const container =
+        document.getElementById(
+            "activeFilters"
+        );
+
+    container.innerHTML = "";
+
+
+    selectedTags.forEach(
+        function (tag) {
+
+            const element =
+                document.createElement(
+                    "span"
+                );
+
+            element.className =
+                "active-filter";
+
+            element.textContent =
+                `#${tag} ×`;
+
+            element.onclick =
+                function () {
+
+                    selectedTags.delete(
+                        tag
+                    );
+
+                    renderTagFilters();
+
+                    renderEntries();
+
+                };
+
+            container.appendChild(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   WYCZYŚĆ FILTRY
+============================================================ */
+
+function clearFilters() {
+
+    document
+        .getElementById(
+            "searchInput"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "sourceFilter"
+        )
+        .value = "";
+
+
+    selectedTags.clear();
+
+
+    renderTagFilters();
+
+    renderEntries();
+
+}
+
+
+/* ============================================================
+   MODAL DODAWANIA
+============================================================ */
+
+function openAddModal() {
+
+    editingEntryId = null;
+
+
+    document
+        .getElementById(
+            "modalTitle"
+        )
+        .textContent =
+        "Dodaj nowy wpis";
+
+
+    document
+        .getElementById(
+            "editOriginalId"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "entryId"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "entryTitle"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "entryContent"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "entrySource"
+        )
+        .value = "";
+
+
+    renderEntryTagCheckboxes();
+
+
+    document
+        .getElementById(
+            "entryModal"
+        )
+        .classList.add(
+            "active"
+        );
+
+}
+
+
+/* ============================================================
+   MODAL EDYCJI
+============================================================ */
+
+function editEntry(
+    id
+) {
+
+    const entry =
+        entries.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!entry) {
+
+        return;
+
+    }
+
+
+    editingEntryId =
+        id;
+
+
+    document
+        .getElementById(
+            "modalTitle"
+        )
+        .textContent =
+        "Edytuj wpis";
+
+
+    document
+        .getElementById(
+            "editOriginalId"
+        )
+        .value =
+        id;
+
+
+    document
+        .getElementById(
+            "entryId"
+        )
+        .value =
+        entry.id;
+
+
+    document
+        .getElementById(
+            "entryTitle"
+        )
+        .value =
+        entry.title;
+
+
+    document
+        .getElementById(
+            "entryContent"
+        )
+        .value =
+        entry.content;
+
+
+    document
+        .getElementById(
+            "entrySource"
+        )
+        .value =
+        entry.source
+            ||
+        "";
+
+
+    renderEntryTagCheckboxes(
+        entry.tags
+    );
+
+
+    document
+        .getElementById(
+            "entryModal"
+        )
+        .classList.add(
+            "active"
+        );
+
+}
+
+
+/* ============================================================
+   TAGI W FORMULARZU
+============================================================ */
+
+function renderEntryTagCheckboxes(
+    selected = []
+) {
+
+    const container =
+        document.getElementById(
+            "entryTags"
+        );
+
+    container.innerHTML = "";
+
+
+    tags.forEach(
+        function (tag, index) {
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+            wrapper.className =
+                "tag-checkbox";
+
+
+            const checkboxId =
+                `tag-${index}`;
+
+
+            wrapper.innerHTML = `
+
+                <input
+                    type="checkbox"
+                    id="${checkboxId}"
+                    value="${escapeHTML(tag)}"
+                    ${selected.includes(tag)
+                        ? "checked"
+                        : ""}>
+
+                <label
+                    for="${checkboxId}">
+
+                    ${escapeHTML(tag)}
+
+                </label>
+
+            `;
+
+
+            container.appendChild(
+                wrapper
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   ZAPIS WPISU
+============================================================ */
+
+function saveEntry() {
+
+    let id =
+        document
+            .getElementById(
+                "entryId"
+            )
+            .value
+            .trim();
+
+
+    const title =
+        document
+            .getElementById(
+                "entryTitle"
+            )
+            .value
+            .trim();
+
+
+    const content =
+        document
+            .getElementById(
+                "entryContent"
+            )
+            .value
+            .trim();
+
+
+    const source =
+        document
+            .getElementById(
+                "entrySource"
+            )
+            .value
+            .trim();
+
+
+    const selected =
+        [
+            ...
+            document.querySelectorAll(
+                "#entryTags input:checked"
+            )
+        ]
+        .map(
+            input =>
+                input.value
+        );
+
+
+    /* WALIDACJA ID */
+
+    if (
+        !/^\d{4}$/.test(id)
+    ) {
+
+        showToast(
+            "Numer wpisu musi zawierać dokładnie 4 cyfry."
+        );
+
+        return;
+
+    }
+
+
+    if (!title) {
+
+        showToast(
+            "Podaj tytuł wpisu."
+        );
+
+        return;
+
+    }
+
+
+    if (!content) {
+
+        showToast(
+            "Podaj treść wpisu."
+        );
+
+        return;
+
+    }
+
+
+    /* EDYCJA */
+
+    if (editingEntryId) {
+
+        const index =
+            entries.findIndex(
+                entry =>
+                    entry.id ===
+                    editingEntryId
+            );
+
+
+        if (
+            index === -1
+        ) {
+
+            return;
+
+        }
+
+
+        const duplicate =
+            entries.some(
+                entry =>
+                    entry.id === id
+                    &&
+                    entry.id !==
+                    editingEntryId
+            );
+
+
+        if (duplicate) {
+
+            showToast(
+                "Wpis o takim numerze już istnieje."
+            );
+
+            return;
+
+        }
+
+
+        entries[index] = {
+
+            id,
+
+            title,
+
+            tags: selected,
+
+            content,
+
+            source
+
+        };
+
+
+        showToast(
+            "Wpis został zaktualizowany."
+        );
+
+    }
+
+
+    /* NOWY WPIS */
+
+    else {
+
+        const duplicate =
+            entries.some(
+                entry =>
+                    entry.id === id
+            );
+
+
+        if (duplicate) {
+
+            showToast(
+                "Wpis o takim numerze już istnieje."
+            );
+
+            return;
+
+        }
+
+
+        entries.push({
+
+            id,
+
+            title,
+
+            tags: selected,
+
+            content,
+
+            source
+
+        });
+
+
+        showToast(
+            "Wpis został dodany."
+        );
+
+    }
+
+
+    saveDatabase();
+
+
+    closeModal();
+
+
+    renderSourceFilter();
+
+    renderEntries();
+
+}
+
+
+/* ============================================================
+   USUWANIE WPISU
+============================================================ */
+
+function deleteEntry(
+    id
+) {
+
+    const entry =
+        entries.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!entry) {
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            `Czy na pewno chcesz usunąć wpis #${id} — "${entry.title}"?`
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    entries =
+        entries.filter(
+            item =>
+                item.id !== id
+        );
+
+
+    expandedEntries.delete(
+        id
+    );
+
+
+    saveDatabase();
+
+
+    renderSourceFilter();
+
+    renderEntries();
+
+
+    showToast(
+        "Wpis został usunięty."
+    );
+
+}
+
+
+/* ============================================================
+   KOPIOWANIE KODU WPISU
+============================================================ */
+
+function copyEntryCode(
+    id
+) {
+
+    const entry =
+        entries.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!entry) {
+
+        return;
+
+    }
+
+
+    const code = `{
+    id: "${entry.id}",
+    title: "${entry.title.replaceAll(
+        '"',
+        '\\"'
+    )}",
+    tags: ${JSON.stringify(
+        entry.tags
+    )},
+    content: \`
+${entry.content}
+    \`,
+    source: "${(
+        entry.source || ""
+    ).replaceAll(
+        '"',
+        '\\"'
+    )}"
+}`;
+
+
+    navigator.clipboard
+        .writeText(
+            code
+        )
+        .then(
+            function () {
+
+                showToast(
+                    "Kod wpisu skopiowany."
+                );
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   ZARZĄDZANIE TAGAMI
+============================================================ */
+
+function openTagManager() {
+
+    renderManagedTags();
+
+    document
+        .getElementById(
+            "tagModal"
+        )
+        .classList.add(
+            "active"
+        );
+
+}
+
+
+function closeTagManager() {
+
+    document
+        .getElementById(
+            "tagModal"
+        )
+        .classList.remove(
+            "active"
+        );
+
+}
+
+
+function renderManagedTags() {
+
+    const container =
+        document.getElementById(
+            "managedTags"
+        );
+
+    container.innerHTML = "";
+
+
+    tags.forEach(
+        function (tag) {
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+            element.className =
+                "managed-tag";
+
+
+            element.innerHTML = `
+
+                <span>
+                    ${escapeHTML(tag)}
+                </span>
+
+                <button
+                    class="remove-tag"
+                    onclick="removeTag('${escapeHTML(tag)}')">
+
+                    ×
+
+                </button>
+
+            `;
+
+
+            container.appendChild(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+function addTag() {
+
+    const input =
+        document.getElementById(
+            "newTagInput"
+        );
+
+
+    const tag =
+        input.value.trim();
+
+
+    if (!tag) {
+
+        return;
+
+    }
+
+
+    if (
+        tags.includes(tag)
+    ) {
+
+        showToast(
+            "Taki tag już istnieje."
+        );
+
+        return;
+
+    }
+
+
+    tags.push(
+        tag
+    );
+
+
+    tags.sort(
+        (a, b) =>
+            a.localeCompare(
+                b,
+                "pl"
+            )
+    );
+
+
+    input.value = "";
+
+
+    saveDatabase();
+
+
+    renderManagedTags();
+
+    renderTagFilters();
+
+    renderEntries();
+
+
+    showToast(
+        "Tag został dodany."
+    );
+
+}
+
+
+function removeTag(
+    tag
+) {
+
+    const used =
+        entries.some(
+            entry =>
+                entry.tags.includes(
+                    tag
+                )
+        );
+
+
+    if (used) {
+
+        const confirmed =
+            confirm(
+                `Tag "${tag}" jest używany w istniejących wpisach. Usunąć go z listy tagów?`
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        entries.forEach(
+            entry => {
+
+                entry.tags =
+                    entry.tags.filter(
+                        item =>
+                            item !== tag
+                    );
+
+            }
+        );
+
+    }
+
+
+    tags =
+        tags.filter(
+            item =>
+                item !== tag
+        );
+
+
+    selectedTags.delete(
+        tag
+    );
+
+
+    saveDatabase();
+
+
+    renderManagedTags();
+
+    renderTagFilters();
+
+    renderEntries();
+
+
+    showToast(
+        "Tag został usunięty."
+    );
+
+}
+
+
+/* ============================================================
+   EKSPORT BAZY
+============================================================ */
+
+function exportDatabase() {
+
+    const data =
+        JSON.stringify(
+            entries,
+            null,
+            4
+        );
+
+
+    const tagsData =
+        JSON.stringify(
+            tags,
+            null,
+            4
+        );
+
+
+    const exportCode =
+
+`<!DOCTYPE html>
+<html lang="pl">
+
+<!--
+    AEG PROCESS BASE
+
+    Wygenerowana kopia bazy:
+    ${new Date().toLocaleString("pl-PL")}
+
+    WPISY:
+-->
+
+<script>
+
+const DEFAULT_ENTRIES = ${data};
+
+const DEFAULT_TAGS = ${tagsData};
+
+</script>
+
+<!--
+    Aby zachować pełną aplikację,
+    użyj oryginalnego pliku index.html
+    i zaktualizuj dane w sekcjach
+    DEFAULT_ENTRIES oraz DEFAULT_TAGS.
+
+    Ta funkcja eksportuje dane bazy.
+-->`;
+
+
+    const blob =
+        new Blob(
+            [
+                exportCode
+            ],
+            {
+                type:
+                    "text/html;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "aeg-process-database.html";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    showToast(
+        "Baza została wyeksportowana."
+    );
+
+}
+
+
+/* ============================================================
+   MOTYW
+============================================================ */
+
+function toggleTheme() {
+
+    const current =
+        document.documentElement
+            .getAttribute(
+                "data-theme"
+            );
+
+
+    const next =
+        current === "dark"
+            ? "light"
+            : "dark";
+
+
+    document.documentElement
+        .setAttribute(
+            "data-theme",
+            next
+        );
+
+
+    localStorage.setItem(
+        "aeg_theme",
+        next
+    );
+
+}
+
+
+function applySavedTheme() {
+
+    const theme =
+        localStorage.getItem(
+            "aeg_theme"
+        );
+
+
+    if (theme) {
+
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                theme
+            );
+
+    }
+
+}
+
+
+/* ============================================================
+   MODAL
+============================================================ */
+
+function closeModal() {
+
+    document
+        .getElementById(
+            "entryModal"
+        )
+        .classList.remove(
+            "active"
+        );
+
+    editingEntryId =
+        null;
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+function showToast(
+    message
+) {
+
+    const container =
+        document.getElementById(
+            "toastContainer"
+        );
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    toast.className =
+        "toast";
+
+
+    toast.textContent =
+        message;
+
+
+    container.appendChild(
+        toast
+    );
+
+
+    setTimeout(
+        function () {
+
+            toast.remove();
+
+        },
+        2800
+    );
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHTML(
+    text
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* ============================================================
+   ZAMYKANIE MODALI
+============================================================ */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target.classList
+                .contains(
+                    "modal-overlay"
+                )
+        ) {
+
+            event.target
+                .classList.remove(
+                    "active"
+                );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   ESC — ZAMKNIJ MODAL
+============================================================ */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeModal();
+
+            closeTagManager();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
