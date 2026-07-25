@@ -16,9 +16,8 @@
     --text: #181a1d;
     --muted: #747980;
     --accent: #e30613;
-    --accent-dark: #bd000b;
     --accent-light: #fff0f1;
-    --shadow: 0 8px 30px rgba(0,0,0,.06);
+    --shadow: 0 8px 30px rgba(0, 0, 0, .06);
     --radius: 14px;
 }
 
@@ -30,9 +29,8 @@
     --text: #f3f4f5;
     --muted: #9da1a9;
     --accent: #ff2634;
-    --accent-dark: #ff4b57;
-    --accent-light: rgba(227,6,19,.14);
-    --shadow: 0 10px 35px rgba(0,0,0,.25);
+    --accent-light: rgba(227, 6, 19, .14);
+    --shadow: 0 10px 35px rgba(0, 0, 0, .25);
 }
 
 * {
@@ -55,9 +53,6 @@ body {
         Arial,
         sans-serif;
     line-height: 1.6;
-    transition:
-        background .25s ease,
-        color .25s ease;
 }
 
 button,
@@ -76,23 +71,18 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255,255,255,.88);
-    backdrop-filter: blur(16px);
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
-}
-
-[data-theme="dark"] header {
-    background: rgba(26,28,32,.88);
 }
 
 .header-inner {
     max-width: 1500px;
     margin: auto;
     padding: 16px 28px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
 }
 
 .brand {
@@ -104,13 +94,17 @@ header {
 .brand-mark {
     width: 40px;
     height: 40px;
-    background: var(--accent);
-    color: white;
-    border-radius: 10px;
+
     display: grid;
     place-items: center;
-    font-weight: 800;
+
+    background: var(--accent);
+    color: white;
+
+    border-radius: 10px;
+
     font-size: 13px;
+    font-weight: 800;
 }
 
 .brand-text h1 {
@@ -124,36 +118,18 @@ header {
     font-size: 12px;
 }
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* BUTTONS */
-
-.btn {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    padding: 9px 14px;
-    border-radius: 9px;
-    font-size: 13px;
-    font-weight: 650;
-    transition: all .18s ease;
-}
-
-.btn:hover {
-    background: var(--surface-2);
-    transform: translateY(-1px);
-}
-
 .icon-btn {
     width: 38px;
     height: 38px;
-    padding: 0;
+
     display: grid;
     place-items: center;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: var(--surface);
+    color: var(--text);
 }
 
 /* MAIN */
@@ -170,25 +146,29 @@ main {
 
 .page-intro h2 {
     margin: 0 0 5px;
-    font-size: clamp(26px,3vw,38px);
+
+    font-size: clamp(26px, 3vw, 38px);
     line-height: 1.15;
-    letter-spacing: -1px;
 }
 
 .page-intro p {
     margin: 0;
+
     color: var(--muted);
     font-size: 14px;
 }
 
-/* FILTERS */
+/* FILTRY */
 
 .filters {
+    margin-bottom: 25px;
+    padding: 20px;
+
     background: var(--surface);
+
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 25px;
+
     box-shadow: var(--shadow);
 }
 
@@ -200,18 +180,38 @@ main {
 
 .input {
     width: 100%;
-    border: 1px solid var(--border);
+
+    padding: 11px 13px;
+
     background: var(--bg);
     color: var(--text);
+
+    border: 1px solid var(--border);
     border-radius: 9px;
-    padding: 11px 13px;
+
     outline: none;
-    transition: all .18s ease;
 }
 
 .input:focus {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.btn {
+    padding: 9px 14px;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.btn:hover {
+    background: var(--surface-2);
 }
 
 .filter-section {
@@ -220,10 +220,14 @@ main {
 
 .filter-label {
     display: block;
+
     margin-bottom: 8px;
+
     color: var(--muted);
+
     font-size: 11px;
     font-weight: 750;
+
     text-transform: uppercase;
     letter-spacing: .7px;
 }
@@ -235,13 +239,15 @@ main {
 }
 
 .tag-filter {
-    border: 1px solid var(--border);
+    padding: 6px 10px;
+
     background: var(--surface-2);
     color: var(--text);
-    padding: 6px 10px;
+
+    border: 1px solid var(--border);
     border-radius: 999px;
+
     font-size: 12px;
-    transition: all .18s ease;
 }
 
 .tag-filter:hover {
@@ -250,17 +256,17 @@ main {
 
 .tag-filter.active {
     background: var(--accent);
-    border-color: var(--accent);
     color: white;
+    border-color: var(--accent);
 }
 
 /* TOOLBAR */
 
 .toolbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    justify-content: space-between;
+
     margin-bottom: 18px;
 }
 
@@ -270,35 +276,28 @@ main {
 }
 
 .sort-select {
-    width: auto;
-    min-width: 190px;
+    width: 190px;
 }
 
-/* CARDS */
+/* KARTY */
 
 .entries-grid {
     display: grid;
-    grid-template-columns: repeat(3,minmax(0,1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
+
     align-items: start;
 }
 
 .entry-card {
+    overflow: hidden;
+
     background: var(--surface);
+
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    animation: cardIn .35s ease both;
-    transition:
-        transform .22s ease,
-        box-shadow .22s ease,
-        border-color .22s ease;
-}
 
-.entry-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 35px rgba(0,0,0,.09);
+    box-shadow: var(--shadow);
 }
 
 .entry-card.expanded {
@@ -314,11 +313,13 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     margin-bottom: 10px;
 }
 
 .entry-id {
     color: var(--accent);
+
     font-size: 12px;
     font-weight: 800;
     letter-spacing: .7px;
@@ -327,77 +328,81 @@ main {
 .expand-icon {
     width: 27px;
     height: 27px;
-    border: 1px solid var(--border);
-    border-radius: 50%;
+
     display: grid;
     place-items: center;
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
     color: var(--muted);
-    transition: transform .25s ease;
 }
 
 .entry-card.expanded .expand-icon {
     transform: rotate(180deg);
+
     color: var(--accent);
     border-color: var(--accent);
 }
 
 .entry-title {
     margin: 0 0 10px;
+
     font-size: 17px;
     line-height: 1.35;
 }
 
 .entry-preview {
     margin: 0;
+
     color: var(--muted);
+
     font-size: 13px;
+
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+
     overflow: hidden;
 }
 
 .entry-tags {
-    margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+
+    margin-top: 15px;
 }
 
 .tag {
-    border: none;
+    padding: 4px 8px;
+
     background: var(--surface-2);
     color: var(--muted);
+
+    border: 0;
     border-radius: 999px;
-    padding: 4px 8px;
+
     font-size: 10px;
     font-weight: 650;
-    cursor: pointer;
 }
 
 .tag:hover {
     color: var(--accent);
 }
 
+/* SZCZEGÓŁY */
+
 .entry-details {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    border-top: 1px solid transparent;
-    transition:
-        max-height .35s ease,
-        opacity .25s ease,
-        border-color .25s ease;
+    display: none;
+
+    padding: 20px;
+
+    border-top: 1px solid var(--border);
 }
 
 .entry-card.expanded .entry-details {
-    max-height: 2000px;
-    opacity: 1;
-    border-color: var(--border);
-}
-
-.entry-details-inner {
-    padding: 20px;
+    display: block;
 }
 
 .entry-content {
@@ -414,9 +419,18 @@ main {
     margin-top: 0;
 }
 
+.entry-content h4 {
+    margin-top: 18px;
+    margin-bottom: 7px;
+}
+
 .entry-content ul,
 .entry-content ol {
     padding-left: 22px;
+}
+
+.entry-content li {
+    margin-bottom: 5px;
 }
 
 .entry-content table {
@@ -427,15 +441,19 @@ main {
 
 .entry-content th,
 .entry-content td {
-    border: 1px solid var(--border);
     padding: 8px;
+
+    border: 1px solid var(--border);
+
     text-align: left;
 }
 
 .entry-source {
     margin-top: 22px;
     padding-top: 15px;
+
     border-top: 1px solid var(--border);
+
     color: var(--muted);
     font-size: 12px;
 }
@@ -445,26 +463,30 @@ main {
 }
 
 .entry-actions {
-    margin-top: 18px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
+    gap: 8px;
+
+    margin-top: 18px;
 }
 
-/* EMPTY */
+/* BRAK WYNIKÓW */
 
 .empty-state {
-    grid-column: 1/-1;
-    text-align: center;
+    grid-column: 1 / -1;
+
     padding: 70px 20px;
+
+    text-align: center;
+
     background: var(--surface);
+
     border: 1px dashed var(--border);
     border-radius: var(--radius);
 }
 
 .empty-icon {
-    font-size: 35px;
     margin-bottom: 10px;
+    font-size: 35px;
 }
 
 .empty-state h3 {
@@ -473,6 +495,7 @@ main {
 
 .empty-state p {
     margin: 0;
+
     color: var(--muted);
     font-size: 13px;
 }
@@ -481,71 +504,44 @@ main {
 
 .toast-container {
     position: fixed;
-    bottom: 22px;
     right: 22px;
+    bottom: 22px;
+
     z-index: 1000;
+
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
 .toast {
+    padding: 11px 15px;
+
     background: var(--text);
     color: var(--surface);
-    padding: 11px 15px;
+
     border-radius: 9px;
+
     font-size: 13px;
-    box-shadow: var(--shadow);
-    animation: toastIn .25s ease;
-}
-
-/* ANIMATIONS */
-
-@keyframes cardIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes toastIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* RESPONSIVE */
 
-@media(max-width:1100px) {
+@media (max-width: 1100px) {
 
     .entries-grid {
-        grid-template-columns: repeat(2,minmax(0,1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
 }
 
-@media(max-width:700px) {
+@media (max-width: 700px) {
 
     .header-inner {
         padding: 14px 16px;
     }
 
     .brand-text span {
-        display: none;
-    }
-
-    .header-actions .btn:not(.icon-btn) {
         display: none;
     }
 
@@ -564,10 +560,17 @@ main {
     .toolbar {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
     }
 
     .sort-select {
         width: 100%;
+    }
+
+    .toast-container {
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
     }
 
 }
@@ -575,631 +578,525 @@ main {
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
-<div class="header-inner">
+    <div class="header-inner">
 
-<div class="brand">
+        <div class="brand">
 
-<div class="brand-mark">
-AEG
-</div>
+            <div class="brand-mark">
+                AEG
+            </div>
 
-<div class="brand-text">
+            <div class="brand-text">
 
-<h1>Process Base</h1>
+                <h1>
+                    Process Base
+                </h1>
 
-<span>
-Customer Service Knowledge Base
-</span>
+                <span>
+                    Customer Service Knowledge Base
+                </span>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-<div class="header-actions">
 
-<button
-class="btn icon-btn"
-onclick="toggleTheme()"
-title="Zmień motyw">
+        <button
+            id="themeButton"
+            class="icon-btn"
+            type="button"
+            title="Zmień motyw">
 
-◐
+            ◐
 
-</button>
+        </button>
 
-</div>
-
-</div>
+    </div>
 
 </header>
 
 
 <main>
 
-<section class="page-intro">
 
-<h2>Baza procesów</h2>
+    <section class="page-intro">
 
-<p>
-Wewnętrzna baza procedur i procesów obsługi klienta.
-</p>
+        <h2>
+            Baza procesów
+        </h2>
 
-</section>
+        <p>
+            Wewnętrzna baza procedur i procesów obsługi klienta.
+        </p>
 
-
-<section class="filters">
-
-<div class="search-row">
-
-<input
-id="searchInput"
-class="input"
-type="text"
-placeholder="Szukaj po numerze, tytule, treści lub źródle..."
-oninput="renderEntries()">
-
-<button
-class="btn"
-onclick="clearFilters()">
-
-Wyczyść filtry
-
-</button>
-
-</div>
+    </section>
 
 
-<div class="filter-section">
-
-<span class="filter-label">
-Filtruj po tagach
-</span>
-
-<div
-id="tagFilters"
-class="tags">
-</div>
-
-</div>
+    <section class="filters">
 
 
-<div class="filter-section">
+        <div class="search-row">
 
-<span class="filter-label">
-Filtruj po źródle
-</span>
+            <input
+                id="searchInput"
+                class="input"
+                type="search"
+                placeholder="Szukaj po numerze, tytule, treści, tagu lub źródle..."
+                autocomplete="off"
+            >
 
-<select
-id="sourceFilter"
-class="input"
-onchange="renderEntries()">
+            <button
+                id="clearButton"
+                class="btn"
+                type="button">
 
-<option value="">
-Wszystkie źródła
-</option>
+                Wyczyść filtry
 
-</select>
+            </button>
 
-</div>
-
-</section>
-
-
-<div class="toolbar">
-
-<div
-id="resultCount"
-class="result-count">
-</div>
-
-<select
-id="sortSelect"
-class="input sort-select"
-onchange="renderEntries()">
-
-<option value="id-asc">
-ID — rosnąco
-</option>
-
-<option value="id-desc">
-ID — malejąco
-</option>
-
-<option value="title-asc">
-Tytuł — A-Z
-</option>
-
-<option value="title-desc">
-Tytuł — Z-A
-</option>
-
-</select>
-
-</div>
+        </div>
 
 
-<section
-id="entriesGrid"
-class="entries-grid">
-</section>
+        <div class="filter-section">
+
+            <span class="filter-label">
+                Filtruj po tagach
+            </span>
+
+            <div
+                id="tagFilters"
+                class="tags">
+            </div>
+
+        </div>
+
+
+        <div class="filter-section">
+
+            <span class="filter-label">
+                Filtruj po źródle
+            </span>
+
+            <select
+                id="sourceFilter"
+                class="input">
+
+                <option value="">
+                    Wszystkie źródła
+                </option>
+
+            </select>
+
+        </div>
+
+
+    </section>
+
+
+    <div class="toolbar">
+
+        <div
+            id="resultCount"
+            class="result-count">
+        </div>
+
+
+        <select
+            id="sortSelect"
+            class="input sort-select">
+
+            <option value="id-asc">
+                ID — rosnąco
+            </option>
+
+            <option value="id-desc">
+                ID — malejąco
+            </option>
+
+            <option value="title-asc">
+                Tytuł — A-Z
+            </option>
+
+            <option value="title-desc">
+                Tytuł — Z-A
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <section
+        id="entriesGrid"
+        class="entries-grid">
+    </section>
+
 
 </main>
 
 
 <div
-id="toastContainer"
-class="toast-container">
+    id="toastContainer"
+    class="toast-container">
 </div>
 
 
 <script>
 
+
 /* =========================================================
-   DODAWANIE WPISÓW
-   =========================================================
+   WPISY BAZY
+========================================================= */
 
-   Każdy wpis powinien mieć:
-
-   id      - dokładnie 4 cyfry
-   title   - tytuł wpisu
-   tags    - lista tagów
-   content - treść HTML
-   source  - źródło
-
-   Skopiuj poniższy wzór i dodaj nowy obiekt
-   przed ostatnim wpisem.
-
-*/
 
 const ENTRIES = [
 
-{
-    id: "0001",
-
-    title: "Nieprawidłowy Gebiet w Serviceauftrag",
-
-    tags: [
-        "Serviceauftrag",
-        "Gebiet",
-        "PLZ",
-        "Techniker",
-        "Fall",
-        "Terminverschiebung"
-    ],
-
-    content: `
-
-        <h3>Opis problemu</h3>
-
-        <p>
-            W niektórych przypadkach może się zdarzyć, że numer
-            <strong>Serviceauftrag</strong> wskazuje na inny
-            <strong>Gebiet</strong> niż ten, który został automatycznie
-            zaczytany przez system.
-        </p>
-
-        <p>
-            Prawdopodobną przyczyną jest zmiana firmy serwisującej
-            odpowiedzialnej za dany kod pocztowy (<strong>PLZ</strong>).
-            System może nie mieć jeszcze zaktualizowanych danych dotyczących
-            nowego podziału obszarów serwisowych.
-        </p>
-
-        <h3>Możliwe objawy</h3>
-
-        <ul>
-            <li>Nie można prawidłowo ustawić lub zarezerwować terminu.</li>
-            <li>
-                Po wpisaniu kodu pocztowego (<strong>PLZ</strong>) system
-                pokazuje innego odpowiedzialnego technika niż ten, który
-                widnieje w utworzonym <strong>Fall</strong>.
-            </li>
-            <li>
-                <strong>Serviceauftrag</strong> wskazuje inne
-                <strong>Gebiet</strong> niż wynikające z danych w
-                <strong>Fall</strong>.
-            </li>
-        </ul>
-
-        <h3>Rozwiązanie</h3>
-
-        <p>
-            W przypadku wystąpienia powyższych objawów należy ponownie utworzyć
-            <strong>Fall</strong>, korzystając z opcji utworzenia go jako kopii
-            istniejącego zgłoszenia.
-        </p>
-
-        <p>
-            Następnie należy utworzyć nowy <strong>Serviceauftrag</strong>.
-            Po ponownym utworzeniu zgłoszenia system powinien prawidłowo
-            przypisać <strong>Gebiet</strong> oraz wyświetlić właściwego
-            technika odpowiedzialnego za dany <strong>PLZ</strong>.
-        </p>
-
-        <h3>Ważne</h3>
-
-        <p>
-            Jeżeli technik widoczny po wpisaniu <strong>PLZ</strong> różni się
-            od technika przypisanego w <strong>Fall</strong>, należy zwrócić
-            uwagę na możliwość nieaktualnych danych dotyczących obszaru
-            serwisowego. W takiej sytuacji ponowne utworzenie
-            <strong>Fall</strong> jako kopii i utworzenie nowego
-            <strong>Serviceauftrag</strong> może spowodować prawidłowe
-            przypisanie technika.
-        </p>
-
-    `,
-},
-{
-    id: "0002",
-
-    title: "Tworzenie Clone w Serviceauftrag po zamówieniu Ersatzteile",
-
-    tags: [
-        "Serviceauftrag",
-        "Clone",
-        "Ersatzteile",
-        "Terminverschiebung",
-        "ISP",
-        "Operatec",
-        "WKD",
-        "ColneSO",
-        "Techniker"
-    ],
-
-    content: `
-
-        <h3>Opis procesu</h3>
-
-        <p>
-            W przypadku, gdy technik był już u klienta i podczas wizyty zamówił
-            wymagane <strong>części zamienne (Ersatzteile)</strong>, po ich
-            dostarczeniu konieczne jest ponowne umówienie wizyty technika
-            u klienta.
-        </p>
-
-        <p>
-            Standardowo <strong>ISP</strong> oraz <strong>Operatec</strong>
-            zajmują się ponownym terminowaniem samodzielnie. Jeżeli jednak
-            klient kontaktuje się z informacją, że otrzymał SMS z informacją
-            o dostępności zamówionych części zamiennych, prawie zawsze można
-            przystąpić do umawiania kolejnej wizyty technika.
-        </p>
-
-        <h3>Postępowanie według SP</h3>
-
-        <h4>ISP</h4>
-
-        <p>
-            W przypadku <strong>ISP</strong> należy wysłać wiadomość e-mail
-            do odpowiedniego <strong>SP</strong> z prośbą o ponowne
-            terminowanie klienta.
-        </p>
-
-        <h4>Operatec</h4>
-
-        <p>
-            W przypadku <strong>Operatec</strong> należy postępować zgodnie
-            z informacją zawartą w <strong>Mitteilung</strong> w
-            <strong>Fall</strong>.
-        </p>
-
-        <h4>WKD</h4>
-
-        <p>
-            W przypadku <strong>WKD</strong> ponowne terminowanie wykonujemy
-            poprzez utworzenie <strong>CloneSO</strong>.
-        </p>
-
-        <p>
-            Informacja o możliwości utworzenia Clone może znajdować się
-            w <strong>Techn. Kom. QES</strong> lub w
-            <strong>Mitteilung</strong> w <strong>Fall</strong>.
-        </p>
-
-        <ul>
-            <li>
-                Jeżeli w <strong>Techn. Kom. QES</strong> znajduje się informacja,
-                że można wykonać <strong>Clone</strong> – należy utworzyć Clone.
-            </li>
-            <li>
-                Jeżeli w <strong>Mitteilung</strong> w <strong>Fall</strong>
-                znajduje się prośba o ponowne terminowanie – należy postępować
-                zgodnie z tą informacją i utworzyć Clone.
-            </li>
-        </ul>
-
-        <h3>Brak możliwości utworzenia Clone</h3>
-
-        <p>
-            Jeżeli z jakiegoś powodu nie jest możliwe utworzenie
-            <strong>Clone</strong> w <strong>Serviceauftrag</strong>, należy
-            ręcznie utworzyć nową pozycję w <strong>Serviceauftrag</strong>.
-        </p>
-
-        <p>
-            Następnie w <strong>Mitteilung</strong> w <strong>Fall</strong>
-            należy pozostawić informację, że utworzenie Clone nie było możliwe
-            oraz że nowa pozycja w <strong>Serviceauftrag</strong> została
-            utworzona ręcznie.
-        </p>
-
-        <h3>Ważne</h3>
-
-        <p>
-            Jeżeli klient informuje, że otrzymał SMS potwierdzający dostępność
-            zamówionych <strong>Ersatzteile</strong>, należy założyć, że
-            części są już dostępne i można przystąpić do organizacji kolejnej
-            wizyty technika. Sposób postępowania zależy od właściwego
-            <strong>SP</strong>: <strong>ISP</strong>, <strong>Operatec</strong>
-            lub <strong>WKD</strong>.
-        </p>
-
-    `,
-},
-{
-    id: "0003",
-
-    title: "Geräteaustausch – proces wymiany urządzenia",
-
-    tags: [
-        "Geräteaustausch",
-        "Austausch",
-        "Angebot",
-        "WKD",
-        "Operatec",
-        "ISP",
-        "Lieferantengruppe",
-        "Versicherung",
-        "Voraussichtliche Lieferung",
-        "DL"
-    ],
-
-    content: `
-
-        <h3>Klient zgłasza konieczność wymiany urządzenia</h3>
-
-        <p>
-            Jeżeli klient twierdzi, że jego <strong>Gerät</strong> powinno
-            zostać wymienione, ale w systemie nie ma jeszcze żadnych
-            informacji dotyczących wymiany, należy skontaktować się
-            z odpowiednią jednostką zgodnie z przypisanym
-            <strong>Lieferantengruppe</strong>.
-        </p>
-
-        <h4>WKD</h4>
-
-        <p>
-            W przypadku <strong>WKD</strong> należy skierować sprawę do
-            odpowiedniego <strong>Bearbeitung</strong> przez
-            <strong>Lieferantengruppe</strong>.
-        </p>
-
-        <h4>Operatec</h4>
-
-        <p>
-            W przypadku <strong>Operatec</strong> należy skierować sprawę
-            do <strong>Operatec</strong> w ramach
-            <strong>Lieferantengruppe</strong>.
-        </p>
-
-        <h4>ISP</h4>
-
-        <p>
-            W przypadku <strong>ISP</strong> należy wysłać wiadomość e-mail
-            do odpowiedniego <strong>SP</strong>.
-        </p>
-
-        <h3>Klient jest na etapie akceptacji oferty</h3>
-
-        <p>
-            Jeżeli klient znajduje się już na etapie akceptowania oferty,
-            powinna być ona widoczna w <strong>Fall</strong> w zakładce
-            <strong>Austausch</strong>.
-        </p>
-
-        <h4>WKD – akceptacja oferty</h4>
-
-        <p>
-            W przypadku <strong>WKD</strong> konieczne jest podpisanie
-            oferty przez klienta i wysłanie jej na adres e-mail wskazany
-            w treści wiadomości dotyczącej oferty.
-        </p>
-
-        <p>
-            Dopiero po wykonaniu tych czynności wymiana zostanie przekazana
-            do dalszego przetwarzania. Dotyczy to również sytuacji, w których
-            wymiana odbywa się w ramach <strong>1:1</strong> – oferta również
-            musi zostać prawidłowo podpisana i odesłana.
-        </p>
-
-        <h4>Ubezpieczenie zewnętrzne</h4>
-
-        <p>
-            W przypadku, gdy wymiana urządzenia jest realizowana przez
-            zewnętrzne ubezpieczenie, <strong>Angebot</strong> zostaje
-            wysłany do ubezpieczyciela.
-        </p>
-
-        <p>
-            Klient musi uzgodnić z ubezpieczycielem akceptację oferty.
-            Dopiero po zaakceptowaniu oferty przez ubezpieczyciela możliwe
-            jest przejście do kolejnego etapu procesu wymiany.
-        </p>
-
-        <h3>Dostawa nowego urządzenia</h3>
-
-        <p>
-            Po zaakceptowaniu oferty i dalszym przetworzeniu wymiany klient
-            otrzymuje informację o przewidywanym terminie dostawy
-            (<strong>voraussichtliche Lieferung</strong>).
-        </p>
-
-        <p>
-            Dostawa jest realizowana do odpowiedniego
-            <strong>DL</strong>, który następnie kontaktuje się z klientem
-            w celu ustalenia dalszych szczegółów dostawy. Przykładowym
-            dostawcą może być <strong>Hermes</strong>.
-        </p>
-
-        <p>
-            Standardowo podczas dostawy nowego urządzenia firma dostarczająca
-            sprzęt powinna:
-        </p>
-
-        <ul>
-            <li>dostarczyć nowe urządzenie do klienta,</li>
-            <li>podłączyć i uruchomić nowe urządzenie,</li>
-            <li>zabrać stare urządzenie.</li>
-        </ul>
-
-        <h3>Problemy związane z wymianą urządzenia</h3>
-
-        <p>
-            Wszystkie problemy związane z procesem wymiany urządzenia, w tym
-            problemy z dostawą, kontaktem z klientem lub realizacją wymiany,
-            należy kierować do <strong>Geräteaustausch</strong> poprzez
-            odpowiednią <strong>Lieferantengruppe</strong>.
-        </p>
-
-        <p>
-            W takim przypadku należy pozostawić odpowiednią informację
-            w <strong>Mitteilung</strong>, dokładnie opisując problem
-            i sytuację klienta.
-        </p>
-
-        <h3>Podsumowanie procesu</h3>
-
-        <ol>
-            <li>
-                Klient zgłasza konieczność wymiany urządzenia.
-            </li>
-            <li>
-                Sprawdzamy, czy w <strong>Fall → Austausch</strong>
-                znajduje się już informacja o wymianie lub oferta.
-            </li>
-            <li>
-                Jeżeli nie ma żadnych informacji, kierujemy sprawę do
-                odpowiedniego <strong>SP / Operatec / Bearbeitung</strong>
-                zgodnie z <strong>Lieferantengruppe</strong>.
-            </li>
-            <li>
-                Jeżeli dostępna jest oferta, klient lub ubezpieczyciel musi
-                ją zaakceptować zgodnie z obowiązującą procedurą.
-            </li>
-            <li>
-                Po zaakceptowaniu wymiana jest dalej przetwarzana.
-            </li>
-            <li>
-                Klient otrzymuje informację o
-                <strong>voraussichtliche Lieferung</strong>.
-            </li>
-            <li>
-                <strong>DL</strong> kontaktuje się z klientem i organizuje
-                dostawę.
-            </li>
-            <li>
-                Standardowo nowe urządzenie jest dostarczane i podłączane,
-                a stare urządzenie zostaje odebrane.
-            </li>
-            <li>
-                Problemy z wymianą kierujemy do
-                <strong>Geräteaustausch</strong> przez odpowiednią
-                <strong>Lieferantengruppe</strong>, pozostawiając
-                <strong>Mitteilung</strong>.
-            </li>
-        </ol>
-
-    `,
-};
-    /*
-        WZÓR NOWEGO WPISU
-
-        {
-            id: "0004",
-
-            title: "Tytuł procesu",
-
-            tags: [
-                "obsługa klienta",
-                "reklamacje"
-            ],
-
-            content: `
-
-                <h3>Opis</h3>
-
-                <p>
-                    Treść procesu.
-                </p>
-
-                <h3>Procedura</h3>
-
-                <ol>
-                    <li>Pierwszy krok.</li>
-                    <li>Drugi krok.</li>
-                    <li>Trzeci krok.</li>
-                </ol>
-
-            `,
-
-            source: "Nazwa źródła"
-        }
-
-    */
+
+    {
+        id: "0001",
+
+        title: "Nieprawidłowy Gebiet w Serviceauftrag",
+
+        tags: [
+            "Serviceauftrag",
+            "Gebiet",
+            "PLZ",
+            "Techniker",
+            "Fall",
+            "Terminverschiebung"
+        ],
+
+        source: "Wewnętrzna baza procesów",
+
+        content: `
+
+            <h3>Opis problemu</h3>
+
+            <p>
+                W niektórych przypadkach może się zdarzyć, że numer
+                <strong>Serviceauftrag</strong> wskazuje na inny
+                <strong>Gebiet</strong> niż ten, który został automatycznie
+                zaczytany przez system.
+            </p>
+
+            <p>
+                Prawdopodobną przyczyną jest zmiana firmy serwisującej
+                odpowiedzialnej za dany kod pocztowy (<strong>PLZ</strong>).
+            </p>
+
+
+            <h3>Możliwe objawy</h3>
+
+            <ul>
+
+                <li>
+                    Nie można prawidłowo ustawić lub zarezerwować terminu.
+                </li>
+
+                <li>
+                    Po wpisaniu kodu pocztowego system pokazuje
+                    innego technika niż ten widoczny w <strong>Fall</strong>.
+                </li>
+
+                <li>
+                    <strong>Serviceauftrag</strong> wskazuje inne
+                    <strong>Gebiet</strong>.
+                </li>
+
+            </ul>
+
+
+            <h3>Rozwiązanie</h3>
+
+            <p>
+                Należy ponownie utworzyć <strong>Fall</strong>,
+                korzystając z opcji utworzenia go jako kopii istniejącego
+                zgłoszenia.
+            </p>
+
+            <p>
+                Następnie należy utworzyć nowy
+                <strong>Serviceauftrag</strong>.
+            </p>
+
+        `
+    },
+
+
+    {
+        id: "0002",
+
+        title: "Tworzenie Clone w Serviceauftrag po zamówieniu Ersatzteile",
+
+        tags: [
+            "Serviceauftrag",
+            "Clone",
+            "CloneSO",
+            "Ersatzteile",
+            "Terminverschiebung",
+            "ISP",
+            "Operatec",
+            "WKD",
+            "Techniker"
+        ],
+
+        source: "Wewnętrzna baza procesów",
+
+        content: `
+
+            <h3>Opis procesu</h3>
+
+            <p>
+                Jeżeli technik podczas wizyty zamówił wymagane
+                <strong>Ersatzteile</strong>, po ich dostarczeniu
+                konieczne jest ponowne umówienie wizyty technika.
+            </p>
+
+
+            <h3>ISP</h3>
+
+            <p>
+                Należy wysłać wiadomość e-mail do odpowiedniego
+                <strong>SP</strong> z prośbą o ponowne terminowanie klienta.
+            </p>
+
+
+            <h3>Operatec</h3>
+
+            <p>
+                Należy postępować zgodnie z informacją zawartą
+                w <strong>Mitteilung</strong> w <strong>Fall</strong>.
+            </p>
+
+
+            <h3>WKD</h3>
+
+            <p>
+                W przypadku <strong>WKD</strong> ponowne terminowanie
+                wykonujemy poprzez utworzenie <strong>CloneSO</strong>.
+            </p>
+
+
+            <h3>Brak możliwości utworzenia Clone</h3>
+
+            <p>
+                Jeżeli nie można utworzyć <strong>Clone</strong>,
+                należy ręcznie utworzyć nową pozycję
+                w <strong>Serviceauftrag</strong>.
+            </p>
+
+            <p>
+                Następnie w <strong>Mitteilung</strong> w
+                <strong>Fall</strong> należy pozostawić informację,
+                że Clone nie mógł zostać utworzony.
+            </p>
+
+        `
+    },
+
+
+    {
+        id: "0003",
+
+        title: "Geräteaustausch – proces wymiany urządzenia",
+
+        tags: [
+            "Geräteaustausch",
+            "Austausch",
+            "Angebot",
+            "WKD",
+            "Operatec",
+            "ISP",
+            "Lieferantengruppe",
+            "Versicherung",
+            "DL"
+        ],
+
+        source: "Wewnętrzna baza procesów",
+
+        content: `
+
+            <h3>Klient zgłasza konieczność wymiany urządzenia</h3>
+
+            <p>
+                Jeżeli klient twierdzi, że jego
+                <strong>Gerät</strong> powinno zostać wymienione,
+                ale w systemie nie ma jeszcze informacji dotyczących
+                wymiany, należy skontaktować się z odpowiednią jednostką
+                zgodnie z przypisanym <strong>Lieferantengruppe</strong>.
+            </p>
+
+
+            <h4>WKD</h4>
+
+            <p>
+                Sprawę należy skierować do odpowiedniego
+                <strong>Bearbeitung</strong> przez
+                <strong>Lieferantengruppe</strong>.
+            </p>
+
+
+            <h4>Operatec</h4>
+
+            <p>
+                Sprawę należy skierować do
+                <strong>Operatec</strong> w ramach
+                <strong>Lieferantengruppe</strong>.
+            </p>
+
+
+            <h4>ISP</h4>
+
+            <p>
+                Należy wysłać wiadomość e-mail do odpowiedniego
+                <strong>SP</strong>.
+            </p>
+
+
+            <h3>Akceptacja oferty</h3>
+
+            <p>
+                Jeżeli klient znajduje się już na etapie akceptacji oferty,
+                powinna być ona widoczna w <strong>Fall</strong>
+                w zakładce <strong>Austausch</strong>.
+            </p>
+
+
+            <h3>Dostawa nowego urządzenia</h3>
+
+            <p>
+                Po zaakceptowaniu oferty klient otrzymuje informację
+                o przewidywanym terminie dostawy.
+            </p>
+
+            <p>
+                Dostawa jest realizowana do odpowiedniego
+                <strong>DL</strong>, który kontaktuje się z klientem.
+            </p>
+
+
+            <h3>Problemy z wymianą</h3>
+
+            <p>
+                Problemy związane z procesem wymiany urządzenia należy
+                kierować do <strong>Geräteaustausch</strong> poprzez
+                odpowiednią <strong>Lieferantengruppe</strong>.
+            </p>
+
+            <p>
+                W <strong>Mitteilung</strong> należy dokładnie opisać
+                problem i sytuację klienta.
+            </p>
+
+        `
+    }
+
 
 ];
 
 
 /* =========================================================
-   USTAWIENIA
+   DOM
 ========================================================= */
 
-const DEFAULT_TAGS = [
-    "WKD",
-    "ISP",
-    "Operatec",
-    "Fall",
-    "Serviceauftrag",
-    "Techniker",
-    "Terminverschiebung",
-    "Storno",
-    "FPR",
-    "Geräteaustausch",
-    "Besuchsbericht",
-    "Garantie",
-    "Versicherung",
-    "Ersatzteile",
-    "Händler",
-    "Rechnung"
-];
 
+const searchInput =
+    document.getElementById("searchInput");
 
-let selectedTags = new Set();
+const sourceFilter =
+    document.getElementById("sourceFilter");
 
-let expandedEntries = new Set();
+const sortSelect =
+    document.getElementById("sortSelect");
+
+const entriesGrid =
+    document.getElementById("entriesGrid");
+
+const tagFilters =
+    document.getElementById("tagFilters");
+
+const resultCount =
+    document.getElementById("resultCount");
+
+const clearButton =
+    document.getElementById("clearButton");
+
+const themeButton =
+    document.getElementById("themeButton");
+
+const toastContainer =
+    document.getElementById("toastContainer");
 
 
 /* =========================================================
-   START
+   STAN APLIKACJI
 ========================================================= */
+
+
+let selectedTags = [];
+
+let expandedEntries = [];
+
+
+/* =========================================================
+   DOM READY
+========================================================= */
+
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        renderTagFilters();
+        loadTheme();
 
-        renderSourceFilter();
+        renderTags();
+
+        renderSources();
 
         renderEntries();
 
-        applySavedTheme();
-
     }
+);
+
+
+/* =========================================================
+   EVENTY
+========================================================= */
+
+
+searchInput.addEventListener(
+    "input",
+    renderEntries
+);
+
+
+sourceFilter.addEventListener(
+    "change",
+    renderEntries
+);
+
+
+sortSelect.addEventListener(
+    "change",
+    renderEntries
+);
+
+
+clearButton.addEventListener(
+    "click",
+    clearFilters
+);
+
+
+themeButton.addEventListener(
+    "click",
+    toggleTheme
 );
 
 
@@ -1207,111 +1104,159 @@ document.addEventListener(
    TAGI
 ========================================================= */
 
+
 function getAllTags() {
 
-    const entryTags = ENTRIES.flatMap(
-        entry => entry.tags || []
+    const tags = [];
+
+    ENTRIES.forEach(
+        entry => {
+
+            entry.tags.forEach(
+                tag => {
+
+                    if(
+                        !tags.includes(tag)
+                    ) {
+
+                        tags.push(tag);
+
+                    }
+
+                }
+            );
+
+        }
     );
 
-    return [
-        ...new Set([
-            ...DEFAULT_TAGS,
-            ...entryTags
-        ])
-    ].sort(
-        (a,b) =>
-            a.localeCompare(b,"pl")
+
+    return tags.sort(
+        (a, b) =>
+            a.localeCompare(
+                b,
+                "pl"
+            )
     );
 
 }
 
 
-function renderTagFilters() {
+function renderTags() {
 
-    const container =
-        document.getElementById(
-            "tagFilters"
+    tagFilters.innerHTML = "";
+
+
+    const allButton =
+        document.createElement("button");
+
+    allButton.className =
+        "tag-filter";
+
+
+    if(
+        selectedTags.length === 0
+    ) {
+
+        allButton.classList.add(
+            "active"
         );
 
-    container.innerHTML = "";
+    }
 
 
-    const all =
-        document.createElement(
-            "button"
-        );
-
-    all.className =
-        "tag-filter " +
-        (
-            selectedTags.size === 0
-            ? "active"
-            : ""
-        );
-
-    all.textContent =
+    allButton.textContent =
         "Wszystkie";
 
-    all.onclick =
+
+    allButton.addEventListener(
+        "click",
         () => {
 
-            selectedTags.clear();
+            selectedTags = [];
 
-            renderTagFilters();
+            renderTags();
 
             renderEntries();
 
-        };
+        }
+    );
 
-    container.appendChild(all);
+
+    tagFilters.appendChild(
+        allButton
+    );
 
 
     getAllTags().forEach(
         tag => {
 
             const button =
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
+
 
             button.className =
-                "tag-filter " +
-                (
-                    selectedTags.has(tag)
-                    ? "active"
-                    : ""
+                "tag-filter";
+
+
+            if(
+                selectedTags.includes(tag)
+            ) {
+
+                button.classList.add(
+                    "active"
                 );
+
+            }
+
 
             button.textContent =
                 tag;
 
-            button.onclick =
+
+            button.addEventListener(
+                "click",
                 () => {
 
-                    if(
-                        selectedTags.has(tag)
-                    ) {
+                    toggleTag(tag);
 
-                        selectedTags.delete(tag);
+                }
+            );
 
-                    }
 
-                    else {
-
-                        selectedTags.add(tag);
-
-                    }
-
-                    renderTagFilters();
-
-                    renderEntries();
-
-                };
-
-            container.appendChild(button);
+            tagFilters.appendChild(
+                button
+            );
 
         }
     );
+
+}
+
+
+function toggleTag(tag) {
+
+    if(
+        selectedTags.includes(tag)
+    ) {
+
+        selectedTags =
+            selectedTags.filter(
+                item =>
+                    item !== tag
+            );
+
+    }
+
+    else {
+
+        selectedTags.push(tag);
+
+    }
+
+
+    renderTags();
+
+    renderEntries();
 
 }
 
@@ -1320,38 +1265,42 @@ function renderTagFilters() {
    ŹRÓDŁA
 ========================================================= */
 
-function renderSourceFilter() {
 
-    const select =
-        document.getElementById(
-            "sourceFilter"
-        );
+function renderSources() {
 
-    const current =
-        select.value;
+    const sources = [];
 
 
-    const sources =
-        [
-            ...new Set(
-                ENTRIES
-                    .map(
-                        entry =>
-                            entry.source
-                    )
-                    .filter(Boolean)
-            )
-        ]
-        .sort(
-            (a,b) =>
-                a.localeCompare(
-                    b,
-                    "pl"
+    ENTRIES.forEach(
+        entry => {
+
+            if(
+                entry.source &&
+                !sources.includes(
+                    entry.source
                 )
-        );
+            ) {
+
+                sources.push(
+                    entry.source
+                );
+
+            }
+
+        }
+    );
 
 
-    select.innerHTML = `
+    sources.sort(
+        (a, b) =>
+            a.localeCompare(
+                b,
+                "pl"
+            )
+    );
+
+
+    sourceFilter.innerHTML = `
 
         <option value="">
             Wszystkie źródła
@@ -1368,130 +1317,136 @@ function renderSourceFilter() {
                     "option"
                 );
 
+
             option.value =
                 source;
+
 
             option.textContent =
                 source;
 
-            select.appendChild(
+
+            sourceFilter.appendChild(
                 option
             );
 
         }
     );
 
+}
 
-    select.value =
-        current;
+
+/* =========================================================
+   FILTROWANIE
+========================================================= */
+
+
+function getFilteredEntries() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const source =
+        sourceFilter.value;
+
+
+    return ENTRIES.filter(
+        entry => {
+
+
+            const text = [
+
+                entry.id,
+
+                entry.title,
+
+                entry.source,
+
+                entry.content
+                    .replace(
+                        /<[^>]+>/g,
+                        " "
+                    ),
+
+                ...entry.tags
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+            const matchesSearch =
+
+                search === "" ||
+
+                text.includes(
+                    search
+                );
+
+
+            const matchesTags =
+
+                selectedTags.length === 0 ||
+
+                selectedTags.every(
+                    tag =>
+                        entry.tags.includes(
+                            tag
+                        )
+                );
+
+
+            const matchesSource =
+
+                source === "" ||
+
+                entry.source === source;
+
+
+            return (
+
+                matchesSearch &&
+
+                matchesTags &&
+
+                matchesSource
+
+            );
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   RENDEROWANIE
+   SORTOWANIE
 ========================================================= */
 
-function renderEntries() {
 
-    const grid =
-        document.getElementById(
-            "entriesGrid"
-        );
-
-
-    const search =
-        document.getElementById(
-            "searchInput"
-        )
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const source =
-        document.getElementById(
-            "sourceFilter"
-        )
-        .value;
-
+function sortEntries(entries) {
 
     const sort =
-        document.getElementById(
-            "sortSelect"
-        )
-        .value;
+        sortSelect.value;
 
 
-    let filtered =
-        ENTRIES.filter(
-            entry => {
-
-                const searchableText = [
-
-                    entry.id,
-
-                    entry.title,
-
-                    entry.content
-                        .replace(
-                            /<[^>]*>/g,
-                            " "
-                        ),
-
-                    entry.source || "",
-
-                    ...(entry.tags || [])
-
-                ]
-                .join(" ")
-                .toLowerCase();
+    return entries.sort(
+        (a, b) => {
 
 
-                const matchesSearch =
+            if(
+                sort === "id-asc"
+            ) {
 
-                    !search ||
-
-                    searchableText.includes(
-                        search
-                    );
-
-
-                const matchesTags =
-
-                    selectedTags.size === 0 ||
-
-                    [...selectedTags].every(
-                        tag =>
-                            entry.tags.includes(
-                                tag
-                            )
-                    );
-
-
-                const matchesSource =
-
-                    !source ||
-
-                    entry.source === source;
-
-
-                return (
-
-                    matchesSearch &&
-
-                    matchesTags &&
-
-                    matchesSource
-
-                );
+                return Number(a.id)
+                    -
+                    Number(b.id);
 
             }
-        );
 
-
-    filtered.sort(
-        (a,b) => {
 
             if(
                 sort === "id-desc"
@@ -1528,67 +1483,60 @@ function renderEntries() {
             }
 
 
-            return Number(a.id)
-                -
-                Number(b.id);
+            return 0;
 
         }
     );
 
-
-    document.getElementById(
-        "resultCount"
-    )
-    .textContent =
-
-        `Wyświetlono ${filtered.length} z ${ENTRIES.length} wpisów`;
+}
 
 
-    grid.innerHTML = "";
+/* =========================================================
+   RENDEROWANIE WPISÓW
+========================================================= */
+
+
+function renderEntries() {
+
+    let entries =
+        getFilteredEntries();
+
+
+    entries =
+        sortEntries(
+            entries
+        );
+
+
+    resultCount.textContent =
+        `Wyświetlono ${entries.length} z ${ENTRIES.length} wpisów`;
+
+
+    entriesGrid.innerHTML =
+        "";
 
 
     if(
-        filtered.length === 0
+        entries.length === 0
     ) {
 
-        grid.innerHTML = `
-
-            <div class="empty-state">
-
-                <div class="empty-icon">
-                    🔎
-                </div>
-
-                <h3>
-                    Nie znaleziono wpisów
-                </h3>
-
-                <p>
-                    Zmień kryteria wyszukiwania
-                    lub wyczyść filtry.
-                </p>
-
-            </div>
-
-        `;
+        showEmptyState();
 
         return;
 
     }
 
 
-    filtered.forEach(
-        (entry,index) => {
+    entries.forEach(
+        entry => {
 
             const card =
-                createEntryCard(
+                createCard(
                     entry
                 );
 
-            card.style.animationDelay =
-                `${index * .025}s`;
 
-            grid.appendChild(
+            entriesGrid.appendChild(
                 card
             );
 
@@ -1599,10 +1547,11 @@ function renderEntries() {
 
 
 /* =========================================================
-   KARTA WPISU
+   TWORZENIE KARTY
 ========================================================= */
 
-function createEntryCard(entry) {
+
+function createCard(entry) {
 
     const card =
         document.createElement(
@@ -1615,7 +1564,7 @@ function createEntryCard(entry) {
 
 
     if(
-        expandedEntries.has(
+        expandedEntries.includes(
             entry.id
         )
     ) {
@@ -1627,141 +1576,291 @@ function createEntryCard(entry) {
     }
 
 
-    const tagsHTML =
-
-        (entry.tags || [])
-        .map(
-            tag => `
-
-                <button
-                    class="tag"
-                    onclick="
-                        event.stopPropagation();
-                        filterByTag('${escapeAttribute(tag)}')
-                    ">
-
-                    #${escapeHTML(tag)}
-
-                </button>
-
-            `
-        )
-        .join("");
+    const head =
+        document.createElement(
+            "div"
+        );
 
 
-    card.innerHTML = `
-
-        <div
-            class="entry-head"
-            onclick="
-                toggleEntry('${escapeAttribute(entry.id)}')
-            ">
+    head.className =
+        "entry-head";
 
 
-            <div class="entry-top">
+    head.addEventListener(
+        "click",
+        () => {
 
-                <span class="entry-id">
+            toggleEntry(
+                entry.id
+            );
 
-                    #${escapeHTML(entry.id)}
-
-                </span>
-
-
-                <span class="expand-icon">
-
-                    ↓
-
-                </span>
-
-            </div>
+        }
+    );
 
 
-            <h3 class="entry-title">
-
-                ${escapeHTML(entry.title)}
-
-            </h3>
-
-
-            <p class="entry-preview">
-
-                ${getPreview(entry.content)}
-
-            </p>
+    const top =
+        document.createElement(
+            "div"
+        );
 
 
-            <div class="entry-tags">
-
-                ${tagsHTML}
-
-            </div>
+    top.className =
+        "entry-top";
 
 
-        </div>
+    const id =
+        document.createElement(
+            "span"
+        );
 
 
-        <div class="entry-details">
+    id.className =
+        "entry-id";
 
 
-            <div class="entry-details-inner">
+    id.textContent =
+        `#${entry.id}`;
 
 
-                <div class="entry-content">
+    const icon =
+        document.createElement(
+            "span"
+        );
 
-                    ${entry.content}
 
-                </div>
+    icon.className =
+        "expand-icon";
 
 
-                ${
-                    entry.source
+    icon.textContent =
+        "↓";
 
-                    ?
 
-                    `
+    top.appendChild(
+        id
+    );
 
-                    <div class="entry-source">
 
-                        Źródło:
+    top.appendChild(
+        icon
+    );
 
-                        <strong>
 
-                            ${escapeHTML(entry.source)}
+    const title =
+        document.createElement(
+            "h3"
+        );
 
-                        </strong>
 
-                    </div>
+    title.className =
+        "entry-title";
 
-                    `
 
-                    :
+    title.textContent =
+        entry.title;
 
-                    ""
+
+    const preview =
+        document.createElement(
+            "p"
+        );
+
+
+    preview.className =
+        "entry-preview";
+
+
+    preview.textContent =
+        getPreview(
+            entry.content
+        );
+
+
+    const tags =
+        document.createElement(
+            "div"
+        );
+
+
+    tags.className =
+        "entry-tags";
+
+
+    entry.tags.forEach(
+        tag => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "tag";
+
+
+            button.textContent =
+                `#${tag}`;
+
+
+            button.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
+
+
+                    selectedTags =
+                        [tag];
+
+
+                    renderTags();
+
+                    renderEntries();
 
                 }
+            );
 
 
-                <div class="entry-actions">
+            tags.appendChild(
+                button
+            );
 
-                    <button
-                        class="btn"
-                        onclick="
-                            event.stopPropagation();
-                            copyEntryCode('${escapeAttribute(entry.id)}')
-                        ">
-
-                        Kopiuj kod wpisu
-
-                    </button>
-
-                </div>
+        }
+    );
 
 
-            </div>
+    head.appendChild(
+        top
+    );
 
-        </div>
 
-    `;
+    head.appendChild(
+        title
+    );
+
+
+    head.appendChild(
+        preview
+    );
+
+
+    head.appendChild(
+        tags
+    );
+
+
+    const details =
+        document.createElement(
+            "div"
+        );
+
+
+    details.className =
+        "entry-details";
+
+
+    const content =
+        document.createElement(
+            "div"
+        );
+
+
+    content.className =
+        "entry-content";
+
+
+    content.innerHTML =
+        entry.content;
+
+
+    details.appendChild(
+        content
+    );
+
+
+    if(
+        entry.source
+    ) {
+
+        const source =
+            document.createElement(
+                "div"
+            );
+
+
+        source.className =
+            "entry-source";
+
+
+        source.innerHTML =
+            `Źródło: <strong>${escapeHTML(entry.source)}</strong>`;
+
+
+        details.appendChild(
+            source
+        );
+
+    }
+
+
+    const actions =
+        document.createElement(
+            "div"
+        );
+
+
+    actions.className =
+        "entry-actions";
+
+
+    const copyButton =
+        document.createElement(
+            "button"
+        );
+
+
+    copyButton.className =
+        "btn";
+
+
+    copyButton.textContent =
+        "Kopiuj kod wpisu";
+
+
+    copyButton.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+
+            copyEntry(
+                entry
+            );
+
+        }
+    );
+
+
+    actions.appendChild(
+        copyButton
+    );
+
+
+    details.appendChild(
+        actions
+    );
+
+
+    card.appendChild(
+        head
+    );
+
+
+    card.appendChild(
+        details
+    );
 
 
     return card;
@@ -1770,49 +1869,34 @@ function createEntryCard(entry) {
 
 
 /* =========================================================
-   ROZWIJANIE WPISU
+   ROZWIJANIE
 ========================================================= */
+
 
 function toggleEntry(id) {
 
     if(
-        expandedEntries.has(id)
+        expandedEntries.includes(id)
     ) {
 
-        expandedEntries.delete(id);
+        expandedEntries =
+            expandedEntries.filter(
+                item =>
+                    item !== id
+            );
 
     }
 
     else {
 
-        expandedEntries.add(id);
+        expandedEntries.push(
+            id
+        );
 
     }
 
 
     renderEntries();
-
-}
-
-
-/* =========================================================
-   FILTROWANIE TAGIEM
-========================================================= */
-
-function filterByTag(tag) {
-
-    selectedTags.clear();
-
-    selectedTags.add(tag);
-
-    renderTagFilters();
-
-    renderEntries();
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 
 }
 
@@ -1821,24 +1905,55 @@ function filterByTag(tag) {
    PODGLĄD
 ========================================================= */
 
+
 function getPreview(html) {
 
-    const temp =
+    const div =
         document.createElement(
             "div"
         );
 
-    temp.innerHTML =
+
+    div.innerHTML =
         html;
 
 
-    return escapeHTML(
-        (
-            temp.textContent ||
-            ""
-        )
-        .trim()
-    );
+    return (
+        div.textContent ||
+        ""
+    )
+    .trim();
+
+}
+
+
+/* =========================================================
+   BRAK WYNIKÓW
+========================================================= */
+
+
+function showEmptyState() {
+
+    entriesGrid.innerHTML = `
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                🔎
+            </div>
+
+            <h3>
+                Nie znaleziono wpisów
+            </h3>
+
+            <p>
+                Zmień kryteria wyszukiwania
+                lub wyczyść filtry.
+            </p>
+
+        </div>
+
+    `;
 
 }
 
@@ -1847,24 +1962,20 @@ function getPreview(html) {
    WYCZYŚĆ FILTRY
 ========================================================= */
 
+
 function clearFilters() {
 
-    document.getElementById(
-        "searchInput"
-    )
-    .value = "";
+    searchInput.value =
+        "";
+
+    sourceFilter.value =
+        "";
+
+    selectedTags =
+        [];
 
 
-    document.getElementById(
-        "sourceFilter"
-    )
-    .value = "";
-
-
-    selectedTags.clear();
-
-
-    renderTagFilters();
+    renderTags();
 
     renderEntries();
 
@@ -1875,19 +1986,8 @@ function clearFilters() {
    KOPIOWANIE WPISU
 ========================================================= */
 
-function copyEntryCode(id) {
 
-    const entry =
-        ENTRIES.find(
-            item =>
-                item.id === id
-        );
-
-
-    if(!entry) {
-        return;
-    }
-
+function copyEntry(entry) {
 
     const code = `{
     id: "${entry.id}",
@@ -1898,21 +1998,28 @@ function copyEntryCode(id) {
 }`;
 
 
-    if(
-        navigator.clipboard
-    ) {
-
-        navigator.clipboard.writeText(
+    navigator.clipboard
+        .writeText(
             code
         )
         .then(
-            () =>
+            () => {
+
                 showToast(
                     "Kod wpisu skopiowany."
-                )
-        );
+                );
 
-    }
+            }
+        )
+        .catch(
+            () => {
+
+                showToast(
+                    "Nie udało się skopiować kodu."
+                );
+
+            }
+        );
 
 }
 
@@ -1920,6 +2027,7 @@ function copyEntryCode(id) {
 /* =========================================================
    MOTYW
 ========================================================= */
+
 
 function toggleTheme() {
 
@@ -1930,7 +2038,7 @@ function toggleTheme() {
             );
 
 
-    const next =
+    const newTheme =
 
         current === "dark"
 
@@ -1942,32 +2050,34 @@ function toggleTheme() {
     document.documentElement
         .setAttribute(
             "data-theme",
-            next
+            newTheme
         );
 
 
     localStorage.setItem(
         "aeg_theme",
-        next
+        newTheme
     );
 
 }
 
 
-function applySavedTheme() {
+function loadTheme() {
 
-    const theme =
+    const savedTheme =
         localStorage.getItem(
             "aeg_theme"
         );
 
 
-    if(theme) {
+    if(
+        savedTheme
+    ) {
 
         document.documentElement
             .setAttribute(
                 "data-theme",
-                theme
+                savedTheme
             );
 
     }
@@ -1979,13 +2089,8 @@ function applySavedTheme() {
    TOAST
 ========================================================= */
 
+
 function showToast(message) {
-
-    const container =
-        document.getElementById(
-            "toastContainer"
-        );
-
 
     const toast =
         document.createElement(
@@ -2001,7 +2106,7 @@ function showToast(message) {
         message;
 
 
-    container.appendChild(
+    toastContainer.appendChild(
         toast
     );
 
@@ -2022,6 +2127,7 @@ function showToast(message) {
    ESCAPE HTML
 ========================================================= */
 
+
 function escapeHTML(text) {
 
     const div =
@@ -2039,24 +2145,10 @@ function escapeHTML(text) {
 }
 
 
-function escapeAttribute(text) {
-
-    return String(text)
-        .replace(
-            /\\/g,
-            "\\\\"
-        )
-        .replace(
-            /'/g,
-            "\\'"
-        );
-
-}
-
-
 /* =========================================================
-   SKRÓTY KLAWIATUROWE
+   SKRÓT /
 ========================================================= */
+
 
 document.addEventListener(
     "keydown",
@@ -2064,32 +2156,19 @@ document.addEventListener(
 
         if(
             event.key === "/" &&
-            document.activeElement.tagName !== "INPUT"
+            document.activeElement.tagName !== "INPUT" &&
+            document.activeElement.tagName !== "TEXTAREA"
         ) {
 
             event.preventDefault();
 
-            document.getElementById(
-                "searchInput"
-            ).focus();
-
-        }
-
-
-        if(
-            event.key === "Escape"
-        ) {
-
-            document.getElementById(
-                "searchInput"
-            ).value = "";
-
-            renderEntries();
+            searchInput.focus();
 
         }
 
     }
 );
+
 
 </script>
 
