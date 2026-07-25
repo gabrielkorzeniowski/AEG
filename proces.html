@@ -756,111 +756,365 @@ class="toast-container">
 
 const ENTRIES = [
 
-    {
-        id: "0001",
+{
+    id: "0001",
 
-        title: "Przykładowy proces obsługi klienta",
+    title: "Nieprawidłowy Gebiet w Serviceauftrag",
 
-        tags: [
-            "obsługa klienta",
-            "dupa"
-        ],
+    tags: [
+        "Serviceauftrag",
+        "Gebiet",
+        "PLZ",
+        "Techniker",
+        "Fall",
+        "Terminverschiebung"
+    ],
 
-        content: `
+    content: `
 
-            <h3>Cel procesu</h3>
+        <h3>Opis problemu</h3>
 
-            <p>
-                To jest przykładowy wpis demonstracyjny.
-                Możesz go zastąpić własną procedurą.
-            </p>
+        <p>
+            W niektórych przypadkach może się zdarzyć, że numer
+            <strong>Serviceauftrag</strong> wskazuje na inny
+            <strong>Gebiet</strong> niż ten, który został automatycznie
+            zaczytany przez system.
+        </p>
 
-            <h3>Przebieg</h3>
+        <p>
+            Prawdopodobną przyczyną jest zmiana firmy serwisującej
+            odpowiedzialnej za dany kod pocztowy (<strong>PLZ</strong>).
+            System może nie mieć jeszcze zaktualizowanych danych dotyczących
+            nowego podziału obszarów serwisowych.
+        </p>
 
-            <ol>
-                <li>Zweryfikuj dane klienta.</li>
-                <li>Ustal przedmiot zgłoszenia.</li>
-                <li>Sprawdź odpowiednią procedurę.</li>
-                <li>Przekaż klientowi dalsze instrukcje.</li>
-            </ol>
+        <h3>Możliwe objawy</h3>
 
-            <h3>Uwagi</h3>
+        <ul>
+            <li>Nie można prawidłowo ustawić lub zarezerwować terminu.</li>
+            <li>
+                Po wpisaniu kodu pocztowego (<strong>PLZ</strong>) system
+                pokazuje innego odpowiedzialnego technika niż ten, który
+                widnieje w utworzonym <strong>Fall</strong>.
+            </li>
+            <li>
+                <strong>Serviceauftrag</strong> wskazuje inne
+                <strong>Gebiet</strong> niż wynikające z danych w
+                <strong>Fall</strong>.
+            </li>
+        </ul>
 
-            <p>
-                W tym miejscu możesz umieścić dodatkowe informacje.
-            </p>
+        <h3>Rozwiązanie</h3>
 
-        `,
+        <p>
+            W przypadku wystąpienia powyższych objawów należy ponownie utworzyć
+            <strong>Fall</strong>, korzystając z opcji utworzenia go jako kopii
+            istniejącego zgłoszenia.
+        </p>
 
-        source: "Przykładowa procedura AEG"
-    },
+        <p>
+            Następnie należy utworzyć nowy <strong>Serviceauftrag</strong>.
+            Po ponownym utworzeniu zgłoszenia system powinien prawidłowo
+            przypisać <strong>Gebiet</strong> oraz wyświetlić właściwego
+            technika odpowiedzialnego za dany <strong>PLZ</strong>.
+        </p>
 
+        <h3>Ważne</h3>
 
-    {
-        id: "0002",
+        <p>
+            Jeżeli technik widoczny po wpisaniu <strong>PLZ</strong> różni się
+            od technika przypisanego w <strong>Fall</strong>, należy zwrócić
+            uwagę na możliwość nieaktualnych danych dotyczących obszaru
+            serwisowego. W takiej sytuacji ponowne utworzenie
+            <strong>Fall</strong> jako kopii i utworzenie nowego
+            <strong>Serviceauftrag</strong> może spowodować prawidłowe
+            przypisanie technika.
+        </p>
 
-        title: "Przykładowy proces reklamacji",
+    `,
+}
+{
+    id: "0002",
 
-        tags: [
-            "reklamacje",
-            "produkty"
-        ],
+    title: "Tworzenie Clone w Serviceauftrag po zamówieniu Ersatzteile",
 
-        content: `
+    tags: [
+        "Serviceauftrag",
+        "Clone",
+        "Ersatzteile",
+        "Terminverschiebung",
+        "ISP",
+        "Operatec",
+        "WKD",
+        "ColneSO",
+        "Techniker"
+    ],
 
-            <h3>Opis</h3>
+    content: `
 
-            <p>
-                Przykładowy proces reklamacyjny.
-            </p>
+        <h3>Opis procesu</h3>
 
-            <h3>Procedura</h3>
+        <p>
+            W przypadku, gdy technik był już u klienta i podczas wizyty zamówił
+            wymagane <strong>części zamienne (Ersatzteile)</strong>, po ich
+            dostarczeniu konieczne jest ponowne umówienie wizyty technika
+            u klienta.
+        </p>
 
-            <ol>
-                <li>Przyjmij zgłoszenie klienta.</li>
-                <li>Zweryfikuj dane zamówienia.</li>
-                <li>Sprawdź możliwość realizacji reklamacji.</li>
-                <li>Poinformuj klienta o dalszych krokach.</li>
-            </ol>
+        <p>
+            Standardowo <strong>ISP</strong> oraz <strong>Operatec</strong>
+            zajmują się ponownym terminowaniem samodzielnie. Jeżeli jednak
+            klient kontaktuje się z informacją, że otrzymał SMS z informacją
+            o dostępności zamówionych części zamiennych, prawie zawsze można
+            przystąpić do umawiania kolejnej wizyty technika.
+        </p>
 
-        `,
+        <h3>Postępowanie według SP</h3>
 
-        source: "AEG Customer Service Manual"
-    },
+        <h4>ISP</h4>
 
+        <p>
+            W przypadku <strong>ISP</strong> należy wysłać wiadomość e-mail
+            do odpowiedniego <strong>SP</strong> z prośbą o ponowne
+            terminowanie klienta.
+        </p>
 
-    {
-        id: "0003",
+        <h4>Operatec</h4>
 
-        title: "Przykładowy problem techniczny",
+        <p>
+            W przypadku <strong>Operatec</strong> należy postępować zgodnie
+            z informacją zawartą w <strong>Mitteilung</strong> w
+            <strong>Fall</strong>.
+        </p>
 
-        tags: [
-            "techniczne",
-            "obsługa klienta"
-        ],
+        <h4>WKD</h4>
 
-        content: `
+        <p>
+            W przypadku <strong>WKD</strong> ponowne terminowanie wykonujemy
+            poprzez utworzenie <strong>CloneSO</strong>.
+        </p>
 
-            <h3>Diagnoza problemu</h3>
+        <p>
+            Informacja o możliwości utworzenia Clone może znajdować się
+            w <strong>Techn. Kom. QES</strong> lub w
+            <strong>Mitteilung</strong> w <strong>Fall</strong>.
+        </p>
 
-            <p>
-                Przykładowa procedura postępowania
-                w przypadku problemu technicznego.
-            </p>
+        <ul>
+            <li>
+                Jeżeli w <strong>Techn. Kom. QES</strong> znajduje się informacja,
+                że można wykonać <strong>Clone</strong> – należy utworzyć Clone.
+            </li>
+            <li>
+                Jeżeli w <strong>Mitteilung</strong> w <strong>Fall</strong>
+                znajduje się prośba o ponowne terminowanie – należy postępować
+                zgodnie z tą informacją i utworzyć Clone.
+            </li>
+        </ul>
 
-            <ul>
-                <li>Ustal model produktu.</li>
-                <li>Poproś klienta o opis problemu.</li>
-                <li>Sprawdź podstawowe rozwiązania.</li>
-                <li>Przejdź do kolejnego etapu procedury.</li>
-            </ul>
+        <h3>Brak możliwości utworzenia Clone</h3>
 
-        `,
+        <p>
+            Jeżeli z jakiegoś powodu nie jest możliwe utworzenie
+            <strong>Clone</strong> w <strong>Serviceauftrag</strong>, należy
+            ręcznie utworzyć nową pozycję w <strong>Serviceauftrag</strong>.
+        </p>
 
-        source: "Wewnętrzna baza wiedzy"
-    },
+        <p>
+            Następnie w <strong>Mitteilung</strong> w <strong>Fall</strong>
+            należy pozostawić informację, że utworzenie Clone nie było możliwe
+            oraz że nowa pozycja w <strong>Serviceauftrag</strong> została
+            utworzona ręcznie.
+        </p>
 
+        <h3>Ważne</h3>
 
+        <p>
+            Jeżeli klient informuje, że otrzymał SMS potwierdzający dostępność
+            zamówionych <strong>Ersatzteile</strong>, należy założyć, że
+            części są już dostępne i można przystąpić do organizacji kolejnej
+            wizyty technika. Sposób postępowania zależy od właściwego
+            <strong>SP</strong>: <strong>ISP</strong>, <strong>Operatec</strong>
+            lub <strong>WKD</strong>.
+        </p>
+
+    `,
+}
+{
+    id: "0003",
+
+    title: "Geräteaustausch – proces wymiany urządzenia",
+
+    tags: [
+        "Geräteaustausch",
+        "Austausch",
+        "Angebot",
+        "WKD",
+        "Operatec",
+        "ISP",
+        "Lieferantengruppe",
+        "Versicherung",
+        "Voraussichtliche Lieferung",
+        "DL"
+    ],
+
+    content: `
+
+        <h3>Klient zgłasza konieczność wymiany urządzenia</h3>
+
+        <p>
+            Jeżeli klient twierdzi, że jego <strong>Gerät</strong> powinno
+            zostać wymienione, ale w systemie nie ma jeszcze żadnych
+            informacji dotyczących wymiany, należy skontaktować się
+            z odpowiednią jednostką zgodnie z przypisanym
+            <strong>Lieferantengruppe</strong>.
+        </p>
+
+        <h4>WKD</h4>
+
+        <p>
+            W przypadku <strong>WKD</strong> należy skierować sprawę do
+            odpowiedniego <strong>Bearbeitung</strong> przez
+            <strong>Lieferantengruppe</strong>.
+        </p>
+
+        <h4>Operatec</h4>
+
+        <p>
+            W przypadku <strong>Operatec</strong> należy skierować sprawę
+            do <strong>Operatec</strong> w ramach
+            <strong>Lieferantengruppe</strong>.
+        </p>
+
+        <h4>ISP</h4>
+
+        <p>
+            W przypadku <strong>ISP</strong> należy wysłać wiadomość e-mail
+            do odpowiedniego <strong>SP</strong>.
+        </p>
+
+        <h3>Klient jest na etapie akceptacji oferty</h3>
+
+        <p>
+            Jeżeli klient znajduje się już na etapie akceptowania oferty,
+            powinna być ona widoczna w <strong>Fall</strong> w zakładce
+            <strong>Austausch</strong>.
+        </p>
+
+        <h4>WKD – akceptacja oferty</h4>
+
+        <p>
+            W przypadku <strong>WKD</strong> konieczne jest podpisanie
+            oferty przez klienta i wysłanie jej na adres e-mail wskazany
+            w treści wiadomości dotyczącej oferty.
+        </p>
+
+        <p>
+            Dopiero po wykonaniu tych czynności wymiana zostanie przekazana
+            do dalszego przetwarzania. Dotyczy to również sytuacji, w których
+            wymiana odbywa się w ramach <strong>1:1</strong> – oferta również
+            musi zostać prawidłowo podpisana i odesłana.
+        </p>
+
+        <h4>Ubezpieczenie zewnętrzne</h4>
+
+        <p>
+            W przypadku, gdy wymiana urządzenia jest realizowana przez
+            zewnętrzne ubezpieczenie, <strong>Angebot</strong> zostaje
+            wysłany do ubezpieczyciela.
+        </p>
+
+        <p>
+            Klient musi uzgodnić z ubezpieczycielem akceptację oferty.
+            Dopiero po zaakceptowaniu oferty przez ubezpieczyciela możliwe
+            jest przejście do kolejnego etapu procesu wymiany.
+        </p>
+
+        <h3>Dostawa nowego urządzenia</h3>
+
+        <p>
+            Po zaakceptowaniu oferty i dalszym przetworzeniu wymiany klient
+            otrzymuje informację o przewidywanym terminie dostawy
+            (<strong>voraussichtliche Lieferung</strong>).
+        </p>
+
+        <p>
+            Dostawa jest realizowana do odpowiedniego
+            <strong>DL</strong>, który następnie kontaktuje się z klientem
+            w celu ustalenia dalszych szczegółów dostawy. Przykładowym
+            dostawcą może być <strong>Hermes</strong>.
+        </p>
+
+        <p>
+            Standardowo podczas dostawy nowego urządzenia firma dostarczająca
+            sprzęt powinna:
+        </p>
+
+        <ul>
+            <li>dostarczyć nowe urządzenie do klienta,</li>
+            <li>podłączyć i uruchomić nowe urządzenie,</li>
+            <li>zabrać stare urządzenie.</li>
+        </ul>
+
+        <h3>Problemy związane z wymianą urządzenia</h3>
+
+        <p>
+            Wszystkie problemy związane z procesem wymiany urządzenia, w tym
+            problemy z dostawą, kontaktem z klientem lub realizacją wymiany,
+            należy kierować do <strong>Geräteaustausch</strong> poprzez
+            odpowiednią <strong>Lieferantengruppe</strong>.
+        </p>
+
+        <p>
+            W takim przypadku należy pozostawić odpowiednią informację
+            w <strong>Mitteilung</strong>, dokładnie opisując problem
+            i sytuację klienta.
+        </p>
+
+        <h3>Podsumowanie procesu</h3>
+
+        <ol>
+            <li>
+                Klient zgłasza konieczność wymiany urządzenia.
+            </li>
+            <li>
+                Sprawdzamy, czy w <strong>Fall → Austausch</strong>
+                znajduje się już informacja o wymianie lub oferta.
+            </li>
+            <li>
+                Jeżeli nie ma żadnych informacji, kierujemy sprawę do
+                odpowiedniego <strong>SP / Operatec / Bearbeitung</strong>
+                zgodnie z <strong>Lieferantengruppe</strong>.
+            </li>
+            <li>
+                Jeżeli dostępna jest oferta, klient lub ubezpieczyciel musi
+                ją zaakceptować zgodnie z obowiązującą procedurą.
+            </li>
+            <li>
+                Po zaakceptowaniu wymiana jest dalej przetwarzana.
+            </li>
+            <li>
+                Klient otrzymuje informację o
+                <strong>voraussichtliche Lieferung</strong>.
+            </li>
+            <li>
+                <strong>DL</strong> kontaktuje się z klientem i organizuje
+                dostawę.
+            </li>
+            <li>
+                Standardowo nowe urządzenie jest dostarczane i podłączane,
+                a stare urządzenie zostaje odebrane.
+            </li>
+            <li>
+                Problemy z wymianą kierujemy do
+                <strong>Geräteaustausch</strong> przez odpowiednią
+                <strong>Lieferantengruppe</strong>, pozostawiając
+                <strong>Mitteilung</strong>.
+            </li>
+        </ol>
+
+    `,
+}
     /*
         WZÓR NOWEGO WPISU
 
