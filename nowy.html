@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AEG Process Base</title>
+
+    <style>
+
+        :root {
+            --bg: #f5f6f7;
+            --surface: #ffffff;
+            --surface-2: #f0f1f3;
+            --border: #e1e3e6;
+            --text: #181a1d;
+            --muted: #747980;
+            --accent: #e30613;
+            --accent-light: #fff0f1;
+            --shadow: 0 8px 30px rgba(0, 0, 0, .06);
+            --radius: 14px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #111214;
+            --surface: #1a1c20;
+            --surface-2: #24262b;
+            --border: #303238;
+            --text: #f3f4f5;
+            --muted: #9da1a9;
+            --accent: #ff2634;
+            --accent-light: rgba(227, 6, 19, .14);
+            --shadow: 0 10px 35px rgba(0, 0, 0, .25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+            line-height: 1.6;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1500px;
+            margin: auto;
+            padding: 16px 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--accent);
+            color: white;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .brand-text h1 {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1500px;
+            margin: auto;
+            padding: 36px 28px 70px;
+        }
+
+        .page-intro {
+            margin-bottom: 30px;
+        }
+
+        .page-intro h2 {
+            margin: 0 0 5px;
+
+            font-size: clamp(26px, 3vw, 38px);
+            line-height: 1.15;
+        }
+
+        .page-intro p {
+            margin: 0;
+
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* FILTRY */
+
+        .filters {
+            margin-bottom: 25px;
+            padding: 20px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+        }
+
+        .input {
+            width: 100%;
+
+            padding: 11px 13px;
+
+            background: var(--bg);
+            color: var(--text);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .btn {
+            padding: 9px 14px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .btn:hover {
+            background: var(--surface-2);
+        }
+
+        .filter-section {
+            margin-top: 18px;
+        }
+
+        .filter-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            font-weight: 750;
+
+            text-transform: uppercase;
+            letter-spacing: .7px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .tag-filter {
+            padding: 6px 10px;
+
+            background: var(--surface-2);
+            color: var(--text);
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            font-size: 12px;
+        }
+
+        .tag-filter:hover {
+            border-color: var(--accent);
+        }
+
+        .tag-filter.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* TOOLBAR */
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+        .result-count {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .sort-select {
+            width: 190px;
+        }
+
+        /* KARTY */
+
+        .entries-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+
+            align-items: start;
+        }
+
+        .entry-card {
+            overflow: hidden;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+        }
+
+        .entry-card.expanded {
+            border-color: var(--accent);
+        }
+
+        .entry-head {
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .entry-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+        }
+
+        .entry-id {
+            color: var(--accent);
+
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .7px;
+        }
+
+        .expand-icon {
+            width: 27px;
+            height: 27px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--border);
+            border-radius: 50%;
+
+            color: var(--muted);
+        }
+
+        .entry-card.expanded .expand-icon {
+            transform: rotate(180deg);
+
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .entry-title {
+            margin: 0 0 10px;
+
+            font-size: 17px;
+            line-height: 1.35;
+        }
+
+        .entry-preview {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+        .entry-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+
+            margin-top: 15px;
+        }
+
+        .tag {
+            padding: 4px 8px;
+
+            background: var(--surface-2);
+            color: var(--muted);
+
+            border: 0;
+            border-radius: 999px;
+
+            font-size: 10px;
+            font-weight: 650;
+        }
+
+        .tag:hover {
+            color: var(--accent);
+        }
+
+        /* SZCZEGÓŁY */
+
+        .entry-details {
+            display: none;
+
+            padding: 20px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .entry-card.expanded .entry-details {
+            display: block;
+        }
+
+        .entry-content {
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        .entry-content h3 {
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .entry-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .entry-content h4 {
+            margin-top: 18px;
+            margin-bottom: 7px;
+        }
+
+        .entry-content ul,
+        .entry-content ol {
+            padding-left: 22px;
+        }
+
+        .entry-content li {
+            margin-bottom: 5px;
+        }
+
+        .entry-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .entry-content th,
+        .entry-content td {
+            padding: 8px;
+
+            border: 1px solid var(--border);
+
+            text-align: left;
+        }
+
+        .entry-source {
+            margin-top: 22px;
+            padding-top: 15px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .entry-source strong {
+            color: var(--text);
+        }
+
+        .entry-actions {
+            display: flex;
+            gap: 8px;
+
+            margin-top: 18px;
+        }
+
+        /* BRAK WYNIKÓW */
+
+        .empty-state {
+            grid-column: 1 / -1;
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+            background: var(--surface);
+
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+        }
+
+        .empty-icon {
+            margin-bottom: 10px;
+            font-size: 35px;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 5px;
+        }
+
+        .empty-state p {
+            margin: 0;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* TOAST */
+
+        .toast-container {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 1000;
+
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            padding: 11px 15px;
+
+            background: var(--text);
+            color: var(--surface);
+
+            border-radius: 9px;
+
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+
+            .entries-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .header-inner {
+                padding: 14px 16px;
+            }
+
+            .brand-text span {
+                display: none;
+            }
+
+            main {
+                padding: 25px 16px 50px;
+            }
+
+            .entries-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .sort-select {
+                width: 100%;
+            }
+
+            .toast-container {
+                right: 16px;
+                bottom: 16px;
+                left: 16px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                AEG
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    Process Base
+                </h1>
+
+                <span>
+                    Customer Service Knowledge Base
+                </span>
+
+            </div>
+
+        </div>
+
+        <button
+            id="themeButton"
+            class="icon-btn"
+            type="button"
+            title="Zmień motyw">
+
+            ◐
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <section class="page-intro">
+
+        <h2>
+            Baza procesów
+        </h2>
+
+        <p>
+            Wewnętrzna baza procedur i procesów obsługi klienta.
+        </p>
+
+    </section>
+
+
+    <section class="filters">
+
+        <div class="search-row">
+
+            <input
+                id="searchInput"
+                class="input"
+                type="search"
+                placeholder="Szukaj po numerze, tytule, treści, tagu lub źródle..."
+                autocomplete="off"
+            >
+
+            <button
+                id="clearButton"
+                class="btn"
+                type="button">
+
+                Wyczyść filtry
+
+            </button>
+
+        </div>
+
+
+        <div class="filter-section">
+
+            <span class="filter-label">
+                Filtruj po tagach
+            </span>
+
+            <div
+                id="tagFilters"
+                class="tags">
+            </div>
+
+        </div>
+
+
+        <div class="filter-section">
+
+            <span class="filter-label">
+                Filtruj po źródle
+            </span>
+
+            <select
+                id="sourceFilter"
+                class="input">
+
+                <option value="">
+                    Wszystkie źródła
+                </option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+
+    <div class="toolbar">
+
+        <div
+            id="resultCount"
+            class="result-count">
+        </div>
+
+        <select
+            id="sortSelect"
+            class="input sort-select">
+
+            <option value="id-asc">
+                ID — rosnąco
+            </option>
+
+            <option value="id-desc">
+                ID — malejąco
+            </option>
+
+            <option value="title-asc">
+                Tytuł — A-Z
+            </option>
+
+            <option value="title-desc">
+                Tytuł — Z-A
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <section
+        id="entriesGrid"
+        class="entries-grid">
+    </section>
+
+</main>
+
+
+<div
+    id="toastContainer"
+    class="toast-container">
+</div>
+
+
+<!--
+    NAJPIERW ŁADUJEMY BAZĘ WPISÓW.
+    Zmienna ENTRIES znajduje się w pliku entries.js.
+-->
+
+<script src="entries.js"></script>
+
+
+<script>
+
+    /* =========================================================
+       DOM
+    ========================================================= */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const sourceFilter =
+        document.getElementById("sourceFilter");
+
+    const sortSelect =
+        document.getElementById("sortSelect");
+
+    const entriesGrid =
+        document.getElementById("entriesGrid");
+
+    const tagFilters =
+        document.getElementById("tagFilters");
+
+    const resultCount =
+        document.getElementById("resultCount");
+
+    const clearButton =
+        document.getElementById("clearButton");
+
+    const themeButton =
+        document.getElementById("themeButton");
+
+    const toastContainer =
+        document.getElementById("toastContainer");
+
+
+    /* =========================================================
+       STAN APLIKACJI
+    ========================================================= */
+
+    let selectedTags = [];
+
+    let expandedEntries = [];
+
+
+    /* =========================================================
+       DOM READY
+    ========================================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            loadTheme();
+
+            renderTags();
+
+            renderSources();
+
+            renderEntries();
+
+        }
+    );
+
+
+    /* =========================================================
+       EVENTY
+    ========================================================= */
+
+    searchInput.addEventListener(
+        "input",
+        renderEntries
+    );
+
+
+    sourceFilter.addEventListener(
+        "change",
+        renderEntries
+    );
+
+
+    sortSelect.addEventListener(
+        "change",
+        renderEntries
+    );
+
+
+    clearButton.addEventListener(
+        "click",
+        clearFilters
+    );
+
+
+    themeButton.addEventListener(
+        "click",
+        toggleTheme
+    );
+
+
+    /* =========================================================
+       TAGI
+    ========================================================= */
+
+    function getAllTags() {
+
+        const tags = [];
+
+        ENTRIES.forEach(
+            entry => {
+
+                entry.tags.forEach(
+                    tag => {
+
+                        if (
+                            !tags.includes(tag)
+                        ) {
+
+                            tags.push(tag);
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        return tags.sort(
+            (a, b) =>
+                a.localeCompare(
+                    b,
+                    "pl"
+                )
+        );
+
+    }
+
+
+    function renderTags() {
+
+        tagFilters.innerHTML = "";
+
+
+        const allButton =
+            document.createElement("button");
+
+
+        allButton.className =
+            "tag-filter";
+
+
+        if (
+            selectedTags.length === 0
+        ) {
+
+            allButton.classList.add(
+                "active"
+            );
+
+        }
+
+
+        allButton.textContent =
+            "Wszystkie";
+
+
+        allButton.addEventListener(
+            "click",
+            () => {
+
+                selectedTags = [];
+
+                renderTags();
+
+                renderEntries();
+
+            }
+        );
+
+
+        tagFilters.appendChild(
+            allButton
+        );
+
+
+        getAllTags().forEach(
+            tag => {
+
+                const button =
+                    document.createElement("button");
+
+
+                button.className =
+                    "tag-filter";
+
+
+                if (
+                    selectedTags.includes(tag)
+                ) {
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                button.textContent =
+                    tag;
+
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        toggleTag(tag);
+
+                    }
+                );
+
+
+                tagFilters.appendChild(
+                    button
+                );
+
+            }
+        );
+
+    }
+
+
+    function toggleTag(tag) {
+
+        if (
+            selectedTags.includes(tag)
+        ) {
+
+            selectedTags =
+                selectedTags.filter(
+                    item =>
+                        item !== tag
+                );
+
+        }
+
+        else {
+
+            selectedTags.push(tag);
+
+        }
+
+
+        renderTags();
+
+        renderEntries();
+
+    }
+
+
+    /* =========================================================
+       ŹRÓDŁA
+    ========================================================= */
+
+    function renderSources() {
+
+        const sources = [];
+
+
+        ENTRIES.forEach(
+            entry => {
+
+                if (
+                    entry.source &&
+                    !sources.includes(
+                        entry.source
+                    )
+                ) {
+
+                    sources.push(
+                        entry.source
+                    );
+
+                }
+
+            }
+        );
+
+
+        sources.sort(
+            (a, b) =>
+                a.localeCompare(
+                    b,
+                    "pl"
+                )
+        );
+
+
+        sourceFilter.innerHTML = `
+
+            <option value="">
+                Wszystkie źródła
+            </option>
+
+        `;
+
+
+        sources.forEach(
+            source => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    source;
+
+
+                option.textContent =
+                    source;
+
+
+                sourceFilter.appendChild(
+                    option
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       FILTROWANIE
+    ========================================================= */
+
+    function getFilteredEntries() {
+
+        const search =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+
+        const source =
+            sourceFilter.value;
+
+
+        return ENTRIES.filter(
+            entry => {
+
+                const text = [
+
+                    entry.id,
+
+                    entry.title,
+
+                    entry.source,
+
+                    entry.content
+                        .replace(
+                            /<[^>]+>/g,
+                            " "
+                        ),
+
+                    ...entry.tags
+
+                ]
+                .join(" ")
+                .toLowerCase();
+
+
+                const matchesSearch =
+
+                    search === "" ||
+
+                    text.includes(
+                        search
+                    );
+
+
+                const matchesTags =
+
+                    selectedTags.length === 0 ||
+
+                    selectedTags.every(
+                        tag =>
+                            entry.tags.includes(
+                                tag
+                            )
+                    );
+
+
+                const matchesSource =
+
+                    source === "" ||
+
+                    entry.source === source;
+
+
+                return (
+
+                    matchesSearch &&
+
+                    matchesTags &&
+
+                    matchesSource
+
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       SORTOWANIE
+    ========================================================= */
+
+    function sortEntries(entries) {
+
+        const sort =
+            sortSelect.value;
+
+
+        return entries.sort(
+            (a, b) => {
+
+                if (
+                    sort === "id-asc"
+                ) {
+
+                    return Number(a.id)
+                        -
+                        Number(b.id);
+
+                }
+
+
+                if (
+                    sort === "id-desc"
+                ) {
+
+                    return Number(b.id)
+                        -
+                        Number(a.id);
+
+                }
+
+
+                if (
+                    sort === "title-asc"
+                ) {
+
+                    return a.title.localeCompare(
+                        b.title,
+                        "pl"
+                    );
+
+                }
+
+
+                if (
+                    sort === "title-desc"
+                ) {
+
+                    return b.title.localeCompare(
+                        a.title,
+                        "pl"
+                    );
+
+                }
+
+
+                return 0;
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       RENDEROWANIE WPISÓW
+    ========================================================= */
+
+    function renderEntries() {
+
+        let entries =
+            getFilteredEntries();
+
+
+        entries =
+            sortEntries(
+                entries
+            );
+
+
+        resultCount.textContent =
+            `Wyświetlono ${entries.length} z ${ENTRIES.length} wpisów`;
+
+
+        entriesGrid.innerHTML =
+            "";
+
+
+        if (
+            entries.length === 0
+        ) {
+
+            showEmptyState();
+
+            return;
+
+        }
+
+
+        entries.forEach(
+            entry => {
+
+                const card =
+                    createCard(
+                        entry
+                    );
+
+
+                entriesGrid.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       TWORZENIE KARTY
+    ========================================================= */
+
+    function createCard(entry) {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "entry-card";
+
+
+        if (
+            expandedEntries.includes(
+                entry.id
+            )
+        ) {
+
+            card.classList.add(
+                "expanded"
+            );
+
+        }
+
+
+        const head =
+            document.createElement(
+                "div"
+            );
+
+
+        head.className =
+            "entry-head";
+
+
+        head.addEventListener(
+            "click",
+            () => {
+
+                toggleEntry(
+                    entry.id
+                );
+
+            }
+        );
+
+
+        const top =
+            document.createElement(
+                "div"
+            );
+
+
+        top.className =
+            "entry-top";
+
+
+        const id =
+            document.createElement(
+                "span"
+            );
+
+
+        id.className =
+            "entry-id";
+
+
+        id.textContent =
+            `#${entry.id}`;
+
+
+        const icon =
+            document.createElement(
+                "span"
+            );
+
+
+        icon.className =
+            "expand-icon";
+
+
+        icon.textContent =
+            "↓";
+
+
+        top.appendChild(
+            id
+        );
+
+
+        top.appendChild(
+            icon
+        );
+
+
+        const title =
+            document.createElement(
+                "h3"
+            );
+
+
+        title.className =
+            "entry-title";
+
+
+        title.textContent =
+            entry.title;
+
+
+        const preview =
+            document.createElement(
+                "p"
+            );
+
+
+        preview.className =
+            "entry-preview";
+
+
+        preview.textContent =
+            getPreview(
+                entry.content
+            );
+
+
+        const tags =
+            document.createElement(
+                "div"
+            );
+
+
+        tags.className =
+            "entry-tags";
+
+
+        entry.tags.forEach(
+            tag => {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.className =
+                    "tag";
+
+
+                button.textContent =
+                    `#${tag}`;
+
+
+                button.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+
+                        selectedTags =
+                            [tag];
+
+
+                        renderTags();
+
+                        renderEntries();
+
+                    }
+                );
+
+
+                tags.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        head.appendChild(
+            top
+        );
+
+
+        head.appendChild(
+            title
+        );
+
+
+        head.appendChild(
+            preview
+        );
+
+
+        head.appendChild(
+            tags
+        );
+
+
+        const details =
+            document.createElement(
+                "div"
+            );
+
+
+        details.className =
+            "entry-details";
+
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+
+        content.className =
+            "entry-content";
+
+
+        content.innerHTML =
+            entry.content;
+
+
+        details.appendChild(
+            content
+        );
+
+
+        if (
+            entry.source
+        ) {
+
+            const source =
+                document.createElement(
+                    "div"
+                );
+
+
+            source.className =
+                "entry-source";
+
+
+            source.innerHTML =
+                `Źródło: <strong>${escapeHTML(entry.source)}</strong>`;
+
+
+            details.appendChild(
+                source
+            );
+
+        }
+
+
+        const actions =
+            document.createElement(
+                "div"
+            );
+
+
+        actions.className =
+            "entry-actions";
+
+
+        const copyButton =
+            document.createElement(
+                "button"
+            );
+
+
+        copyButton.className =
+            "btn";
+
+
+        copyButton.textContent =
+            "Kopiuj kod wpisu";
+
+
+        copyButton.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+
+                copyEntry(
+                    entry
+                );
+
+            }
+        );
+
+
+        actions.appendChild(
+            copyButton
+        );
+
+
+        details.appendChild(
+            actions
+        );
+
+
+        card.appendChild(
+            head
+        );
+
+
+        card.appendChild(
+            details
+        );
+
+
+        return card;
+
+    }
+
+
+    /* =========================================================
+       ROZWIJANIE
+    ========================================================= */
+
+    function toggleEntry(id) {
+
+        if (
+            expandedEntries.includes(id)
+        ) {
+
+            expandedEntries =
+                expandedEntries.filter(
+                    item =>
+                        item !== id
+                );
+
+        }
+
+        else {
+
+            expandedEntries.push(
+                id
+            );
+
+        }
+
+
+        renderEntries();
+
+    }
+
+
+    /* =========================================================
+       PODGLĄD
+    ========================================================= */
+
+    function getPreview(html) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.innerHTML =
+            html;
+
+
+        return (
+            div.textContent ||
+            ""
+        )
+        .trim();
+
+    }
+
+
+    /* =========================================================
+       BRAK WYNIKÓW
+    ========================================================= */
+
+    function showEmptyState() {
+
+        entriesGrid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Nie znaleziono wpisów
+                </h3>
+
+                <p>
+                    Zmień kryteria wyszukiwania
+                    lub wyczyść filtry.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================================================
+       WYCZYŚĆ FILTRY
+    ========================================================= */
+
+    function clearFilters() {
+
+        searchInput.value =
+            "";
+
+        sourceFilter.value =
+            "";
+
+        selectedTags =
+            [];
+
+
+        renderTags();
+
+        renderEntries();
+
+    }
+
+
+    /* =========================================================
+       KOPIOWANIE WPISU
+    ========================================================= */
+
+    function copyEntry(entry) {
+
+        const code = `{
+    id: "${entry.id}",
+    title: ${JSON.stringify(entry.title)},
+    tags: ${JSON.stringify(entry.tags)},
+    content: ${JSON.stringify(entry.content)},
+    source: ${JSON.stringify(entry.source || "")}
+}`;
+
+
+        navigator.clipboard
+            .writeText(
+                code
+            )
+            .then(
+                () => {
+
+                    showToast(
+                        "Kod wpisu skopiowany."
+                    );
+
+                }
+            )
+            .catch(
+                () => {
+
+                    showToast(
+                        "Nie udało się skopiować kodu."
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =========================================================
+       MOTYW
+    ========================================================= */
+
+    function toggleTheme() {
+
+        const current =
+            document.documentElement
+                .getAttribute(
+                    "data-theme"
+                );
+
+
+        const newTheme =
+
+            current === "dark"
+
+            ? "light"
+
+            : "dark";
+
+
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                newTheme
+            );
+
+
+        localStorage.setItem(
+            "aeg_theme",
+            newTheme
+        );
+
+    }
+
+
+    function loadTheme() {
+
+        const savedTheme =
+            localStorage.getItem(
+                "aeg_theme"
+            );
+
+
+        if (
+            savedTheme
+        ) {
+
+            document.documentElement
+                .setAttribute(
+                    "data-theme",
+                    savedTheme
+                );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    function showToast(message) {
+
+        const toast =
+            document.createElement(
+                "div"
+            );
+
+
+        toast.className =
+            "toast";
+
+
+        toast.textContent =
+            message;
+
+
+        toastContainer.appendChild(
+            toast
+        );
+
+
+        setTimeout(
+            () => {
+
+                toast.remove();
+
+            },
+            2500
+        );
+
+    }
+
+
+    /* =========================================================
+       ESCAPE HTML
+    ========================================================= */
+
+    function escapeHTML(text) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.textContent =
+            String(text);
+
+
+        return div.innerHTML;
+
+    }
+
+
+    /* =========================================================
+       SKRÓT /
+    ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "/" &&
+                document.activeElement.tagName !== "INPUT" &&
+                document.activeElement.tagName !== "TEXTAREA"
+            ) {
+
+                event.preventDefault();
+
+                searchInput.focus();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
